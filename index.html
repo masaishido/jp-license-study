@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="JDL Study">
+<title>Japan Driver's License Study Guide — Karimen &amp; Honmen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%231A50A2'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='white' stroke-width='5'/%3E%3C/svg%3E">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#faf8f3;
+  --paper-2:#f1ede4;
+  --ink:#1d1d1f;
+  --ink-soft:#55554f;
+  --blue:#1A50A2;        /* regulatory instruction-sign blue */
+  --blue-soft:#e7eef9;
+  --red:#C0272D;         /* regulatory sign red */
+  --red-soft:#faeaea;
+  --green:#0e7a5f;       /* maru ○ */
+  --green-soft:#e4f2ec;
+  --amber:#9a6b00;
+  --amber-soft:#f7efd8;
+  --line:#d8d2c4;
+  --line-strong:#a9a294;
+  --topbar-h:48px;
+  --sidebar-w:264px;
+  --radius:8px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-tap-highlight-color:transparent;
+}
+h1,h2,h3,h4{line-height:1.3;margin:1.4em 0 .5em}
+h1{font-size:1.55rem}
+h2{font-size:1.25rem;border-bottom:2px solid var(--blue);padding-bottom:.25em}
+h3{font-size:1.05rem}
+p{margin:.6em 0}
+a{color:var(--blue)}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+strong{font-weight:650}
+hr{border:none;border-top:1px solid var(--line);margin:1.5em 0}
+code{background:var(--paper-2);padding:0 4px;border:1px solid var(--line);font-size:.9em}
+
+/* ============ LAYOUT ============ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:calc(var(--topbar-h) + env(safe-area-inset-top));
+  padding-top:env(safe-area-inset-top);
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;gap:10px;
+  z-index:40;
+  padding-left:10px;padding-right:10px;
+}
+.topbar .title{font-weight:650;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-btn{
+  background:none;border:1px solid rgba(255,255,255,.45);border-radius:6px;
+  color:#fff;font-size:1.05rem;line-height:1;
+  width:38px;height:34px;flex:0 0 auto;cursor:pointer;
+}
+.backdrop{
+  position:fixed;inset:0;background:rgba(20,20,20,.45);z-index:48;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+body.drawer-open .backdrop{opacity:1;pointer-events:auto}
+
+nav#toc{
+  position:fixed;z-index:50;top:0;bottom:0;left:0;width:min(82vw,300px);
+  background:#fff;border-right:1px solid var(--line);
+  transform:translateX(-102%);transition:transform .22s ease;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:calc(10px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom));
+}
+body.drawer-open nav#toc{transform:translateX(0)}
+nav#toc .nav-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:4px 14px 10px;border-bottom:1px solid var(--line);margin-bottom:6px;
+}
+nav#toc .nav-head .t{font-weight:700;color:var(--blue)}
+nav#toc .close-btn{background:none;border:none;font-size:1.4rem;color:var(--ink-soft);cursor:pointer;padding:4px 8px}
+nav#toc a{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 14px;color:var(--ink);text-decoration:none;font-size:.95rem;
+  border-left:3px solid transparent;
+}
+nav#toc a.sub{padding-left:30px;font-size:.9rem;color:var(--ink-soft)}
+nav#toc a[aria-current="page"]{
+  background:var(--blue-soft);border-left-color:var(--blue);color:var(--blue);font-weight:650;
+}
+nav#toc .group-label{
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);padding:14px 14px 4px;
+}
+nav#toc a .nbadge{margin-left:auto;flex:0 0 auto}
+
+main{
+  padding:calc(var(--topbar-h) + env(safe-area-inset-top) + 8px) 16px calc(40px + env(safe-area-inset-bottom));
+  max-width:74ch;
+}
+section[data-route]{display:block}
+section[hidden]{display:none}
+
+@media (min-width:880px){
+  .topbar{display:none}
+  .backdrop{display:none}
+  nav#toc{
+    transform:none;width:var(--sidebar-w);
+    background:transparent;border-right:1px solid var(--line);
+    padding-top:18px;
+  }
+  nav#toc .close-btn{display:none}
+  main{margin-left:var(--sidebar-w);padding-top:24px;padding-left:36px;padding-right:36px}
+}
+
+/* ============ COMPONENTS ============ */
+.badge{
+  display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.04em;
+  padding:1px 7px;border:1px solid currentColor;border-radius:3px;vertical-align:2px;
+}
+.badge.high{color:var(--red)}
+.badge.med{color:var(--amber)}
+.badge.skim{color:var(--ink-soft)}
+.badge.stage{color:var(--blue)}
+.badge.trap{color:#fff;background:var(--red);border-color:var(--red)}
+
+.chapter-tab{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:30px;height:30px;background:var(--blue);color:#fff;
+  font-weight:700;font-size:1rem;margin-right:10px;padding:0 6px;
+}
+
+.card{
+  background:#fff;border:1px solid var(--line);padding:14px 16px;margin:12px 0;
+}
+.card.accent{border-left:4px solid var(--blue)}
+.card.warn{border-left:4px solid var(--red);background:var(--red-soft)}
+.card.ok{border-left:4px solid var(--green);background:var(--green-soft)}
+
+.callout{
+  border:1px solid var(--line-strong);background:var(--paper-2);
+  padding:10px 14px;margin:14px 0;font-size:.95rem;
+}
+.callout .lbl{font-weight:700;color:var(--blue);display:block;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase}
+
+table{border-collapse:collapse;width:100%;margin:14px 0;background:#fff;font-size:.93rem}
+th,td{border:1px solid var(--line-strong);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--blue-soft);color:var(--ink);font-weight:650}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-wrap table{margin:0;min-width:480px}
+td .num,th .num,.num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--red)}
+
+.btn{
+  display:inline-block;border:1px solid var(--blue);background:var(--blue);color:#fff;
+  font-size:.95rem;font-weight:600;padding:9px 16px;border-radius:var(--radius);
+  cursor:pointer;text-decoration:none;text-align:center;
+}
+.btn:active{transform:translateY(1px)}
+.btn.secondary{background:#fff;color:var(--blue)}
+.btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--ink-soft)}
+.btn.danger{background:#fff;border-color:var(--red);color:var(--red)}
+.btn.small{font-size:.83rem;padding:5px 10px}
+.btn:disabled{opacity:.45;cursor:default}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+
+/* quiz */
+.quiz-shell{max-width:62ch}
+.quiz-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.85rem;color:var(--ink-soft);margin-bottom:8px}
+.quiz-progressbar{height:5px;background:var(--paper-2);border:1px solid var(--line);margin-bottom:16px}
+.quiz-progressbar > div{height:100%;background:var(--blue)}
+.timer-chip{
+  margin-left:auto;font-variant-numeric:tabular-nums;font-weight:700;
+  border:1px solid var(--line-strong);padding:2px 9px;background:#fff;
+}
+.timer-chip.low{color:var(--red);border-color:var(--red)}
+.q-statement{
+  background:#fff;border:1px solid var(--line-strong);padding:18px 18px;
+  font-size:1.08rem;min-height:7em;display:flex;align-items:center;
+}
+.ox-bar{
+  display:flex;gap:12px;margin-top:18px;
+}
+.ox-bar button{
+  flex:1;font-size:2rem;font-weight:700;padding:12px 0;min-height:60px;
+  border-radius:var(--radius);cursor:pointer;border-width:2px;border-style:solid;
+}
+.ox-bar .o-btn{border-color:var(--green);color:var(--green);background:#fff}
+.ox-bar .x-btn{border-color:var(--red);color:var(--red);background:#fff}
+.ox-bar .o-btn.picked{background:var(--green);color:#fff}
+.ox-bar .x-btn.picked{background:var(--red);color:#fff}
+.ox-bar button:disabled{opacity:.55}
+.ox-hint{font-size:.78rem;color:var(--ink-soft);text-align:center;margin-top:6px}
+@media (max-width:879px){
+  .ox-hint{display:none}
+  body.quiz-active .ox-sticky{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    background:var(--paper);border-top:1px solid var(--line-strong);
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    margin:0;
+  }
+  body.quiz-active main{padding-bottom:140px}
+}
+.verdict{font-weight:700;font-size:1.05rem;margin:14px 0 6px}
+.verdict.correct{color:var(--green)}
+.verdict.wrong{color:var(--red)}
+.explain{border:1px solid var(--line-strong);background:#fff;border-left:4px solid var(--blue);padding:12px 14px;margin:10px 0;font-size:.95rem}
+.explain .trap-tag{margin-bottom:6px}
+
+.result-score{font-size:2rem;font-weight:800;margin:.2em 0}
+.passline{position:relative;height:26px;background:var(--paper-2);border:1px solid var(--line-strong);margin:14px 0 22px}
+.passline .fill{position:absolute;top:0;bottom:0;left:0;background:var(--blue-soft);border-right:3px solid var(--blue)}
+.passline .fill.pass{background:var(--green-soft);border-right-color:var(--green)}
+.passline .mark{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--red)}
+.passline .mark span{position:absolute;top:-18px;left:-18px;font-size:.72rem;color:var(--red);white-space:nowrap}
+.minibar{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.88rem}
+.minibar .track{flex:1;height:10px;background:var(--paper-2);border:1px solid var(--line)}
+.minibar .track i{display:block;height:100%;background:var(--green)}
+.minibar.weak .track i{background:var(--red)}
+.minibar .pct{width:46px;text-align:right;font-variant-numeric:tabular-nums}
+.minibar .nm{width:max(34%,130px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.review-item{border:1px solid var(--line);background:#fff;padding:10px 14px;margin:8px 0;font-size:.93rem}
+.review-item .ri-head{display:flex;gap:8px;align-items:baseline}
+.review-item.wrong{border-left:4px solid var(--red)}
+.review-item.right{border-left:4px solid var(--green)}
+
+/* dashboard */
+.ladder{margin:16px 0;padding:0;list-style:none}
+.ladder li{
+  display:flex;gap:12px;align-items:flex-start;padding:7px 0 7px 0;
+  color:var(--ink-soft);font-size:.93rem;
+}
+.ladder .dot{
+  flex:0 0 22px;height:22px;border-radius:50%;border:2px solid var(--line-strong);
+  background:#fff;text-align:center;line-height:19px;font-size:.72rem;font-weight:700;
+}
+.ladder li.done .dot{background:var(--green);border-color:var(--green);color:#fff}
+.ladder li.current{color:var(--ink);font-weight:650}
+.ladder li.current .dot{border-color:var(--blue);color:var(--blue)}
+.next-step{border:1px solid var(--blue);background:var(--blue-soft);padding:10px 14px;font-size:.95rem}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat-grid .cell{background:#fff;border:1px solid var(--line);padding:10px 12px}
+.stat-grid .cell .v{font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat-grid .cell .k{font-size:.78rem;color:var(--ink-soft)}
+.sparkline{width:100%;height:70px;background:#fff;border:1px solid var(--line)}
+
+/* anchors flip cards */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:14px 0}
+.flip{
+  border:1px solid var(--line-strong);background:#fff;padding:10px 12px;cursor:pointer;
+  min-height:88px;font-size:.9rem;
+}
+.flip .fq{color:var(--ink)}
+.flip .fa{display:none;margin-top:6px;font-weight:700;color:var(--blue);border-top:1px dashed var(--line);padding-top:6px}
+.flip.revealed .fa{display:block}
+.flip .tap{font-size:.72rem;color:var(--ink-soft);margin-top:6px}
+.flip.revealed .tap{display:none}
+
+/* quiz picker cards */
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+.mode-card{background:#fff;border:1px solid var(--line-strong);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.mode-card h3{margin:0;font-size:1rem}
+.mode-card .desc{font-size:.85rem;color:var(--ink-soft);flex:1}
+.mode-card .last{font-size:.78rem;color:var(--ink-soft)}
+
+.toast{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(18px + env(safe-area-inset-bottom));z-index:60;
+  background:var(--ink);color:#fff;padding:10px 18px;border-radius:var(--radius);
+  font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .25s;max-width:88vw;
+}
+.toast.show{opacity:1}
+.banner{
+  border:1px solid var(--amber);background:var(--amber-soft);color:var(--ink);
+  padding:9px 14px;font-size:.88rem;margin:0 0 14px;
+}
+
+textarea.io{
+  width:100%;min-height:110px;font-size:16px;font-family:ui-monospace,Menlo,monospace;
+  border:1px solid var(--line-strong);padding:8px;background:#fff;
+}
+
+.sign-figure{display:inline-block;text-align:center;margin:6px 10px 6px 0;vertical-align:top;width:96px;font-size:.74rem;color:var(--ink-soft)}
+.sign-figure svg{display:block;margin:0 auto 4px}
+
+.foot-note{font-size:.8rem;color:var(--ink-soft);border-top:1px solid var(--line);margin-top:36px;padding-top:10px}
+
+/* ============ PRINT ============ */
+@media print{
+  .topbar,nav#toc,.backdrop,.btn,.btn-row,.toast,.ox-bar,.ox-hint{display:none !important}
+  main{margin:0;padding:0;max-width:none}
+  section[hidden]{display:block !important}
+  section[data-route="quiz"],section[data-route="progress"],section[data-route="home"]{display:none !important}
+  body{background:#fff}
+  .card,.q-statement{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open table of contents">☰</button>
+  <div class="title">JP Driver's License Study Guide</div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+
+<nav id="toc" aria-label="Table of contents">
+  <div class="nav-head">
+    <span class="t">Contents</span>
+    <button class="close-btn" id="closeNav" aria-label="Close menu">×</button>
+  </div>
+  <div id="navLinks"><!-- built by JS from ROUTES --></div>
+</nav>
+
+<main id="main">
+  <section data-route="home"><div id="homeRoot"></div></section>
+  <section data-route="exams" hidden><div id="examsRoot"></div></section>
+  <section data-route="study" hidden><div id="studyIndexRoot"></div></section>
+  <section data-route="study/ch1" hidden><div id="ch1Root"></div></section>
+  <section data-route="study/ch2" hidden><div id="ch2Root"></div></section>
+  <section data-route="study/ch3" hidden><div id="ch3Root"></div></section>
+  <section data-route="study/ch4" hidden><div id="ch4Root"></div></section>
+  <section data-route="study/ch5" hidden><div id="ch5Root"></div></section>
+  <section data-route="study/ch6" hidden><div id="ch6Root"></div></section>
+  <section data-route="study/ch79" hidden><div id="ch79Root"></div></section>
+  <section data-route="anchors" hidden><div id="anchorsRoot"></div></section>
+  <section data-route="traps" hidden><div id="trapsRoot"></div></section>
+  <section data-route="quiz" hidden><div id="quizRoot"></div></section>
+  <section data-route="hazard" hidden><div id="hazardRoot"></div></section>
+  <section data-route="progress" hidden><div id="progressRoot"></div></section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs id="svgDefs">
+    <!-- shared glyphs -->
+    <g id="hz-you"><rect x="-11" y="-20" width="22" height="40" rx="4" fill="#1A50A2"/><rect x="-8" y="-14" width="16" height="9" rx="2" fill="#9db9e8"/><text y="34" text-anchor="middle" font-size="11" fill="#1A50A2" font-weight="bold">you</text></g>
+    <g id="hz-car"><rect x="-11" y="-20" width="22" height="40" rx="4" fill="#777"/><rect x="-8" y="-14" width="16" height="9" rx="2" fill="#ccc"/></g>
+    <g id="hz-truck"><rect x="-13" y="-26" width="26" height="52" rx="3" fill="#4a4a42"/><rect x="-10" y="-22" width="20" height="14" rx="2" fill="#8a8a80"/></g>
+    <g id="hz-ped"><circle r="4" fill="#C0272D"/><line x1="0" y1="4" x2="0" y2="13" stroke="#C0272D" stroke-width="2.6"/><line x1="-5" y1="8" x2="5" y2="8" stroke="#C0272D" stroke-width="2.4"/><line x1="0" y1="13" x2="-4" y2="20" stroke="#C0272D" stroke-width="2.4"/><line x1="0" y1="13" x2="4" y2="20" stroke="#C0272D" stroke-width="2.4"/></g>
+    <g id="hz-bike"><circle cx="-6" cy="6" r="5" fill="none" stroke="#C0272D" stroke-width="2"/><circle cx="6" cy="6" r="5" fill="none" stroke="#C0272D" stroke-width="2"/><line x1="-6" y1="6" x2="0" y2="-4" stroke="#C0272D" stroke-width="2"/><line x1="0" y1="-4" x2="6" y2="6" stroke="#C0272D" stroke-width="2"/><circle cx="0" cy="-8" r="3" fill="#C0272D"/></g>
+
+    <!-- scene 1: blind uncontrolled intersection, parked truck hides a cyclist -->
+    <symbol id="haz-scene-1" viewBox="0 0 400 240">
+      <rect width="400" height="240" fill="#e9e4d8"/>
+      <rect x="165" y="0" width="70" height="240" fill="#b0aca0"/>
+      <rect x="0" y="85" width="400" height="70" fill="#b0aca0"/>
+      <line x1="200" y1="0" x2="200" y2="85" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <line x1="200" y1="155" x2="200" y2="240" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <line x1="0" y1="120" x2="165" y2="120" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <line x1="235" y1="120" x2="400" y2="120" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <use href="#hz-truck" x="120" y="138"/>
+      <text x="120" y="186" text-anchor="middle" font-size="11" fill="#4a4a42" font-weight="bold">parked truck</text>
+      <use href="#hz-bike" x="60" y="130"/>
+      <text x="60" y="158" text-anchor="middle" font-size="11" fill="#C0272D" font-weight="bold">bicycle →</text>
+      <use href="#hz-you" x="200" y="205"/>
+      <path d="M200 178 L200 150" stroke="#1A50A2" stroke-width="3" marker-end="none"/>
+      <polygon points="200,142 194,154 206,154" fill="#1A50A2"/>
+    </symbol>
+
+    <!-- scene 2: right turn, oncoming car with motorcycle behind it -->
+    <symbol id="haz-scene-2" viewBox="0 0 400 240">
+      <rect width="400" height="240" fill="#e9e4d8"/>
+      <rect x="160" y="0" width="80" height="240" fill="#b0aca0"/>
+      <rect x="160" y="85" width="240" height="70" fill="#b0aca0"/>
+      <line x1="200" y1="0" x2="200" y2="240" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <line x1="240" y1="120" x2="400" y2="120" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <use href="#hz-car" x="219" y="40"/>
+      <text x="262" y="36" font-size="11" fill="#555" font-weight="bold">oncoming car ↓</text>
+      <use href="#hz-bike" x="219" y="14"/>
+      <text x="262" y="64" font-size="11" fill="#C0272D" font-weight="bold">motorcycle behind it</text>
+      <use href="#hz-you" x="181" y="200"/>
+      <path d="M181 175 Q185 120 260 118" stroke="#1A50A2" stroke-width="3" fill="none" stroke-dasharray="6,5"/>
+      <polygon points="268,118 254,111 254,125" fill="#1A50A2"/>
+      <text x="300" y="108" font-size="11" fill="#1A50A2" font-weight="bold">your turn</text>
+    </symbol>
+
+    <!-- scene 3: two lanes, car stopped before a crosswalk in the left lane -->
+    <symbol id="haz-scene-3" viewBox="0 0 400 240">
+      <rect width="400" height="240" fill="#e9e4d8"/>
+      <rect x="120" y="0" width="160" height="240" fill="#b0aca0"/>
+      <line x1="200" y1="0" x2="200" y2="240" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
+      <g fill="#fff"><rect x="128" y="62" width="144" height="7"/><rect x="128" y="76" width="144" height="7"/><rect x="128" y="90" width="144" height="7"/></g>
+      <text x="290" y="84" font-size="11" fill="#555" font-weight="bold">crosswalk</text>
+      <use href="#hz-car" x="160" y="135"/>
+      <text x="92" y="140" font-size="11" fill="#555" font-weight="bold">stopped</text>
+      <use href="#hz-ped" x="138" y="48"/>
+      <text x="96" y="44" font-size="11" fill="#C0272D" font-weight="bold">pedestrian?</text>
+      <use href="#hz-you" x="240" y="205"/>
+      <polygon points="240,150 234,162 246,162" fill="#1A50A2"/>
+      <line x1="240" y1="160" x2="240" y2="180" stroke="#1A50A2" stroke-width="3"/>
+    </symbol>
+
+    <!-- scene 4: narrow street, parked cars, child with a ball -->
+    <symbol id="haz-scene-4" viewBox="0 0 400 240">
+      <rect width="400" height="240" fill="#e9e4d8"/>
+      <rect x="0" y="80" width="400" height="80" fill="#b0aca0"/>
+      <rect x="0" y="74" width="400" height="6" fill="#d8d2c4"/>
+      <rect x="0" y="160" width="400" height="6" fill="#d8d2c4"/>
+      <g transform="rotate(90 120 100)"><use href="#hz-car" x="120" y="100"/></g>
+      <g transform="rotate(90 210 100)"><use href="#hz-car" x="210" y="100"/></g>
+      <text x="165" y="70" text-anchor="middle" font-size="11" fill="#555" font-weight="bold">parked cars</text>
+      <circle cx="262" cy="120" r="6" fill="#C0272D" opacity=".85"/>
+      <text x="262" y="106" text-anchor="middle" font-size="11" fill="#C0272D" font-weight="bold">ball</text>
+      <use href="#hz-ped" x="285" y="176"/>
+      <text x="285" y="212" text-anchor="middle" font-size="11" fill="#C0272D" font-weight="bold">child</text>
+      <g transform="rotate(-90 60 120)"><use href="#hz-you" x="60" y="120"/></g>
+      <text x="56" y="150" font-size="11" fill="#1A50A2" font-weight="bold">you →</text>
+    </symbol>
+
+    <!-- scene 5: night, rain, crossing ahead, oncoming glare -->
+    <symbol id="haz-scene-5" viewBox="0 0 400 240">
+      <rect width="400" height="240" fill="#2b2b33"/>
+      <rect x="120" y="0" width="160" height="240" fill="#4a4a52"/>
+      <line x1="200" y1="0" x2="200" y2="240" stroke="#888" stroke-dasharray="10,8" stroke-width="2"/>
+      <g fill="#9a9aa4"><rect x="128" y="56" width="144" height="7"/><rect x="128" y="70" width="144" height="7"/><rect x="128" y="84" width="144" height="7"/></g>
+      <use href="#hz-car" x="160" y="30"/>
+      <polygon points="160,46 130,110 190,110" fill="#f5e9b8" opacity=".5"/>
+      <text x="96" y="34" font-size="11" fill="#f5e9b8" font-weight="bold">glare</text>
+      <use href="#hz-ped" x="252" y="62"/>
+      <text x="296" y="60" font-size="11" fill="#ff8888" font-weight="bold">pedestrian</text>
+      <use href="#hz-you" x="240" y="205"/>
+      <polygon points="240,148 218,96 262,96" fill="#f5e9b8" opacity=".35"/>
+      <text x="330" y="225" font-size="11" fill="#aaa" font-weight="bold">night · rain</text>
+    </symbol>
+  </defs>
+</svg>
+
+<script>
+(function(){
+'use strict';
+
+/* ===== 01 CONFIG ===== */
+var TOPICS = {
+  signals:      {label:'Signals & police signals', chapter:'ch1', stage:1},
+  signs:        {label:'Signs & markings',         chapter:'ch1', stage:1},
+  rightOfWay:   {label:'Intersections & right-of-way', chapter:'ch3', stage:1},
+  speed:        {label:'Speed & stopping distance', chapter:'ch3', stage:1},
+  following:    {label:'Following & lane use',     chapter:'ch3', stage:1},
+  parking:      {label:'Parking & stopping',       chapter:'ch3', stage:1},
+  pedestrians:  {label:'Pedestrians & slow-driving (徐行)', chapter:'ch3', stage:1},
+  overtaking:   {label:'Overtaking & passing',     chapter:'ch3', stage:1},
+  vehicleAdmin: {label:'License, belts, loading, alcohol', chapter:'ch2', stage:1},
+  railWeather:  {label:'Railroads, night, weather', chapter:'ch4', stage:1},
+  expressway:   {label:'Expressways',              chapter:'ch5', stage:2},
+  emergency:    {label:'Emergency vehicles & accidents', chapter:'ch79', stage:2},
+  twoWheel:     {label:'Two-wheeled vehicles',     chapter:'ch6', stage:2}
+};
+var TRAPS = {
+  absolute:    {label:'Absolute words',   hint:'"always / all / never / without exception" usually flips a true rule to false.'},
+  mustVsMay:   {label:'Must vs may',      hint:'Swaps an obligation ("must stop") for permission ("may slow down"), or vice versa.'},
+  numberSwap:  {label:'Number swap',      hint:'A real rule with the wrong distance, speed, age, or limit substituted.'},
+  lookalike:   {label:'Look-alike signs', hint:'Two visually similar signs swapped in meaning.'},
+  swap:        {label:'Rule swap',        hint:'Two related rules exchanged (e.g., flashing red vs flashing yellow).'},
+  partialTruth:{label:'Partial truth',    hint:'A true rule with one false condition or exception attached.'}
+};
+var EXAMS = {
+  karimen: {label:'Karimen mock (Stage 1)', count:50, passPts:90, totalPts:100, minutes:30},
+  honmen:  {label:'Honmen set (Stage 1+2)', count:45, hazardCount:3, minutes:25},
+  honmenFull: {label:'Full honmen (90+5)', count:90, hazardCount:5, minutes:50}
+};
+var ROUTES = [
+  {route:'home',    title:'Dashboard'},
+  {route:'exams',   title:'How the Exams Work'},
+  {group:'Study the Rules'},
+  {route:'study',   title:'Chapter Index'},
+  {route:'study/ch1', title:'1 · Common Rules & Signs', sub:true, yield:'high'},
+  {route:'study/ch2', title:'2 · Before Driving', sub:true, yield:'med'},
+  {route:'study/ch3', title:'3 · Driving Tips', sub:true, yield:'high'},
+  {route:'study/ch4', title:'4 · Dangerous Spots', sub:true, yield:'med'},
+  {route:'study/ch5', title:'5 · Expressways', sub:true, yield:'high'},
+  {route:'study/ch6', title:'6 · Two-wheeled Vehicles', sub:true, yield:'med'},
+  {route:'study/ch79', title:'7–9 · Low-yield Chapters', sub:true, yield:'skim'},
+  {group:'Memorize'},
+  {route:'anchors', title:'Numeric Anchors'},
+  {route:'traps',   title:'Trap Patterns (引っ掛け)'},
+  {group:'Drill & Track'},
+  {route:'quiz',    title:'Quiz Center'},
+  {route:'hazard',  title:'Hazard Prediction'},
+  {route:'progress',title:'Progress & Data'}
+];
+
+/* ===== 02 DATA: QUESTIONS (authored in topic batches) ===== */
+var QUESTIONS = [
+// ---- signals (12) ----
+{id:'sig-001', topic:'signals', stage:1, answer:false, trapType:'swap',
+ statement:'A yellow traffic light means you may proceed with caution while watching surrounding traffic.',
+ explanation:'Steady yellow means STOP at the stop line, unless you are already so close that stopping safely is impossible. "Proceed with caution" describes FLASHING yellow.'},
+{id:'sig-002', topic:'signals', stage:1, answer:true,
+ statement:'At a flashing red signal, vehicles must stop at the stop line and may then proceed after checking safety.',
+ explanation:'Flashing red works like a stop sign: complete stop first, then go when safe.'},
+{id:'sig-003', topic:'signals', stage:1, answer:false, trapType:'mustVsMay',
+ statement:'A green light means vehicles must proceed.',
+ explanation:'Green means vehicles MAY proceed. It grants permission; it does not order you forward when conditions are unsafe (e.g., congestion across the intersection).'},
+{id:'sig-004', topic:'signals', stage:1, answer:true,
+ statement:'A green right-arrow signal allows vehicles to turn right, and a U-turn is also permitted in the direction of the arrow.',
+ explanation:'Since a 2012 rule change, a right arrow also permits U-turns (where U-turns are not otherwise prohibited).'},
+{id:'sig-005', topic:'signals', stage:1, answer:false, trapType:'swap',
+ statement:'A yellow arrow signal means ordinary vehicles may proceed in the direction of the arrow.',
+ explanation:'Yellow arrows are for streetcars/trams ONLY. Cars and motorcycles must not move on a yellow arrow.'},
+{id:'sig-006', topic:'signals', stage:1, answer:false, trapType:'partialTruth',
+ statement:'When the light turns green, you should proceed immediately so as not to obstruct vehicles behind you.',
+ explanation:'Before moving off, confirm the intersection is actually clear — vehicles or pedestrians may still be crossing. Green is permission, with a safety check first.'},
+{id:'sig-007', topic:'signals', stage:1, answer:true,
+ statement:'Even when your signal is green, you must not enter the intersection if traffic congestion ahead would force you to stop inside it and block crossing traffic.',
+ explanation:'True — entering only to get stuck blocks the cross flow and is prohibited.'},
+{id:'sig-008', topic:'signals', stage:1, answer:false, trapType:'swap',
+ statement:'When a police officer faces you while directing traffic, it has the same meaning as a green light for you.',
+ explanation:'An officer\'s front or back toward you = RED for you. Their side toward you corresponds to green for traffic parallel to their arms.'},
+{id:'sig-009', topic:'signals', stage:1, answer:true,
+ statement:'When a police officer directing traffic raises an arm vertically, traffic moving parallel to the officer\'s body is treated as facing a yellow light.',
+ explanation:'Vertical arm = yellow for the parallel direction; traffic facing the officer remains at red.'},
+{id:'sig-010', topic:'signals', stage:1, answer:false, trapType:'partialTruth',
+ statement:'Signals given by a police officer can be ignored if they contradict the traffic lights, because lights have legal priority.',
+ explanation:'The opposite: where an officer (or traffic patrol official) directs traffic, you must follow the officer even against the lights.'},
+{id:'sig-011', topic:'signals', stage:1, answer:false, trapType:'absolute',
+ statement:'Vehicles must always come to a complete stop before passing through any intersection with a flashing yellow signal.',
+ explanation:'Flashing yellow requires caution, not a stop. (Flashing RED requires the stop.) "Always ... complete stop" flips it false.'},
+{id:'sig-012', topic:'signals', stage:1, answer:true,
+ statement:'You must obey the signal facing your own direction of travel, not the signal facing crossing traffic.',
+ explanation:'Each direction obeys its own light — a red for the perpendicular road tells you nothing about yours.'},
+
+// ---- signs & markings (15) ----
+{id:'sgn-001', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+ statement:'The round sign with a red circle and a single diagonal red bar over a blue background means parking and stopping are both prohibited.',
+ explanation:'ONE diagonal = No PARKING (brief stopping allowed). The X (two diagonals) = no parking AND no stopping. Count the slashes.'},
+{id:'sgn-002', topic:'signs', stage:1, answer:true, trapType:'lookalike',
+ statement:'The red disc with a horizontal white bar means "No entry" and is typically posted facing traffic at the exit end of a one-way road.',
+ explanation:'進入禁止 — you may not enter from the side facing the sign; traffic flows the other way.'},
+{id:'sgn-003', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+ statement:'A white circular sign with a red border and a number, with a horizontal line under the number, indicates the maximum speed limit.',
+ explanation:'The UNDERLINED number is the MINIMUM speed limit (used on expressway main lanes). Without the line it is the maximum.'},
+{id:'sgn-004', topic:'signs', stage:1, answer:true,
+ statement:'Yellow diamond-shaped signs are warning signs: they alert you to danger ahead but do not themselves impose specific speed obligations.',
+ explanation:'Warning signs alert (crossing ahead, curve, school). Obligations like 徐行 come from regulatory signs or the law, not the yellow diamond itself.'},
+{id:'sgn-005', topic:'signs', stage:1, answer:true,
+ statement:'Blue circular signs indicate something you must do, such as proceeding only in the direction of the arrows.',
+ explanation:'Blue circle = instruction (obligation). Red border = prohibition. The color/shape system decodes unfamiliar signs.'},
+{id:'sgn-006', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+ statement:'The inverted red triangle sign reading 徐行 (SLOW) requires you to come to a complete stop before proceeding.',
+ explanation:'徐行 requires slowing to a speed from which you can stop immediately — not a complete stop. The complete stop belongs to 止まれ (STOP).'},
+{id:'sgn-007', topic:'signs', stage:1, answer:true,
+ statement:'At a 止まれ (STOP) sign, you must stop completely at the stop line, or just before the intersection if there is no line.',
+ explanation:'A rolling crawl does not satisfy a stop sign — wheels fully stopped, then check and go.'},
+{id:'sgn-008', topic:'signs', stage:1, answer:false, trapType:'numberSwap',
+ statement:'A road marking of a yellow center line means overtaking is prohibited in all cases.',
+ explanation:'A yellow center line prohibits crossing it (or protruding over it) to overtake. Overtaking that stays within your own side — e.g., a moped — can still be legal.'},
+{id:'sgn-009', topic:'signs', stage:1, answer:true,
+ statement:'A white rectangular plate mounted under a main sign is an auxiliary sign that limits or clarifies the main sign, for example by showing hours or vehicle types.',
+ explanation:'Auxiliary plates ("8-20", "except large vehicles") modify the main sign above them.'},
+{id:'sgn-010', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+ statement:'The circular sign with a red border and a red X over a white background means vehicles are prohibited, but pedestrians may still use the road.',
+ explanation:'The red X on white (通行止め) closes the road to EVERYTHING — pedestrians and vehicles. The single-slash version (車両通行止め) is the vehicles-only ban.'},
+{id:'sgn-011', topic:'signs', stage:1, answer:true,
+ statement:'A diamond-shaped marking painted on the road surface warns that a pedestrian crossing is ahead.',
+ explanation:'The painted diamond appears 30–50 m before a crossing — be ready to stop for pedestrians.'},
+{id:'sgn-012', topic:'signs', stage:1, answer:false, trapType:'partialTruth',
+ statement:'A maximum speed sign of 40 applies to regular cars but not to motorcycles, which may follow the default 60 km/h limit.',
+ explanation:'Posted limits bind ALL vehicles (mopeds keep their lower 30 km/h limit). A motorcycle must also obey the 40.'},
+{id:'sgn-013', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+ statement:'A blue square sign with a pedestrian symbol means pedestrians are prohibited from entering.',
+ explanation:'Blue square = indication/permission (e.g., pedestrian crossing or pedestrians-only road). Prohibitions are red-bordered. Blue allows; red forbids.'},
+{id:'sgn-014', topic:'signs', stage:1, answer:true,
+ statement:'You may not change lanes across a yellow lane line.',
+ explanation:'Yellow lane boundaries prohibit lane changes across them; white broken lines allow them when safe.'},
+{id:'sgn-015', topic:'signs', stage:1, answer:true, trapType:'lookalike',
+ statement:'The 徐行 sign and the 止まれ sign are both inverted triangles, but only 止まれ requires a complete stop.',
+ explanation:'Same shape family, different duty: 徐行 = immediately-stoppable crawl; 止まれ = full stop. The exam loves swapping their duties.'},
+
+// ---- right-of-way / intersections (10) ----
+{id:'row-001', topic:'rightOfWay', stage:1, answer:false, trapType:'swap',
+ statement:'At an uncontrolled intersection of roads of equal width, you must yield to vehicles approaching from your right.',
+ explanation:'In Japan you yield to traffic from your LEFT (左方優先) at equal uncontrolled intersections — and always to streetcars.'},
+{id:'row-002', topic:'rightOfWay', stage:1, answer:true,
+ statement:'When entering an uncontrolled intersection from a clearly narrower road, you must slow down and give way to traffic on the wider road.',
+ explanation:'Wider road has priority; approach with 徐行 and yield.'},
+{id:'row-003', topic:'rightOfWay', stage:1, answer:false, trapType:'partialTruth',
+ statement:'If you enter the intersection before an oncoming vehicle that is going straight, you may complete your right turn first.',
+ explanation:'Entering first gives no priority: right-turners must let oncoming straight and left-turning traffic pass, period.'},
+{id:'row-004', topic:'rightOfWay', stage:1, answer:true,
+ statement:'When turning left at an intersection, you should pull toward the left edge of the road in advance and turn slowly along the edge.',
+ explanation:'Hug the left in advance (closing the gap motorcycles could slip into) and take the corner at 徐行.'},
+{id:'row-005', topic:'rightOfWay', stage:1, answer:true,
+ statement:'When turning right at a normal two-way intersection, you should move toward the center of the road in advance and pass just inside the center of the intersection.',
+ explanation:'Center in advance, slow, inside the intersection center — except mopeds doing a two-step turn.'},
+{id:'row-006', topic:'rightOfWay', stage:1, answer:false, trapType:'numberSwap',
+ statement:'You must signal your intention to turn left or right at least 3 seconds before reaching the turning point.',
+ explanation:'Turns at intersections: signal 30 METERS before the point. The 3-SECOND rule is for lane changes. Classic swap.'},
+{id:'row-007', topic:'rightOfWay', stage:1, answer:true,
+ statement:'When an emergency vehicle approaches an intersection, you must clear the intersection and pull to the left and stop.',
+ explanation:'In/near intersections: avoid the intersection, go left, stop. Elsewhere: yield left (stopping not always mandatory). On one-ways you may go right if left would block the emergency vehicle.'},
+{id:'row-008', topic:'rightOfWay', stage:1, answer:false, trapType:'absolute',
+ statement:'A vehicle on the road designated as a priority road must always stop before crossing any intersection.',
+ explanation:'Priority-road traffic has the right of way; the crossing traffic slows/yields. No general stop duty for the priority road.'},
+{id:'row-009', topic:'rightOfWay', stage:1, answer:true,
+ statement:'When the vehicle ahead is signaling a lane change or turn, you must not obstruct its movement except to avoid sudden danger.',
+ explanation:'Do not block a signaled change; the exception is genuine emergency braking/steering.'},
+{id:'row-010', topic:'rightOfWay', stage:1, answer:true,
+ statement:'When entering a roundabout, you must slow down and must not interfere with vehicles already traveling inside it.',
+ explanation:'Circulating traffic has priority; enter at low speed when there is a safe gap.'},
+
+// ---- speed & stopping distance (6) ----
+{id:'spd-001', topic:'speed', stage:1, answer:true,
+ statement:'On an ordinary road without a posted speed limit, the maximum speed for a regular passenger car is 60 km/h.',
+ explanation:'60 km/h is the legal default for cars on ordinary roads (expressway default is 100).'},
+{id:'spd-002', topic:'speed', stage:1, answer:false, trapType:'numberSwap',
+ statement:'On an ordinary road without a posted speed limit, the maximum speed for a regular passenger car is 50 km/h.',
+ explanation:'The default is 60 km/h. The exam plants nearby numbers (50, 70) hoping you half-remember.'},
+{id:'spd-003', topic:'speed', stage:1, answer:true,
+ statement:'Stopping distance is the sum of the free-running distance covered during the driver\'s reaction time and the braking distance.',
+ explanation:'Stopping = free-running (空走) + braking (制動). Tiredness lengthens free-running; wet roads and speed lengthen braking.'},
+{id:'spd-004', topic:'speed', stage:1, answer:false, trapType:'partialTruth',
+ statement:'If you drive below the posted speed limit, you can never be at fault for driving too fast for the conditions.',
+ explanation:'The duty is to drive at a SAFE speed for conditions. In fog, ice, or crowds, even sub-limit speed can be a violation.'},
+{id:'spd-005', topic:'speed', stage:1, answer:false, trapType:'numberSwap',
+ statement:'When you double your speed, your braking distance also roughly doubles.',
+ explanation:'Braking distance grows with the SQUARE of speed: double the speed ≈ four times the braking distance.'},
+{id:'spd-006', topic:'speed', stage:1, answer:true,
+ statement:'On wet roads or with worn tires, braking distance becomes longer, so you should slow down and leave more following distance.',
+ explanation:'Wet surface + worn tires can double required distances; the book recommends doubling your following gap in rain.'},
+
+// ---- following & lane use (5) ----
+{id:'fol-001', topic:'following', stage:1, answer:true,
+ statement:'You must keep a following distance sufficient to avoid a collision even if the vehicle ahead stops suddenly.',
+ explanation:'The legal standard for following distance: enough to stop safely behind a suddenly braking leader.'},
+{id:'fol-002', topic:'following', stage:1, answer:false, trapType:'numberSwap',
+ statement:'You should signal about 30 meters before changing lanes.',
+ explanation:'Lane changes: signal about 3 SECONDS before. 30 m is the rule for turns at intersections.'},
+{id:'fol-003', topic:'following', stage:1, answer:true,
+ statement:'On a road with three or more lanes in your direction, you should normally drive in the lanes toward the left and leave the rightmost lane for overtaking.',
+ explanation:'The rightmost lane is reserved for passing; cruising there is a violation (通行帯違反).'},
+{id:'fol-004', topic:'following', stage:1, answer:false, trapType:'partialTruth',
+ statement:'You may cross over the median strip to overtake when the road ahead is clearly empty.',
+ explanation:'Crossing a median is never permitted for overtaking, no matter how clear it looks.'},
+{id:'fol-005', topic:'following', stage:1, answer:false, trapType:'mustVsMay',
+ statement:'When another vehicle is overtaking you, you may accelerate slightly to shorten the time the other vehicle spends in the opposite lane.',
+ explanation:'You must NOT raise your speed while being overtaken — speeding up under an overtaker is prohibited and dangerous.'},
+
+// ---- parking & stopping (12) ----
+{id:'prk-001', topic:'parking', stage:1, answer:true,
+ statement:'Parking and stopping are both prohibited within 5 meters of an intersection and its corners.',
+ explanation:'Intersections, corners/bends, and pedestrian/bicycle crossings all carry the 5 m both-prohibited zone.'},
+{id:'prk-002', topic:'parking', stage:1, answer:false, trapType:'numberSwap',
+ statement:'Parking and stopping are both prohibited within 5 meters of a railroad crossing.',
+ explanation:'Railroad crossings carry a 10 m both-prohibited zone (plus the crossing itself). 5 m belongs to intersections and crossings.'},
+{id:'prk-003', topic:'parking', stage:1, answer:true,
+ statement:'During operating hours, you may not park or stop within 10 meters of a bus stop signpost.',
+ explanation:'10 m around bus and streetcar stop posts, during operating hours, bans both parking and stopping.'},
+{id:'prk-004', topic:'parking', stage:1, answer:false, trapType:'numberSwap',
+ statement:'Parking is prohibited within 5 meters of a garage or other vehicle entrance.',
+ explanation:'Garage/vehicle entrances: 3 m (parking only). The 5 m parking-only zone is for fire hydrants and similar.'},
+{id:'prk-005', topic:'parking', stage:1, answer:true,
+ statement:'Parking is prohibited within 1 meter of a fire alarm.',
+ explanation:'The 1 m fire-alarm rule is the smallest number on the list — and a favorite for swapping.'},
+{id:'prk-006', topic:'parking', stage:1, answer:true,
+ statement:'Stopping briefly to let a passenger out is permitted in a no-parking (駐車禁止) zone.',
+ explanation:'駐車禁止 bans parking only. Brief halts for passengers or ≤5-minute loading remain legal (unlike 駐停車禁止 zones).'},
+{id:'prk-007', topic:'parking', stage:1, answer:false, trapType:'partialTruth',
+ statement:'Stopping for 8 minutes to unload goods counts as stopping, not parking, as long as the driver stays with the vehicle.',
+ explanation:'Loading/unloading over 5 minutes IS parking regardless of the driver\'s presence.'},
+{id:'prk-008', topic:'parking', stage:1, answer:true,
+ statement:'A vehicle left in place while the driver is away from it is considered parked, even if only for a short time.',
+ explanation:'Driver away = cannot move immediately = parking, however brief.'},
+{id:'prk-009', topic:'parking', stage:1, answer:false, trapType:'numberSwap',
+ statement:'Parking is prohibited within 3 meters of a fire hydrant.',
+ explanation:'Fire hydrants/fire-fighting water sources: 5 m. The 3 m zone is for garage entrances. (1 alarm, 3 garage, 5 hydrant.)'},
+{id:'prk-010', topic:'parking', stage:1, answer:true,
+ statement:'Parking and stopping are prohibited inside tunnels.',
+ explanation:'Tunnels are on the both-prohibited list (with or without lane markings), along with steep slopes and hill crests.'},
+{id:'prk-011', topic:'parking', stage:1, answer:false, trapType:'partialTruth',
+ statement:'On a road, you may park on the right side as well as the left, provided you are within 75 cm of the edge.',
+ explanation:'Park on the LEFT edge (right-side parking is for one-way roads in limited cases). The 75 cm figure relates to keeping space on roads with no sidewalk.'},
+{id:'prk-012', topic:'parking', stage:1, answer:true,
+ statement:'When leaving a parked vehicle, you must stop the engine, apply the parking brake, take the key, and lock the doors.',
+ explanation:'Standard secure-parking duty (the earthquake-evacuation exception — key left in the car, doors unlocked — is the special case).'},
+
+// ---- pedestrians & 徐行 (12) ----
+{id:'ped-001', topic:'pedestrians', stage:1, answer:false, trapType:'mustVsMay',
+ statement:'When a person walking with a white cane is crossing the road, you may pass by slowly while keeping a careful watch.',
+ explanation:'White/yellow cane or guide dog: you must STOP or slow down (徐行) so as not to obstruct them. "Pass by carefully" understates a hard duty.'},
+{id:'ped-002', topic:'pedestrians', stage:1, answer:true,
+ statement:'When a pedestrian is crossing or about to cross a pedestrian crossing, you must stop before the crossing.',
+ explanation:'Pedestrians on or entering the crossing have absolute priority — a complete stop, not a slowdown.'},
+{id:'ped-003', topic:'pedestrians', stage:1, answer:false, trapType:'partialTruth',
+ statement:'When a vehicle is stopped just before a pedestrian crossing, you may pass it slowly without stopping if you see no pedestrians.',
+ explanation:'You must STOP before passing a vehicle stopped at a crossing — it may be hiding a pedestrian. Then proceed only after confirming.'},
+{id:'ped-004', topic:'pedestrians', stage:1, answer:true,
+ statement:'徐行 (slow driving) means a speed at which the vehicle can be stopped immediately.',
+ explanation:'No fixed km/h — the test is "can you stop at once?" (practically a crawl of roughly 10 km/h or less).'},
+{id:'ped-005', topic:'pedestrians', stage:1, answer:true,
+ statement:'You must drive at 徐行 speed when turning left or right at an intersection.',
+ explanation:'All intersection turns are 徐行 situations, alongside crests, steep downhills, and poor-visibility uncontrolled intersections.'},
+{id:'ped-006', topic:'pedestrians', stage:1, answer:false, trapType:'absolute',
+ statement:'You must always sound your horn when passing pedestrians to alert them.',
+ explanation:'Horns are restricted: use where signs require it or to avoid imminent danger. Routine honking at pedestrians is a violation.'},
+{id:'ped-007', topic:'pedestrians', stage:1, answer:true,
+ statement:'When passing close to a pedestrian where no fence or other separation exists, you must leave a safe distance or drive at 徐行 speed.',
+ explanation:'Safe gap (about 1–1.5 m) or crawl — one of the two, every time.'},
+{id:'ped-008', topic:'pedestrians', stage:1, answer:false, trapType:'partialTruth',
+ statement:'A child walking alone near the road requires no special action as long as the child is on the sidewalk.',
+ explanation:'Unattended children are a stop-or-徐行 case: children dart out. The sidewalk does not cancel the duty of special care.'},
+{id:'ped-009', topic:'pedestrians', stage:1, answer:true,
+ statement:'When driving through a puddle beside pedestrians, you must slow down or otherwise take care not to splash them.',
+ explanation:'Splashing pedestrians (泥はね) is an actual traffic violation, not just bad manners.'},
+{id:'ped-010', topic:'pedestrians', stage:1, answer:true,
+ statement:'You must drive at 徐行 speed near the top of an uphill slope and on steep downhill grades.',
+ explanation:'Hill crests and steep downhills are statutory 徐行 places — you cannot see, or cannot stop, at speed.'},
+{id:'ped-011', topic:'pedestrians', stage:1, answer:false, trapType:'swap',
+ statement:'When passing a stopped streetcar with no safety zone while passengers are boarding, it is sufficient to slow down and pass carefully.',
+ explanation:'No safety zone + passengers boarding/alighting = STOP behind and wait (you may proceed at 徐行 only with a safety zone, or when no passengers and 1.5 m clearance).'},
+{id:'ped-012', topic:'pedestrians', stage:1, answer:true,
+ statement:'Near a stopped school bus with children getting on or off, you must pass at 徐行 speed and watch for children running out.',
+ explanation:'The school-bus rule: crawl past and expect the unexpected.'},
+
+// ---- overtaking (10) ----
+{id:'ovt-001', topic:'overtaking', stage:1, answer:true,
+ statement:'As a rule, you must overtake another vehicle on its right side.',
+ explanation:'Right is the rule; the left-side exception exists only when the vehicle ahead is turning right (positioned at the center).'},
+{id:'ovt-002', topic:'overtaking', stage:1, answer:false, trapType:'swap',
+ statement:'When the vehicle ahead is positioned at the center of the road to turn right, you must overtake it on its right.',
+ explanation:'This is THE exception: a right-turning leader is passed on the LEFT.'},
+{id:'ovt-003', topic:'overtaking', stage:1, answer:true,
+ statement:'Overtaking is prohibited within 30 meters of a pedestrian crossing.',
+ explanation:'Intersections, crossings, and railroad crossings carry a 30 m no-overtaking zone before them (and overtaking is banned within them).'},
+{id:'ovt-004', topic:'overtaking', stage:1, answer:false, trapType:'numberSwap',
+ statement:'Overtaking is prohibited within 10 meters of an intersection.',
+ explanation:'The no-overtaking zone before intersections is 30 m, not 10. (10 m is a parking figure — railroad crossings, bus stops, safety zones.)'},
+{id:'ovt-005', topic:'overtaking', stage:1, answer:true,
+ statement:'Overtaking a vehicle that is itself overtaking another vehicle (double overtaking) is prohibited.',
+ explanation:'二重追い越し is banned outright. (Note: the leader merely passing a moped does not make your pass a double overtake.)'},
+{id:'ovt-006', topic:'overtaking', stage:1, answer:false, trapType:'partialTruth',
+ statement:'You may cut in front of a vehicle that has stopped at a railroad crossing if there is enough space for your car.',
+ explanation:'Cutting in front of vehicles slowing or stopped at crossings/intersections is prohibited — the space is not an invitation.'},
+{id:'ovt-007', topic:'overtaking', stage:1, answer:true,
+ statement:'Before starting to overtake, you must check oncoming traffic, the traffic behind you, and signal your move.',
+ explanation:'Mirror/shoulder checks, oncoming gap, signal — the full sequence is testable step by step.'},
+{id:'ovt-008', topic:'overtaking', stage:1, answer:false, trapType:'absolute',
+ statement:'Overtaking is prohibited on all downhill sections of road.',
+ explanation:'The ban covers STEEP downhill grades (and hill crests) — not every downhill. "All" overreaches.'},
+{id:'ovt-009', topic:'overtaking', stage:1, answer:true,
+ statement:'After overtaking, you should not return to the left until you can see the overtaken vehicle in your rearview mirror.',
+ explanation:'The mirror check prevents cutting back in too early — also exam-tested as the "safe distance after passing" rule.'},
+{id:'ovt-010', topic:'overtaking', stage:1, answer:false, trapType:'partialTruth',
+ statement:'Inside a tunnel with marked lanes for each direction, overtaking is prohibited.',
+ explanation:'The tunnel overtaking ban applies to tunnels WITHOUT vehicular lane markings. With marked lanes, overtaking is not banned by the tunnel itself.'},
+
+// ---- license, belts, loading, alcohol (10) ----
+{id:'adm-001', topic:'vehicleAdmin', stage:1, answer:false, trapType:'partialTruth',
+ statement:'Seatbelts are mandatory for the driver and front passenger, and recommended for rear passengers.',
+ explanation:'Belts are mandatory for ALL seats, rear included. The driver is responsible for passengers buckling up.'},
+{id:'adm-002', topic:'vehicleAdmin', stage:1, answer:true,
+ statement:'A child under 6 years old must be secured in a child seat appropriate for the child\'s size.',
+ explanation:'Under 6 = child seat, no exceptions for laps or short trips.'},
+{id:'adm-003', topic:'vehicleAdmin', stage:1, answer:false, trapType:'numberSwap',
+ statement:'Driving is punishable when breath alcohol reaches 0.25 mg/L or more; below that level it is legal to drive after drinking.',
+ explanation:'The offense threshold is 0.15 mg/L — and the rule is "if you drank, do not drive" at ANY level. (0.25 is the higher penalty tier.)'},
+{id:'adm-004', topic:'vehicleAdmin', stage:1, answer:true,
+ statement:'A person who provides alcohol to someone they know will drive, or rides as a passenger knowing the driver has been drinking, can also be punished.',
+ explanation:'Drunk driving liability spreads to the car provider, alcohol provider, and knowing passengers.'},
+{id:'adm-005', topic:'vehicleAdmin', stage:1, answer:false, trapType:'partialTruth',
+ statement:'With a regular (普通) driver\'s license, you may ride a motorcycle of up to 125 cc.',
+ explanation:'A regular license covers mopeds (≤50 cc) and small special vehicles — not motorcycles. 125 cc needs a small motorcycle license.'},
+{id:'adm-006', topic:'vehicleAdmin', stage:1, answer:true,
+ statement:'When practicing with a provisional (仮免) license, a person with at least 3 years of driving experience for that vehicle class must sit beside you, and 仮免許練習中 plates must be shown front and rear.',
+ explanation:'Qualified supervisor (3+ years, or an instructor) plus the practice plates — both required, ordinary roads only.'},
+{id:'adm-007', topic:'vehicleAdmin', stage:1, answer:false, trapType:'numberSwap',
+ statement:'For seating capacity, two children under 12 years old are counted as one adult.',
+ explanation:'THREE children count as TWO adults (3 kids = 2 adults), not 2 = 1.'},
+{id:'adm-008', topic:'vehicleAdmin', stage:1, answer:true,
+ statement:'Using a hand-held mobile phone or staring at its screen while driving is prohibited.',
+ explanation:'Hand-held use and screen-gazing while in motion are violations (and penalties were sharply raised in 2019).'},
+{id:'adm-009', topic:'vehicleAdmin', stage:1, answer:false, trapType:'absolute',
+ statement:'Daily inspection of a private car must be performed every day before driving, without exception.',
+ explanation:'For private passenger cars, operational checks are done at appropriate intervals based on use (e.g., before long trips) — the every-single-day duty applies to business vehicles.'},
+{id:'adm-010', topic:'vehicleAdmin', stage:1, answer:true,
+ statement:'You must not lend your vehicle to a person who has no driver\'s license or who has been drinking.',
+ explanation:'The lender shares liability — unlicensed driving and DUI both punish the provider of the car.'},
+
+// ---- railroads, night, weather (10) ----
+{id:'rlw-001', topic:'railWeather', stage:1, answer:true,
+ statement:'Before a railroad crossing, you must stop and check safety with both your eyes and ears, opening the window to listen if necessary.',
+ explanation:'Stop + look + LISTEN is the full duty. The only no-stop case is a green signal at the crossing.'},
+{id:'rlw-002', topic:'railWeather', stage:1, answer:false, trapType:'partialTruth',
+ statement:'If the crossing bell is ringing but the barrier has not yet started to lower, you may cross quickly.',
+ explanation:'Bell ringing or barrier moving (down OR coming down) = do not enter. "Quickly before the bar drops" is the textbook fatal error.'},
+{id:'rlw-003', topic:'railWeather', stage:1, answer:true,
+ statement:'You must not enter a railroad crossing unless there is enough space beyond it for your entire vehicle.',
+ explanation:'Same logic as intersections: never risk being trapped on the tracks by traffic ahead.'},
+{id:'rlw-004', topic:'railWeather', stage:1, answer:false, trapType:'partialTruth',
+ statement:'When crossing a railroad crossing with a manual-transmission car, you should shift to a higher gear midway to cross faster.',
+ explanation:'Cross in LOW gear WITHOUT changing gears midway — a mid-crossing shift risks a stall on the tracks.'},
+{id:'rlw-005', topic:'railWeather', stage:2, answer:true,
+ statement:'If your vehicle stalls inside a crossing as a train approaches, your first action should be to alert the railway, for example with the crossing emergency button.',
+ explanation:'Warn the train FIRST (button, flares, smoke), then try to move the car. People clear of the tracks throughout.'},
+{id:'rlw-006', topic:'railWeather', stage:1, answer:true,
+ statement:'You must use headlights at night and also inside tunnels and in fog where visibility is poor.',
+ explanation:'Lights on at night, in tunnels, and when visibility drops below about 50 m — daytime included.'},
+{id:'rlw-007', topic:'railWeather', stage:1, answer:false, trapType:'mustVsMay',
+ statement:'When following another vehicle at night, you should keep your headlights on high beam to see as far as possible.',
+ explanation:'Dip to low beam when following or meeting traffic — high beams dazzle the driver ahead through their mirrors.'},
+{id:'rlw-008', topic:'railWeather', stage:1, answer:false, trapType:'swap',
+ statement:'If your car begins to hydroplane on a wet road, you should brake firmly and steer toward the shoulder.',
+ explanation:'Hydroplaning: ease off the accelerator, hold the wheel straight, NO hard braking — the tires are floating and cannot grip.'},
+{id:'rlw-009', topic:'railWeather', stage:1, answer:true,
+ statement:'On a narrow slope where vehicles cannot pass each other, the descending vehicle should give way to the climbing vehicle.',
+ explanation:'Descending yields (reversing uphill is harder/more dangerous for the climber to restart). Near a passing place, the car closest to it uses it.'},
+{id:'rlw-010', topic:'railWeather', stage:1, answer:true,
+ statement:'On long downhill grades you should rely mainly on engine braking in a low gear rather than continuous use of the foot brake.',
+ explanation:'Continuous foot braking risks fade and vapor lock; engine brake carries the load downhill.'},
+
+// ---- expressways (10) ----
+{id:'exp-001', topic:'expressway', stage:2, answer:true,
+ statement:'On the main lanes of a national expressway with no posted limits, the maximum speed for a regular passenger car is 100 km/h and the minimum is 50 km/h.',
+ explanation:'100 max (regular cars, large motorcycles) / 50 minimum on divided main lanes. Certain trucks and any towing vehicle: 80 max.'},
+{id:'exp-002', topic:'expressway', stage:2, answer:false, trapType:'numberSwap',
+ statement:'The minimum speed on national expressway main lanes is 60 km/h.',
+ explanation:'The minimum is 50 km/h. (60 is the ordinary-road default maximum — the exam loves crossing these.)'},
+{id:'exp-003', topic:'expressway', stage:2, answer:false, trapType:'partialTruth',
+ statement:'Mopeds may use expressways if they are capable of maintaining the minimum speed.',
+ explanation:'Mopeds and motorcycles ≤125 cc are banned from expressways regardless of capability, along with pedestrians, bicycles, and small special vehicles.'},
+{id:'exp-004', topic:'expressway', stage:2, answer:true,
+ statement:'At roughly 100 km/h on a dry expressway, you should keep a following distance of about 100 meters.',
+ explanation:'Rule of thumb: distance ≈ speed (100 m @100 km/h, 80 m @80) — doubled on wet roads or worn tires.'},
+{id:'exp-005', topic:'expressway', stage:2, answer:false, trapType:'partialTruth',
+ statement:'You may drive on the expressway shoulder to pass a traffic jam if you are exiting at the next interchange.',
+ explanation:'The shoulder is for emergencies only — never a driving or passing lane, whatever your exit plans.'},
+{id:'exp-006', topic:'expressway', stage:2, answer:true,
+ statement:'In the acceleration lane you should raise your speed close to that of the main-lane traffic before merging, and yield to vehicles already in the main lane.',
+ explanation:'Match speed, mirror/shoulder check, merge into a gap — main-lane traffic has priority.'},
+{id:'exp-007', topic:'expressway', stage:2, answer:false, trapType:'partialTruth',
+ statement:'If you miss your exit on an expressway, you may carefully reverse along the shoulder back to the exit.',
+ explanation:'No reversing, no U-turns, no median crossing — ever. Missed exit = continue to the next one.'},
+{id:'exp-008', topic:'expressway', stage:2, answer:true,
+ statement:'When stopping on the expressway due to a breakdown, you must place a warning triangle behind the vehicle and have all occupants wait behind the guardrail.',
+ explanation:'Triangle (legally required on expressways) + everyone out and behind the barrier. Waiting inside the car is how secondary crashes kill.'},
+{id:'exp-009', topic:'expressway', stage:2, answer:false, trapType:'numberSwap',
+ statement:'When towing a broken-down vehicle with a rope on the expressway, the rope must be 5 meters or shorter with a white cloth attached.',
+ explanation:'Trick within a trick: the 5 m + 0.3 m white cloth rule is for ORDINARY roads. Rope towing is not permitted on expressways at all (only purpose-built tow setups).'},
+{id:'exp-010', topic:'expressway', stage:2, answer:true,
+ statement:'Before using the expressway you should check fuel, oil, water, tire pressure, and that all cargo is firmly secured.',
+ explanation:'Pre-entry inspection is a stated duty — a loose load or soft tire at 100 km/h endangers everyone.'},
+
+// ---- emergency vehicles & accidents (6) ----
+{id:'emg-001', topic:'emergency', stage:1, answer:true,
+ statement:'When an emergency vehicle approaches while you are in or near an intersection, you must avoid the intersection, pull to the left, and stop.',
+ explanation:'In/near intersections: clear the junction + left + stop. Elsewhere, yield to the left (a stop is not always required).'},
+{id:'emg-002', topic:'emergency', stage:2, answer:false, trapType:'partialTruth',
+ statement:'After a minor accident with no injuries, if both drivers agree on compensation, the accident need not be reported to the police.',
+ explanation:'Reporting is the driver\'s legal duty for every accident, including property-only. Private settlement does not replace the report.'},
+{id:'emg-003', topic:'emergency', stage:2, answer:true,
+ statement:'After an accident with injuries, the order of action is: stop, prevent further danger, aid the injured and call 119, then report to the police.',
+ explanation:'Stop → secure the scene → injured/119 → police/110. The exam tests the order as much as the items.'},
+{id:'emg-004', topic:'emergency', stage:2, answer:false, trapType:'partialTruth',
+ statement:'An injured person with a head injury should be moved into a comfortable position in your car while waiting for the ambulance.',
+ explanation:'Do not move head-injury casualties unless leaving them in place is itself dangerous (fire, traffic). Make the scene safe instead.'},
+{id:'emg-005', topic:'emergency', stage:2, answer:true,
+ statement:'If you abandon your car to evacuate after an earthquake alert, you should park it off the road or on the left, leave the key in or visible, close the windows, and leave the doors unlocked.',
+ explanation:'Responders may need to move your car: key accessible, doors unlocked. (Windows closed — against fire sparks.)'},
+{id:'emg-006', topic:'emergency', stage:1, answer:false, trapType:'mustVsMay',
+ statement:'On a one-way road, when an emergency vehicle approaches, you must always pull to the left side and stop.',
+ explanation:'On one-ways you pull RIGHT when keeping left would obstruct the emergency vehicle. "Always left" overreaches.'},
+
+// ---- two-wheeled vehicles (8) ----
+{id:'two-001', topic:'twoWheel', stage:2, answer:false, trapType:'numberSwap',
+ statement:'The maximum speed for a moped (原付) on ordinary roads is 40 km/h.',
+ explanation:'Mopeds: 30 km/h, even where the posted limit for cars is higher.'},
+{id:'two-002', topic:'twoWheel', stage:2, answer:true,
+ statement:'Both the rider and any passenger of a motorcycle must wear a properly fastened helmet, even for a very short ride.',
+ explanation:'Helmet always — loose straps and "just to the corner" excuses are exam bait.'},
+{id:'two-003', topic:'twoWheel', stage:2, answer:false, trapType:'partialTruth',
+ statement:'A moped may carry one passenger if the passenger is a child.',
+ explanation:'Mopeds carry NO passengers, child or adult, ever.'},
+{id:'two-004', topic:'twoWheel', stage:2, answer:true,
+ statement:'When braking a two-wheeled vehicle, you should keep the vehicle upright and apply the front and rear brakes at the same time.',
+ explanation:'Upright + both brakes together (with engine braking) — single-brake stops cause skids, especially on wet roads.'},
+{id:'two-005', topic:'twoWheel', stage:2, answer:true,
+ statement:'At a signal-controlled intersection with three or more lanes in your direction, a moped must as a rule make a right turn in two steps.',
+ explanation:'Two-step (hook) turn: straight to the far corner with the right signal on, rotate, proceed on the new green. Also wherever the two-step sign orders it.'},
+{id:'two-006', topic:'twoWheel', stage:2, answer:false, trapType:'swap',
+ statement:'Where a sign prohibits the two-step right turn, a moped must dismount and cross as a pedestrian.',
+ explanation:'Where two-step turns are prohibited (or on two-lane roads), the moped turns right like a car, from the center. No dismounting rule exists here.'},
+{id:'two-007', topic:'twoWheel', stage:2, answer:true,
+ statement:'When choosing a motorcycle, you should be able to push it off its stand and support it on your own; a machine too heavy to handle is too big for you.',
+ explanation:'The book\'s fit test: lift off the stand, hold it upright, reach the ground — riding skill cannot fix an oversized machine.'},
+{id:'two-008', topic:'twoWheel', stage:2, answer:false, trapType:'partialTruth',
+ statement:'Because motorcycles are smaller, car drivers at a right turn can assume an approaching motorcycle is farther away and slower than it looks.',
+ explanation:'Backwards: small size makes bikes look FARTHER and SLOWER than they really are — assume the bike arrives sooner.'},
+];
+/* ===== /02 ===== */
+
+/* ===== 03 DATA: HAZARD_QUESTIONS ===== */
+var HAZARD_QUESTIONS = [
+{id:'haz-001', topic:'rightOfWay', stage:2, sceneSvg:'haz-scene-1',
+ sceneText:'You are driving at 30 km/h toward an uncontrolled intersection of equal-width roads. A truck is parked on the crossing road to your left, just before the intersection, blocking your view. A bicycle\'s front wheel is visible ahead of the truck, moving toward the intersection.',
+ parts:[
+  {statement:'The bicycle may enter the intersection hidden by the truck, so I will slow to a speed at which I can stop immediately (徐行) before entering.', answer:true,
+   explanation:'Poor-visibility uncontrolled intersections are statutory 徐行 places — and the visible wheel is a direct warning.'},
+  {statement:'Since cars have priority over bicycles, the bicycle will stop, and I may pass through at my current speed.', answer:false,
+   explanation:'Bicycles are vehicles; nothing guarantees it stops, and traffic from the left is exactly what you must yield to at an equal intersection. Assuming others yield is the core hazard-prediction error.'},
+  {statement:'I will watch only the bicycle on the left, since no hazard can come from the right at an equal-width intersection.', answer:false,
+   explanation:'Fixating on one hazard creates the next. Traffic from the right can still conflict; scanning both sides is required.'}
+ ]},
+{id:'haz-002', topic:'rightOfWay', stage:2, sceneSvg:'haz-scene-2',
+ sceneText:'You are waiting to turn right at a signalized intersection. An oncoming car approaches, signaling nothing, and behind it you glimpse a motorcycle. The oncoming car appears to be slowing as the light turns yellow.',
+ parts:[
+  {statement:'The oncoming car seems to be stopping for the yellow light, so I can complete my turn quickly before the light changes.', answer:false,
+   explanation:'“It will probably stop” (だろう運転) is the classic killer at right turns. The car may push through the yellow — and the motorcycle behind it almost certainly may.'},
+  {statement:'The motorcycle behind the car may continue straight through, hidden by the car, so I should wait until I can confirm it.', answer:true,
+   explanation:'The right-turn/oncoming-motorcycle collision (右直事故) is Japan\'s textbook accident. Motorcycles look farther and slower than they are.'},
+  {statement:'Even while turning, pedestrians may be on the crossing to my right, so I must check it before completing the turn.', answer:true,
+   explanation:'The crossing at the exit of your turn is part of the same maneuver — turning drivers owe pedestrians a stop.'}
+ ]},
+{id:'haz-003', topic:'pedestrians', stage:2, sceneSvg:'haz-scene-3',
+ sceneText:'You are driving at 40 km/h in the right lane of a two-lane road. In the left lane ahead, a car has stopped just before a pedestrian crossing. You cannot see the crossing area in front of the stopped car.',
+ parts:[
+  {statement:'The car ahead may have stopped to let a pedestrian cross, so I must stop before the crossing rather than pass at my current speed.', answer:true,
+   explanation:'A vehicle stopped before a crossing legally forces you to STOP before passing it — the law assumes it hides a pedestrian, and here it visibly might.'},
+  {statement:'Because I am in a different lane from the stopped car, the stopping rule does not apply to me and I may continue while watching carefully.', answer:false,
+   explanation:'The rule binds vehicles passing the stopped car regardless of lane — the hidden pedestrian steps into YOUR lane next.'},
+  {statement:'A pedestrian may emerge suddenly from in front of the stopped car at a pace I cannot predict.', answer:true,
+   explanation:'That is precisely the hazard: an unseen pedestrian mid-crossing, screened by the stopped vehicle.'}
+ ]},
+{id:'haz-004', topic:'pedestrians', stage:2, sceneSvg:'haz-scene-4',
+ sceneText:'You are driving at 25 km/h on a narrow residential street with cars parked on the left. A ball rolls into the road from between the parked cars, and a child is visible on the sidewalk to your right.',
+ parts:[
+  {statement:'A child may chase the ball into the road from between the parked cars, so I should brake at once and be ready to stop.', answer:true,
+   explanation:'Ball = child follows. Brake first, before any child is visible — this is the canonical 危険予測 scene.'},
+  {statement:'The child I can see on the right sidewalk is the only child I need to worry about.', answer:false,
+   explanation:'The ball came from the LEFT — its owner is probably still hidden between the parked cars. The visible child is not the dangerous one.'},
+  {statement:'Sounding the horn continuously while maintaining my speed is the appropriate way to warn the children.', answer:false,
+   explanation:'Slowing/stopping is the duty; the horn is for danger avoidance, not a substitute for braking — and children may not react to it as adults would.'}
+ ]},
+{id:'haz-005', topic:'railWeather', stage:2, sceneSvg:'haz-scene-5',
+ sceneText:'You are driving at night in the rain at 50 km/h. An oncoming car approaches with bright headlights. There is a pedestrian crossing ahead, and a pedestrian in dark clothing is starting to cross from the right.',
+ parts:[
+  {statement:'The pedestrian may disappear from my view where my headlights and the oncoming car\'s lights cross, so I should slow down before the crossing.', answer:true,
+   explanation:'The "vanishing" (glare/蒸発) phenomenon hides pedestrians exactly between two beams. Rain and dark clothing compound it.'},
+  {statement:'Since the pedestrian can clearly see my headlights, they will wait for me to pass, and I may keep my speed.', answer:false,
+   explanation:'Pedestrians at a crossing have priority and may assume YOU will stop. Expecting others to evade you fails both the law and the prediction test.'},
+  {statement:'Wet roads lengthen my braking distance, so I should begin slowing earlier than I would on a dry night.', answer:true,
+   explanation:'Rain extends braking distance (roughly double the safe gap) — early, gentle braking is the correct compensation.'}
+ ]}
+];
+/* ===== /03 ===== */
+
+/* ===== 04 STORAGE ===== */
+var Store = (function(){
+  var KEY = 'jdlGuide.v1';
+  var memoryOnly = false;
+  var saveTimer = null;
+  function fresh(){
+    return {v:1, sections:{}, q:{}, history:[], wrongQueue:[], anchors:{}, settings:{timer:true}};
+  }
+  var state = fresh();
+  function load(){
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); }
+    catch(e){ memoryOnly = true; banner('Storage is unavailable in this browser mode — progress will not be saved.'); return; }
+    if (!raw) return;
+    try {
+      var parsed = JSON.parse(raw);
+      if (parsed && parsed.v === 1) { state = Object.assign(fresh(), parsed); }
+      else {
+        try { localStorage.setItem(KEY + '.backup', raw); } catch(e2){}
+        banner('Saved progress was from an unknown version and has been reset (a backup copy was kept).');
+      }
+    } catch(e){
+      banner('Saved progress was unreadable and has been reset.');
+    }
+  }
+  function persist(){
+    if (memoryOnly) return;
+    try {
+      localStorage.setItem(KEY, JSON.stringify(state));
+    } catch(e){
+      // quota: trim history and retry once
+      state.history = state.history.slice(-10);
+      try { localStorage.setItem(KEY, JSON.stringify(state)); }
+      catch(e2){
+        memoryOnly = true;
+        banner('Could not save progress (storage full or blocked). Running without saving.');
+      }
+    }
+  }
+  function save(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 400);
+  }
+  function exportJSON(){ return JSON.stringify(state); }
+  function importJSON(text){
+    var parsed = JSON.parse(text); // caller catches
+    if (!parsed || parsed.v !== 1) throw new Error('Not a valid progress export (missing v:1).');
+    state = Object.assign(fresh(), parsed);
+    persist();
+  }
+  function reset(){
+    state = fresh();
+    if (!memoryOnly) { try { localStorage.removeItem(KEY); } catch(e){} }
+    persist();
+  }
+  return { get state(){ return state; }, load:load, save:save, exportJSON:exportJSON, importJSON:importJSON, reset:reset };
+})();
+
+/* ===== 05 ROUTER + NAV ===== */
+var sections = {};
+document.querySelectorAll('section[data-route]').forEach(function(s){ sections[s.dataset.route] = s; });
+
+function currentRoute(){
+  var h = location.hash.replace(/^#\/?/, '');
+  return h || 'home';
+}
+function navigate(route){ location.hash = '#/' + route; }
+
+var renderers = {}; // route -> render fn, registered by components
+
+function dispatch(){
+  var r = currentRoute();
+  var params = null;
+  if (!sections[r]) {
+    // routes with params e.g. quiz/drill/parking
+    var parts = r.split('/');
+    if (parts[0] === 'quiz' && parts.length > 1) { params = parts.slice(1); r = 'quiz'; }
+    else if (!sections[parts[0]]) { r = 'home'; }
+    else r = parts[0];
+  }
+  if (Quiz.active && r !== 'quiz') {
+    if (!confirm('A quiz is in progress. Leave and abandon it?')) {
+      history.back();
+      return;
+    }
+    Quiz.abandon();
+  }
+  Object.keys(sections).forEach(function(k){ sections[k].hidden = (k !== r); });
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    if (a.dataset.route === r) a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
+  });
+  closeDrawer();
+  if (renderers[r]) renderers[r](params);
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', dispatch);
+
+function buildNav(){
+  var html = '';
+  ROUTES.forEach(function(it){
+    if (it.group) { html += '<div class="group-label">' + it.group + '</div>'; return; }
+    var badge = it.yield ? '<span class="nbadge badge ' + it.yield + '">' + it.yield.toUpperCase() + '</span>' : '';
+    html += '<a href="#/' + it.route + '" data-route="' + it.route + '" class="' + (it.sub ? 'sub' : '') + '">' + it.title + badge + '</a>';
+  });
+  document.getElementById('navLinks').innerHTML = html;
+}
+
+/* drawer */
+function openDrawer(){ document.body.classList.add('drawer-open'); }
+function closeDrawer(){ document.body.classList.remove('drawer-open'); }
+document.getElementById('menuBtn').addEventListener('click', openDrawer);
+document.getElementById('closeNav').addEventListener('click', closeDrawer);
+document.getElementById('backdrop').addEventListener('click', closeDrawer);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDrawer(); });
+
+/* toast + banner */
+var toastTimer = null;
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+function banner(msg){
+  var b = document.createElement('div');
+  b.className = 'banner';
+  b.textContent = msg;
+  var main = document.getElementById('main');
+  main.insertBefore(b, main.firstChild);
+}
+
+/* helpers */
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function shuffle(arr){
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+/* ===== 06 COMPONENTS ===== */
+
+/* --- readiness model --- */
+var CHAPTERS = ['ch1','ch2','ch3','ch4','ch5','ch6','ch79'];
+function topicAccuracy(){
+  // topic -> {a, c, pct} aggregated from per-question stats
+  var agg = {};
+  QUESTIONS.forEach(function(q){
+    var s = qstat(q.id);
+    if (!s.a) return;
+    if (!agg[q.topic]) agg[q.topic] = {a:0,c:0};
+    agg[q.topic].a += s.a; agg[q.topic].c += s.c;
+  });
+  Object.keys(agg).forEach(function(t){ agg[t].pct = Math.round(agg[t].c/agg[t].a*100); });
+  return agg;
+}
+function mocksOf(){
+  return Store.state.history.filter(function(h){ return h.mode==='karimen'||h.mode==='honmen'||h.mode==='honmenFull'; });
+}
+function lastN(arr, mode, n){
+  var f = arr.filter(function(h){ return mode.indexOf(h.mode) !== -1; });
+  return f.slice(-n);
+}
+function readiness(){
+  var s1 = QUESTIONS.filter(function(q){ return q.stage===1; });
+  var attempted1 = s1.filter(function(q){ return qstat(q.id).a > 0; }).length;
+  var attemptedPct = s1.length ? attempted1/s1.length : 0;
+  var mocks = mocksOf();
+  var best = mocks.reduce(function(m,h){ return Math.max(m, h.pct); }, 0);
+  var acc = topicAccuracy();
+  var weak = Object.keys(acc).filter(function(t){ return acc[t].a >= 5 && acc[t].pct < 80; });
+  var lastK2 = lastN(Store.state.history, ['karimen'], 2);
+  var k2ok = lastK2.length === 2 && lastK2.every(function(h){ return h.pct >= 90; });
+  var lastH2 = lastN(Store.state.history, ['honmen','honmenFull'], 2);
+  var h2ok = lastH2.length === 2 && lastH2.every(function(h){ return h.pct >= 90; });
+  var chDone = CHAPTERS.filter(function(c){ return Store.state.sections[c] && Store.state.sections[c].done; }).length;
+
+  var level, next;
+  if (h2ok && k2ok && !weak.length) { level = 5; next = 'You meet the honmen-ready bar. Confirm with an external question bank, then book the test.'; }
+  else if (k2ok && !weak.length) {
+    level = 4;
+    var hLast = lastH2.length ? lastH2[lastH2.length-1] : null;
+    next = lastH2.length < 2
+      ? 'Take ' + (2 - lastH2.length) + ' more honmen set(s) at ≥90% to reach honmen-ready.'
+      : 'Your last honmen sets: ' + lastH2.map(function(h){return h.pct + '%';}).join(', ') + ' — get two in a row at ≥90%.';
+    if (hLast && hLast.pct >= 90) next = 'One more honmen set at ≥90% (last was ' + hLast.pct + '%).';
+  }
+  else if (mocks.length && mocks[mocks.length-1].pct >= 90) {
+    level = 3;
+    next = weak.length
+      ? 'Fix weak topic(s): ' + weak.map(function(t){ return TOPICS[t].label; }).join(', ') + ' — each must reach 80%.'
+      : 'Take one more karimen mock at ≥90% to confirm consistency (last was ' + mocks[mocks.length-1].pct + '%).';
+  }
+  else if (mocks.length) {
+    level = 2;
+    var last = mocks[mocks.length-1];
+    next = 'Best mock so far: ' + best + '%. Drill weak topics, then retake — you need ≥90%' + (last.pct ? ' (last was ' + last.pct + '%)' : '') + '.';
+  }
+  else if (attemptedPct >= 0.2 || chDone > 0) { level = 1; next = 'Work through the chapters and drills, then take your first karimen mock.'; }
+  else { level = 0; next = 'Start with “How the Exams Work”, then Chapter 1. Drill as you go — reading alone does not pass this test.'; }
+  return {level:level, next:next, weak:weak, acc:acc, mocks:mocks, attemptedPct:attemptedPct, chDone:chDone};
+}
+
+var LADDER = [
+  'Getting started',
+  'Studying the chapters',
+  'Drilling — below the 90% bar',
+  'Almost there — hit 90% once',
+  'Karimen-ready (two mocks ≥90%, no weak topics)',
+  'Honmen-ready (plus two honmen sets ≥90%)'
+];
+
+renderers['home'] = function(){
+  var r = readiness();
+  var root = document.getElementById('homeRoot');
+  var ladderHtml = LADDER.map(function(lbl, i){
+    var cls = i < r.level ? 'done' : (i === r.level ? 'current' : '');
+    return '<li class="' + cls + '"><span class="dot">' + (i < r.level ? '✓' : i) + '</span><span>' + lbl + '</span></li>';
+  }).join('');
+
+  var attempted = QUESTIONS.filter(function(q){ return qstat(q.id).a > 0; }).length;
+  var totA = 0, totC = 0;
+  Object.keys(r.acc).forEach(function(t){ totA += r.acc[t].a; totC += r.acc[t].c; });
+  var overallPct = totA ? Math.round(totC/totA*100) : 0;
+  var wq = Store.state.wrongQueue.length;
+
+  var weakHtml = r.weak.length
+    ? r.weak.map(function(t){ return minibarRow(TOPICS[t].label, [r.acc[t].c, r.acc[t].a], '#/quiz/drill/' + t); }).join('')
+    : (totA ? '<p style="color:var(--green);font-weight:600">No weak topics right now (everything attempted ≥5 times is at 80%+).</p>'
+            : '<p style="color:var(--ink-soft)">Answer some questions and weak topics will surface here.</p>');
+
+  /* sparkline of last 10 mocks */
+  var hs = r.mocks.slice(-10);
+  var spark = '';
+  if (hs.length) {
+    var W = 560, H = 70, pad = 8;
+    var pts = hs.map(function(h, i){
+      var x = hs.length === 1 ? W/2 : pad + i * ((W - 2*pad) / (hs.length - 1));
+      var y = H - pad - (h.pct/100) * (H - 2*pad);
+      return [x,y,h.pct];
+    });
+    var y90 = H - pad - 0.9 * (H - 2*pad);
+    spark = '<svg class="sparkline" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
+      '<line x1="0" y1="' + y90 + '" x2="' + W + '" y2="' + y90 + '" stroke="#C0272D" stroke-dasharray="5,4" stroke-width="1.5"/>' +
+      (pts.length > 1 ? '<polyline fill="none" stroke="#1A50A2" stroke-width="2.5" points="' + pts.map(function(p){ return p[0]+','+p[1]; }).join(' ') + '"/>' : '') +
+      pts.map(function(p){ return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="4" fill="' + (p[2]>=90?'#0e7a5f':'#C0272D') + '"/>'; }).join('') +
+      '</svg><div style="font-size:.75rem;color:var(--ink-soft)">Last ' + hs.length + ' mock(s) — dashed line is the 90% pass bar. ' +
+      hs.map(function(h){ return h.pct + '%'; }).join(' · ') + '</div>';
+  }
+
+  var nudge = wq > 15 ? '<div class="card warn"><strong>' + wq + ' questions in your review queue.</strong> Clear it before taking another mock — re-meeting your mistakes is the fastest score gain.</div>' : '';
+
+  root.innerHTML =
+    '<h1>Dashboard</h1>' +
+    '<div class="next-step"><strong>Next step:</strong> ' + esc(r.next) + '</div>' +
+    nudge +
+    '<ul class="ladder">' + ladderHtml + '</ul>' +
+    '<div class="stat-grid">' +
+      '<div class="cell"><div class="v">' + attempted + '<span style="font-size:.85rem;color:var(--ink-soft)">/' + QUESTIONS.length + '</span></div><div class="k">questions attempted</div></div>' +
+      '<div class="cell"><div class="v">' + (totA ? overallPct + '%' : '—') + '</div><div class="k">overall accuracy</div></div>' +
+      '<div class="cell"><div class="v">' + wq + '</div><div class="k">in review queue</div></div>' +
+      '<div class="cell"><div class="v">' + r.mocks.length + '</div><div class="k">mocks taken</div></div>' +
+    '</div>' +
+    (spark ? '<h2>Mock history</h2>' + spark : '') +
+    '<h2>Weak topics</h2>' + weakHtml +
+    '<h2>Continue</h2><div class="btn-row">' +
+      (wq ? '<a class="btn" href="#/quiz/mode/review">Clear review queue (' + wq + ')</a>' : '') +
+      '<a class="btn' + (wq ? ' secondary' : '') + '" href="#/quiz">Quiz Center</a>' +
+      '<a class="btn secondary" href="#/study">Chapters (' + r.chDone + '/' + CHAPTERS.length + ' done)</a>' +
+      '<a class="btn ghost" href="#/anchors">Numeric anchors</a>' +
+    '</div>';
+};
+
+/* --- progress & data page --- */
+renderers['progress'] = function(){
+  var root = document.getElementById('progressRoot');
+  var acc = topicAccuracy();
+  var rows = Object.keys(TOPICS).map(function(t){
+    var a = acc[t];
+    var total = QUESTIONS.filter(function(q){ return q.topic === t; }).length;
+    var seen = QUESTIONS.filter(function(q){ return q.topic === t && qstat(q.id).a > 0; }).length;
+    return '<tr><td>' + TOPICS[t].label + '</td><td>' + seen + ' / ' + total + '</td>' +
+      '<td>' + (a ? a.a : 0) + '</td><td>' + (a ? a.pct + '%' : '—') + '</td>' +
+      '<td><a class="btn small secondary" href="#/quiz/drill/' + t + '">Drill</a></td></tr>';
+  }).join('');
+  var hist = Store.state.history.slice().reverse().map(function(h){
+    var d = new Date(h.ts);
+    var when = (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + ('0'+d.getMinutes()).slice(-2);
+    return '<tr><td>' + when + '</td><td>' + esc(h.mode) + '</td><td>' + h.score + '/' + h.total + ' (' + h.pct + '%)</td>' +
+      '<td>' + (h.pass ? '<span style="color:var(--green);font-weight:700">PASS</span>' : '<span style="color:var(--red)">below</span>') + '</td>' +
+      '<td>' + Math.floor(h.durSec/60) + 'm' + (h.durSec%60) + 's</td></tr>';
+  }).join('');
+  root.innerHTML =
+    '<h1>Progress &amp; Data</h1>' +
+    '<h2>Per-topic accuracy</h2>' +
+    '<div class="table-wrap"><table><tr><th>Topic</th><th>Seen</th><th>Attempts</th><th>Accuracy</th><th></th></tr>' + rows + '</table></div>' +
+    '<h2>Mock history</h2>' +
+    (hist ? '<div class="table-wrap"><table><tr><th>When</th><th>Mode</th><th>Score</th><th>Result</th><th>Time</th></tr>' + hist + '</table></div>'
+          : '<p style="color:var(--ink-soft)">No mocks taken yet.</p>') +
+    '<h2>Move progress between devices</h2>' +
+    '<p style="font-size:.9rem">Progress is saved per device/browser. To move it (e.g., laptop → iPhone), copy the export here and paste it into the import box on the other device. Also useful as a backup — Safari can clear site storage after long inactivity.</p>' +
+    '<div class="btn-row"><button class="btn secondary" id="expBtn">Export progress</button></div>' +
+    '<textarea class="io" id="ioBox" placeholder="Export appears here; or paste an export and press Import."></textarea>' +
+    '<div class="btn-row"><button class="btn" id="impBtn">Import (replaces current progress)</button>' +
+    '<button class="btn danger" id="resetBtn">Reset all progress</button></div>';
+
+  document.getElementById('expBtn').addEventListener('click', function(){
+    var box = document.getElementById('ioBox');
+    box.value = Store.exportJSON();
+    box.select();
+    try { document.execCommand('copy'); toast('Progress copied to clipboard.'); }
+    catch(e){ toast('Select the text and copy it manually.'); }
+  });
+  document.getElementById('impBtn').addEventListener('click', function(){
+    var txt = document.getElementById('ioBox').value.trim();
+    if (!txt) { toast('Paste an export first.'); return; }
+    if (!confirm('Importing replaces ALL progress on this device. Continue?')) return;
+    try { Store.importJSON(txt); toast('Progress imported.'); renderers['progress'](); }
+    catch(e){ toast('Import failed: ' + e.message); }
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if (!confirm('Delete all progress (quiz stats, history, chapter completion)? This cannot be undone.')) return;
+    Store.reset(); toast('Progress reset.'); renderers['progress']();
+  });
+};
+
+/* --- chapter helpers --- */
+function chapterTopics(ch){
+  return Object.keys(TOPICS).filter(function(t){ return TOPICS[t].chapter === ch; });
+}
+function startChapterDrill(ch){
+  var topics = chapterTopics(ch);
+  var pool = QUESTIONS.filter(function(q){ return topics.indexOf(q.topic) !== -1; });
+  if (!pool.length) { toast('No questions for this chapter yet.'); return; }
+  startQuiz({mode:'drill', label:'Drill: Chapter ' + ch.replace('ch',''), items:pickWeak(pool, Math.min(10, pool.length)), instant:true});
+}
+function chapterFooter(ch){
+  var done = Store.state.sections[ch] && Store.state.sections[ch].done;
+  return '<div class="btn-row" style="margin-top:28px">' +
+    '<button class="btn" data-chdrill="' + ch + '">Drill this chapter</button>' +
+    '<button class="btn ' + (done ? 'ghost' : 'secondary') + '" data-chdone="' + ch + '">' + (done ? '✓ Marked as read — unmark' : 'Mark chapter as read') + '</button>' +
+    '<a class="btn ghost" href="#/study">Chapter index</a></div>' +
+    '<div class="foot-note">Digest based on the JAF “Rules of the Road” (2017 English edition) and exam-focused research. ' +
+    'A few figures may have changed since 2017 — when an external question bank disagrees, trust the newer source.</div>';
+}
+function wireChapterFooter(root, rerender){
+  root.querySelectorAll('[data-chdrill]').forEach(function(b){
+    b.addEventListener('click', function(){ startChapterDrill(b.dataset.chdrill); });
+  });
+  root.querySelectorAll('[data-chdone]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var ch = b.dataset.chdone;
+      var cur = Store.state.sections[ch] && Store.state.sections[ch].done;
+      Store.state.sections[ch] = {done:!cur, ts:Date.now()};
+      Store.save();
+      rerender();
+    });
+  });
+}
+
+/* --- exams page --- */
+renderers['exams'] = function(){
+  document.getElementById('examsRoot').innerHTML =
+  '<h1>How the Exams Work</h1>' +
+  '<p>The full domestic path has <strong>two written exams</strong>. Both are true/false (○×, <em>maru-batsu</em>) and both require <strong>90%</strong> — a brutal bar that turns every careless misread into a fail.</p>' +
+  '<div class="table-wrap"><table>' +
+  '<tr><th></th><th>Karimen 仮免 (provisional)</th><th>Honmen 本免 (full)</th></tr>' +
+  '<tr><td>Questions</td><td>50 true/false, text only</td><td>90 true/false (1 pt) + 5 illustrated hazard-prediction (2 pts)</td></tr>' +
+  '<tr><td>Pass mark</td><td><span class="num">90/100</span> (45 of 50, 2 pts each)</td><td><span class="num">90/100</span></td></tr>' +
+  '<tr><td>Time</td><td>30 minutes</td><td>50 minutes</td></tr>' +
+  '<tr><td>Scope</td><td>Stage 1 — basics: signals, signs, right-of-way, speed, parking, pedestrians</td><td>Stage 1 + Stage 2 — everything, incl. expressways, two-wheel (~11 pts), hazard prediction</td></tr>' +
+  '<tr><td>Pass rate</td><td>~80% (Tokyo, 2021)</td><td>~72–78% (recent 10-year range)</td></tr>' +
+  '</table></div>' +
+  '<h2>Three facts that should shape your studying</h2>' +
+  '<div class="card accent"><strong>1. The JAF book alone will not pass this test.</strong> JAF itself says the book “is not intended for use as teaching material for the written examination.” It teaches concepts; the exam tests <em>trick wording</em>. Read a chapter once, then drill questions — that is where the points are.</div>' +
+  '<div class="card accent"><strong>2. The test is built on 引っ掛け (hikkake) traps.</strong> A single word — “always,” “may,” “5 meters” — flips the answer. Learn the <a href="#/traps">six trap patterns</a> and you will recognize most questions as variations of them.</div>' +
+  '<div class="card accent"><strong>3. Exact numbers are guaranteed points.</strong> Distances, speeds, ages, and limits appear with wrong values swapped in. Memorize the <a href="#/anchors">numeric anchors</a> cold; they are the cheapest points on the paper.</div>' +
+  '<h2>The study loop this guide is built around</h2>' +
+  '<ol>' +
+  '<li><strong>Learn</strong> — read a chapter digest (15–25 min each). Don\'t aim for mastery from reading.</li>' +
+  '<li><strong>Memorize</strong> — the <a href="#/anchors">numeric anchors</a> and <a href="#/traps">trap patterns</a>. Revisit on your phone in spare minutes.</li>' +
+  '<li><strong>Drill</strong> — topic drills with instant explanations, then full mocks under timer.</li>' +
+  '<li><strong>Track</strong> — the <a href="#/home">dashboard</a> tells you the next step and which topics are leaking points. Re-drill weak topics; don\'t re-read whole chapters.</li>' +
+  '</ol>' +
+  '<div class="callout"><span class="lbl">Benchmark</span>Book the real test when you score <strong>≥90% on two consecutive mocks</strong> with no topic under 80%. Scores on repeated mocks inflate (you start recognizing questions) — before booking, confirm once on an external bank: ' +
+  '<a href="https://karimen-honmen.com" target="_blank" rel="noopener">karimen-honmen.com</a>, <a href="https://jn8.jp" target="_blank" rel="noopener">jn8.jp</a>, or <a href="https://menkyo-mtg.com" target="_blank" rel="noopener">menkyo-mtg.com</a> (2,000+ questions).</div>' +
+  '<h2>Exam-day mechanics worth knowing</h2>' +
+  '<ul>' +
+  '<li>Each question is judged <strong>as written</strong>. If any part of the statement is wrong, the whole statement is × — even if most of it is right.</li>' +
+  '<li>You can answer in English at major centers, but the English is a direct translation of Japanese legal phrasing (“Japanglish”). Understand the rule\'s logic, not the surface English.</li>' +
+  '<li>Hazard-prediction questions (honmen only) give <strong>2 points only if all three sub-answers are correct</strong>. One slip = 0 points. Five questions = 10 points, and you can only lose 10 total. Practice them in the <a href="#/hazard">Hazard section</a>.</li>' +
+  '<li>Pace: karimen ≈ 35 s/question, honmen ≈ 30 s. The timer on mocks here trains that rhythm.</li>' +
+  '</ul>';
+};
+
+/* --- study index --- */
+var CH_META = {
+  ch1:  {n:'1', t:'Common Rules & Signs', y:'high', stage:'1', d:'Signals (incl. arrows & flashing), traffic signs and markings, police hand signals. The single highest-yield chapter.'},
+  ch2:  {n:'2', t:'Before Driving', y:'med', stage:'1', d:'License classes, vehicle inspection, seatbelts, child seats, loading limits, alcohol — the “guaranteed numbers” chapter.'},
+  ch3:  {n:'3', t:'Driving Tips', y:'high', stage:'1', d:'Right-of-way, speed & stopping distance, lanes, overtaking, parking distances, pedestrian protection, 徐行. The biggest chapter and the exam\'s core.'},
+  ch4:  {n:'4', t:'Dangerous Spots', y:'med', stage:'1+2', d:'Railroad crossings, slopes & curves, night driving, bad weather, emergency measures.'},
+  ch5:  {n:'5', t:'Expressways', y:'high', stage:'2', d:'Speed ranges, lane discipline, following distance, breakdown procedure. Compact and heavily tested on honmen.'},
+  ch6:  {n:'6', t:'Two-wheeled Vehicles', y:'med', stage:'2', d:'~11 points on honmen even if you never ride: helmets, two-step right turns, braking, passengers.'},
+  ch79: {n:'7–9', t:'Low-yield Chapters', y:'skim', stage:'2', d:'Passenger transport, accidents/breakdowns/disasters, owner duties — only a handful of testable facts, digested here.'}
+};
+renderers['study'] = function(){
+  var root = document.getElementById('studyIndexRoot');
+  var cards = CHAPTERS.map(function(ch){
+    var m = CH_META[ch];
+    var done = Store.state.sections[ch] && Store.state.sections[ch].done;
+    return '<div class="card" style="display:flex;gap:12px;align-items:flex-start">' +
+      '<span class="chapter-tab">' + m.n + '</span>' +
+      '<div style="flex:1"><div><a href="#/study/' + ch + '" style="font-weight:700">' + m.t + '</a> ' +
+      '<span class="badge ' + m.y + '">' + m.y.toUpperCase() + '</span> <span class="badge stage">STAGE ' + m.stage + '</span> ' +
+      (done ? '<span style="color:var(--green);font-weight:700">✓ read</span>' : '') + '</div>' +
+      '<div style="font-size:.88rem;color:var(--ink-soft)">' + m.d + '</div></div></div>';
+  }).join('');
+  root.innerHTML =
+    '<h1>Study the Rules</h1>' +
+    '<p>Each digest condenses a JAF chapter to what the exam actually tests. Order for the karimen: 1 → 3 → 2 → 4. Add 5, 6, 7–9 before the honmen.</p>' +
+    '<p style="font-size:.85rem"><span class="badge high">HIGH</span> drill until ≥90% &nbsp; <span class="badge med">MED</span> know the listed facts &nbsp; <span class="badge skim">SKIM</span> read once</p>' +
+    cards;
+};
+
+/* --- numeric anchors --- */
+renderers['anchors'] = function(){
+  var root = document.getElementById('anchorsRoot');
+  var FLIPS = [
+    ['Default speed limit, ordinary roads (regular car)?', '60 km/h'],
+    ['Default max on national expressways (regular car)?', '100 km/h (80 for some vehicle types / towing)'],
+    ['Minimum speed on national expressways?', '50 km/h (divided main lanes)'],
+    ['Moped maximum speed?', '30 km/h'],
+    ['No parking AND no stopping: within ___ m of an intersection?', '5 m (also within 5 m of corners, crossings)'],
+    ['No parking AND no stopping: within ___ m of a railroad crossing?', '10 m (and on it)'],
+    ['No parking AND no stopping: within ___ m of a bus/tram stop?', '10 m (during operating hours)'],
+    ['No parking AND no stopping: safety zone?', 'Left side of it + 10 m before/after'],
+    ['Parking prohibited: within ___ m of a fire alarm?', '1 m'],
+    ['Parking prohibited: within ___ m of a garage / vehicle entrance?', '3 m'],
+    ['Parking prohibited: within ___ m of a fire hydrant?', '5 m (also fire-fighting water sources, construction zones)'],
+    ['Towing a broken-down car: max rope distance between vehicles?', '5 m, with a white cloth ≥ 0.3 m square on the rope'],
+    ['Child seat required for children under age ___?', '6 (under 6 years old)'],
+    ['Breath alcohol legal threshold?', '0.15 mg/L — but ANY amount means you must not drive'],
+    ['Stopping distance = ?', 'Free-running (reaction) distance + braking distance'],
+    ['Following distance at 100 km/h on a dry expressway?', '≈ 100 m (80 m at 80 km/h; double it when wet)'],
+    ['Headlights required where, even in daytime?', 'In tunnels and wherever 50 m visibility is lost (fog etc.)'],
+    ['Right turn on red?', 'Does not exist. Right turns need green or a green right-arrow'],
+    ['Seatbelts required for…?', 'All occupants, including rear seats'],
+    ['White/yellow cane, guide dog, child alone on the road — you must…?', 'STOP or slow down (徐行) — merely “being careful” is not enough']
+  ];
+  var flips = FLIPS.map(function(f, i){
+    return '<div class="flip" data-flip="' + i + '"><div class="fq">' + f[0] + '</div><div class="fa">' + f[1] + '</div><div class="tap">tap to reveal</div></div>';
+  }).join('');
+  root.innerHTML =
+  '<h1>Numeric Anchors</h1>' +
+  '<p>The exam swaps these numbers for wrong ones and waits for you to nod along. Know them <em>cold</em> — they are guaranteed points. This page is designed for spare-minute review on your phone.</p>' +
+  '<h2>Speed</h2>' +
+  '<div class="table-wrap"><table>' +
+  '<tr><th>Situation</th><th>Limit</th></tr>' +
+  '<tr><td>Ordinary road, no sign (regular car)</td><td><span class="num">60 km/h</span></td></tr>' +
+  '<tr><td>National expressway max (regular car, large motorcycle)</td><td><span class="num">100 km/h</span></td></tr>' +
+  '<tr><td>National expressway max (certain other types; any vehicle towing)</td><td><span class="num">80 km/h</span></td></tr>' +
+  '<tr><td>National expressway minimum (divided main lane)</td><td><span class="num">50 km/h</span></td></tr>' +
+  '<tr><td>Moped (原付)</td><td><span class="num">30 km/h</span></td></tr>' +
+  '</table></div>' +
+  '<h2>Parking &amp; stopping — the distance ladder</h2>' +
+  '<p>Two different lists. Mixing them up is the classic trap.</p>' +
+  '<div class="card warn"><strong>BOTH parking and stopping prohibited (駐停車禁止)</strong>' +
+  '<ul style="margin:.4em 0">' +
+  '<li>Within <span class="num">5 m</span> of: an intersection and its edges · a corner/bend · a pedestrian or bicycle crossing</li>' +
+  '<li>Within <span class="num">10 m</span> of: a railroad crossing · a bus/tram stop sign (during operating hours) · a safety zone (and on its left side)</li>' +
+  '<li>Anywhere on/in: intersections, crossings, railroad crossings, tunnels, steep slopes, near hill crests</li>' +
+  '</ul></div>' +
+  '<div class="card accent"><strong>Parking prohibited, brief stopping allowed (駐車禁止)</strong>' +
+  '<ul style="margin:.4em 0">' +
+  '<li>Within <span class="num">1 m</span> of a fire alarm</li>' +
+  '<li>Within <span class="num">3 m</span> of a garage or vehicle entrance/exit</li>' +
+  '<li>Within <span class="num">5 m</span> of a fire hydrant, fire-fighting water source, or construction-zone boundary</li>' +
+  '</ul>Mnemonic: <em>1 alarm, 3 garage, 5 hydrant</em> — odd numbers, parking only.</div>' +
+  '<h2>Everything else they love to swap</h2>' +
+  '<div class="table-wrap"><table>' +
+  '<tr><th>Fact</th><th>Value</th></tr>' +
+  '<tr><td>Towing a broken-down vehicle: rope length / marker</td><td>≤ <span class="num">5 m</span> between vehicles; white cloth ≥ <span class="num">0.3 m</span> square</td></tr>' +
+  '<tr><td>Child seat required</td><td>under <span class="num">6</span> years old</td></tr>' +
+  '<tr><td>Breath alcohol offense threshold</td><td><span class="num">0.15 mg/L</span> (but any drinking = do not drive)</td></tr>' +
+  '<tr><td>Following distance, expressway, dry</td><td>≈ <span class="num">100 m</span> @100 km/h · <span class="num">80 m</span> @80 km/h · ×2 when wet</td></tr>' +
+  '<tr><td>Stopping distance</td><td>free-running (reaction) + braking distance; braking distance grows with speed² and on wet roads</td></tr>' +
+  '<tr><td>Headlights</td><td>at night and in tunnels; high beams down for oncoming traffic and when following</td></tr>' +
+  '<tr><td>Seatbelts</td><td>all occupants incl. rear seats</td></tr>' +
+  '<tr><td>Keep to the…</td><td>left (vehicles); pedestrians on the right edge facing traffic</td></tr>' +
+  '</table></div>' +
+  '<h2>Self-test</h2><p>Tap a card, answer out loud, then reveal.</p>' +
+  '<div class="flip-grid">' + flips + '</div>' +
+  '<div class="btn-row"><a class="btn" href="#/quiz/trap/numberSwap">Drill number-swap questions</a></div>';
+  root.querySelectorAll('.flip').forEach(function(el){
+    el.addEventListener('click', function(){ el.classList.toggle('revealed'); });
+  });
+};
+
+/* --- trap patterns --- */
+renderers['traps'] = function(){
+  var root = document.getElementById('trapsRoot');
+  var EXAMPLES = {
+    absolute: [
+      {s:'Vehicles must always stop before a pedestrian crossing.', a:false, w:'You must stop only when pedestrians are crossing or clearly about to cross (and behind a stopped vehicle at a crossing). “Always” breaks it.'},
+      {s:'You must never use the horn except where a horn sign requires it.', a:false, w:'There is one more case: to avoid imminent danger. “Never … except [one thing]” hides the second exception.'}
+    ],
+    mustVsMay: [
+      {s:'When a person with a white cane is crossing, you may slow down and pass with caution.', a:false, w:'You must STOP or slow down so as not to obstruct — “may pass with caution” downgrades a duty into an option.'},
+      {s:'At a flashing red signal, vehicles must stop at the stop line before proceeding.', a:true, w:'Flashing red = stop, then proceed when safe. The duty is real; this one is true. Traps cut both ways — don\'t × every “must.”'}
+    ],
+    numberSwap: [
+      {s:'Parking is prohibited within 5 m of a garage entrance.', a:false, w:'It is 3 m for garage/vehicle entrances. 5 m belongs to fire hydrants and intersections.'},
+      {s:'You must not park or stop within 10 m of a railroad crossing.', a:true, w:'Correct figure. Half the number questions are TRUE — they test whether you really know the value, not just smell a trap.'}
+    ],
+    lookalike: [
+      {s:'The round sign with a red border and horizontal white bar means “Road closed to all traffic.”', a:false, w:'The horizontal bar on a red disc is “No entry” (進入禁止), aimed at one direction. “Closed to all” is the red circle with X-free blank or the closed sign with vertical layout. Learn the pairs side by side.'},
+      {s:'A blue round sign shows what you MUST do; a red-bordered round sign shows what you must NOT do.', a:true, w:'Blue circles = instruction (obligation), red border = regulation/prohibition. This shape-color logic decodes most signs.'}
+    ],
+    swap: [
+      {s:'At a flashing yellow signal, vehicles must stop at the stop line before proceeding.', a:false, w:'Flashing YELLOW = proceed with caution. Flashing RED = stop first. The exam swaps these constantly.'},
+      {s:'A police officer facing you with a raised arm means the same as a green light for you.', a:false, w:'Facing you (front/back toward you) = red. Officer\'s side = the arm signal works like yellow/green depending on the motion. If the officer faces you, treat it as red.'}
+    ],
+    partialTruth: [
+      {s:'On an expressway you must keep a safe following distance, so at 100 km/h on a dry road about 50 m is sufficient.', a:false, w:'The duty is real, but the figure is wrong: ≈100 m at 100 km/h. A true rule + one false detail = ×.'},
+      {s:'Before driving, you should check your vehicle, and if a child under 6 is aboard you must use a child seat unless the child sits on an adult\'s lap.', a:false, w:'The lap “exception” is invented. If any clause is false, the whole statement is ×.'}
+    ]
+  };
+  var cards = Object.keys(TRAPS).map(function(k){
+    var ex = (EXAMPLES[k] || []).map(function(e){
+      return '<div class="review-item ' + (e.a?'right':'wrong') + '">' +
+        '<div>“' + e.s + '” → <strong>' + (e.a ? '○ true' : '× false') + '</strong></div>' +
+        '<div style="color:var(--ink-soft);margin-top:4px">' + e.w + '</div></div>';
+    }).join('');
+    return '<div class="card"><h3 style="margin-top:0"><span class="badge trap">⚠ ' + TRAPS[k].label + '</span></h3>' +
+      '<p style="font-size:.92rem">' + TRAPS[k].hint + '</p>' + ex +
+      '<div class="btn-row"><a class="btn small secondary" href="#/quiz/trap/' + k + '">Drill this trap</a></div></div>';
+  }).join('');
+  root.innerHTML =
+    '<h1>Trap Patterns — 引っ掛け問題</h1>' +
+    '<p>The exam rarely tests obscure rules. It tests <strong>famous rules with one word bent</strong>. Six patterns cover most traps. Read each statement on the exam asking: <em>which pattern is this trying to be?</em></p>' +
+    '<div class="callout"><span class="lbl">The golden rule</span>A statement is ○ only if <strong>every part</strong> of it is correct. One wrong word, number, or condition makes the whole thing ×.</div>' +
+    cards +
+    '<div class="callout"><span class="lbl">Calibration warning</span>Roughly half of all exam statements are TRUE. If you start ×-ing everything that contains “must” or a number, you will fail in the other direction. Drilling fixes calibration; pattern-spotting alone does not.</div>';
+};
+
+/* --- mini sign figures (simplified shapes for recognition training) --- */
+var SIGN = {
+  noEntry: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#C0272D"/><rect x="10" y="24" width="36" height="8" fill="#fff"/></svg>',
+  closedVehicles: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff" stroke="#C0272D" stroke-width="6"/><line x1="11" y1="45" x2="45" y2="11" stroke="#C0272D" stroke-width="5"/></svg>',
+  closedAll: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff" stroke="#C0272D" stroke-width="6"/><line x1="12" y1="12" x2="44" y2="44" stroke="#C0272D" stroke-width="5"/><line x1="44" y1="12" x2="12" y2="44" stroke="#C0272D" stroke-width="5"/></svg>',
+  noParking: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#1A50A2" stroke="#C0272D" stroke-width="6"/><line x1="11" y1="45" x2="45" y2="11" stroke="#C0272D" stroke-width="5"/></svg>',
+  noStopPark: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#1A50A2" stroke="#C0272D" stroke-width="6"/><line x1="12" y1="12" x2="44" y2="44" stroke="#C0272D" stroke-width="5"/><line x1="44" y1="12" x2="12" y2="44" stroke="#C0272D" stroke-width="5"/></svg>',
+  stop: '<svg width="56" height="56" viewBox="0 0 56 56"><polygon points="28,52 3,8 53,8" fill="#C0272D"/><text x="28" y="26" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">止まれ</text><text x="28" y="38" text-anchor="middle" fill="#fff" font-size="8">STOP</text></svg>',
+  slow: '<svg width="56" height="56" viewBox="0 0 56 56"><polygon points="28,52 3,8 53,8" fill="#C0272D"/><polygon points="28,46 9,12 47,12" fill="#fff"/><text x="28" y="24" text-anchor="middle" fill="#C0272D" font-size="10" font-weight="bold">徐行</text><text x="28" y="34" text-anchor="middle" fill="#C0272D" font-size="7">SLOW</text></svg>',
+  speed50: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff" stroke="#C0272D" stroke-width="6"/><text x="28" y="38" text-anchor="middle" fill="#1A50A2" font-size="24" font-weight="bold">50</text></svg>',
+  minSpeed30: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff" stroke="#C0272D" stroke-width="6"/><text x="28" y="36" text-anchor="middle" fill="#1A50A2" font-size="22" font-weight="bold">30</text><line x1="16" y1="44" x2="40" y2="44" stroke="#1A50A2" stroke-width="4"/></svg>',
+  onlyStraight: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#1A50A2"/><path d="M28 46 L28 16 M28 12 L21 24 L35 24 Z" stroke="#fff" stroke-width="5" fill="#fff"/></svg>',
+  warning: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="8" y="8" width="40" height="40" rx="4" transform="rotate(45 28 28)" fill="#F2B705" stroke="#1d1d1f" stroke-width="2"/><text x="28" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1d1d1f">!</text></svg>',
+  crossing: '<svg width="56" height="56" viewBox="0 0 56 56"><polygon points="28,4 52,28 28,52 4,28" fill="#1A50A2"/><polygon points="28,9 47,28 28,47 9,28" fill="#fff"/><path d="M24 22 a3.2 3.2 0 1 1 .1 0 M24 26 l0 12 M24 28 l-5 8 M24 28 l5 8 M24 27 l7 -2" stroke="#1A50A2" stroke-width="2.4" fill="none"/></svg>'
+};
+function signFig(key, label){
+  return '<span class="sign-figure">' + SIGN[key] + label + '</span>';
+}
+
+/* --- chapter digests --- */
+renderers['study/ch1'] = function(){
+  var root = document.getElementById('ch1Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">1</span>Common Rules &amp; Signs <span class="badge high">HIGH</span> <span class="badge stage">STAGE 1</span></h1>' +
+  '<p>Signals, signs, and police signals are the densest cluster of exam points. Almost every mock has 8–12 questions from this chapter.</p>' +
+
+  '<h2>Traffic lights — exact meanings</h2>' +
+  '<div class="table-wrap"><table>' +
+  '<tr><th>Light</th><th>Means</th><th>The trap</th></tr>' +
+  '<tr><td>Green</td><td>You <strong>may</strong> proceed (it is permission, not an order to go)</td><td>“Green means vehicles must proceed” → ×</td></tr>' +
+  '<tr><td>Yellow</td><td><strong>Stop</strong> at the stop line — unless you are so close that stopping safely is impossible</td><td>“Yellow means proceed with caution” → ×. That is <em>flashing</em> yellow.</td></tr>' +
+  '<tr><td>Red</td><td>Stop. Do not cross the stop line.</td><td>Already-turning vehicles inside the intersection may continue.</td></tr>' +
+  '<tr><td>Green arrow</td><td>May proceed <strong>in the arrow\'s direction</strong> even on red. A right arrow also permits U-turns.</td><td>Arrow ≠ everyone goes; only the arrow direction.</td></tr>' +
+  '<tr><td>Yellow arrow</td><td><strong>Streetcars/trams only.</strong> Cars must not proceed.</td><td>“Vehicles may proceed on a yellow arrow” → ×</td></tr>' +
+  '<tr><td>Flashing yellow</td><td>Proceed with caution, watching other traffic</td><td rowspan="2">The classic <strong>swap pair</strong>. Flashing red works like a stop sign.</td></tr>' +
+  '<tr><td>Flashing red</td><td><strong>Stop</strong> at the line first, then proceed when safe</td></tr>' +
+  '</table></div>' +
+  '<div class="callout"><span class="lbl">Often missed</span>Obey the signal <em>you</em> are facing. A red light for crossing traffic tells you nothing about your own signal. And where a police officer directs traffic, the officer\'s signal wins over the lights.</div>' +
+
+  '<h2>Police hand signals</h2>' +
+  '<ul>' +
+  '<li>Officer\'s <strong>front or back</strong> toward you = <strong>red light</strong> for you.</li>' +
+  '<li>Officer\'s <strong>side</strong> toward you, arms horizontal = green for you (parallel to the arms).</li>' +
+  '<li><strong>Arm raised vertically</strong>: traffic parallel to the officer\'s body sees <strong>yellow</strong>; traffic the officer faces stays at red.</li>' +
+  '<li>At night the same logic applies with a flashlight swung horizontally: facing the swing = red.</li>' +
+  '</ul>' +
+
+  '<h2>Sign system — decode by shape and color</h2>' +
+  '<ul>' +
+  '<li><strong>Red border or red disc</strong> = regulatory: prohibition (no entry, closed, no parking, speed limit).</li>' +
+  '<li><strong>Blue circle</strong> = instruction: what you MUST do (only-direction arrows, designated lanes).</li>' +
+  '<li><strong>Blue square</strong> = indication: permission/designation (crossing, parking allowed, one-way).</li>' +
+  '<li><strong>Yellow diamond</strong> = warning: danger ahead (curve, crossing, school, animals). Warnings never oblige — they alert.</li>' +
+  '<li><strong>White rectangle under a sign</strong> = auxiliary: limits the main sign (hours, vehicle types, “except…”).</li>' +
+  '</ul>' +
+
+  '<h2>The look-alike pairs that decide pass/fail</h2>' +
+  '<div style="margin:10px 0">' +
+  signFig('noEntry','No entry 進入禁止<br>(one-way exit)') +
+  signFig('closedVehicles','Closed to vehicles<br>車両通行止め') +
+  signFig('closedAll','Closed to ALL<br>通行止め') +
+  '</div>' +
+  '<div style="margin:10px 0">' +
+  signFig('noParking','No parking<br>駐車禁止') +
+  signFig('noStopPark','No parking<br>AND stopping<br>駐停車禁止') +
+  signFig('speed50','Max speed 50') +
+  signFig('minSpeed30','MINIMUM speed 30<br>(note the underline)') +
+  '</div>' +
+  '<div style="margin:10px 0">' +
+  signFig('stop','Stop 一時停止') +
+  signFig('slow','Slow 徐行') +
+  signFig('onlyStraight','Straight only<br>(blue = must)') +
+  signFig('crossing','Pedestrian crossing<br>(blue square)') +
+  '</div>' +
+  '<ul>' +
+  '<li><strong>One diagonal vs two:</strong> one slash = parking banned (stopping OK); X = both banned. Same logic: one slash = vehicles banned; X = everything banned.</li>' +
+  '<li><strong>Underline under a number = minimum</strong> speed, not maximum. On expressway main lanes only.</li>' +
+  '<li><strong>Red disc with white bar (no entry)</strong> faces you at one-way exits — other directions may enter legally.</li>' +
+  '<li><strong>止まれ requires a complete stop</strong> at the line; 徐行 means a speed from which you can stop immediately (roughly walking-to-10 km/h — no fixed number).</li>' +
+  '</ul>' +
+
+  '<h2>Markings</h2>' +
+  '<ul>' +
+  '<li><strong>Yellow center line</strong>: do not cross to overtake (overtaking itself may still be possible within your side).</li>' +
+  '<li><strong>White solid line</strong> beside your lane edge; <strong>white broken</strong> center line may be crossed when safe.</li>' +
+  '<li><strong>Yellow lane line</strong>: no lane change across it.</li>' +
+  '<li>Diamond mark on the road = pedestrian crossing ahead (30–50 m).</li>' +
+  '</ul>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> yellow = “proceed with caution” (×), flashing red/yellow swapped, yellow arrow for cars (×), minimum-speed sign read as a limit, no-parking vs no-stopping signs swapped, “warning signs oblige you to slow down” (× — they warn; 徐行 obligations come from the SLOW sign and specific places).</div>' +
+  chapterFooter('ch1');
+  wireChapterFooter(root, renderers['study/ch1']);
+};
+
+renderers['study/ch2'] = function(){
+  var root = document.getElementById('ch2Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">2</span>Before Driving <span class="badge med">MED</span> <span class="badge stage">STAGE 1</span></h1>' +
+  '<p>A short chapter, but it owns several <strong>guaranteed-number questions</strong>: belts, child seats, alcohol, loading, and what your license lets you drive.</p>' +
+
+  '<h2>Licenses</h2>' +
+  '<ul>' +
+  '<li>A <strong>regular (普通) license</strong> covers regular cars, light motor vehicles… and <strong>mopeds (原付)</strong> and small special vehicles. It does NOT cover motorcycles (50cc+).</li>' +
+  '<li><strong>Provisional (karimen) practice</strong>: only on ordinary roads, with an instructor or a person licensed for 3+ years on the front passenger seat, and the 仮免許練習中 plates on front and rear.</li>' +
+  '<li>Carrying your license while driving is mandatory; lending the car to an unlicensed person is a crime for both.</li>' +
+  '</ul>' +
+
+  '<h2>Condition to drive</h2>' +
+  '<ul>' +
+  '<li><strong>Alcohol: zero is the rule.</strong> Any alcohol = do not drive. The punishable breath threshold is <span class="num">0.15 mg/L</span>, but “under the limit so it\'s legal to drive after one beer” is always ×.</li>' +
+  '<li>Liability spreads: the <strong>provider of the car, the provider of alcohol, and passengers</strong> who knew can all be punished.</li>' +
+  '<li>No driving when overtired or on medicine that impairs you. Smartphone/screen use while driving is prohibited (holding a phone even while waiting at a light is bait — the vehicle is still “in operation”… but stopped at a light it is actually <em>not</em> punishable driving use; the safe exam answer follows the statement\'s wording about “while driving”).</li>' +
+  '</ul>' +
+
+  '<h2>Belts, child seats, helmets</h2>' +
+  '<ul>' +
+  '<li><strong>Seatbelts: all seats</strong>, rear included. The driver is responsible for making passengers wear them.</li>' +
+  '<li><strong>Child seat: required under 6 years old.</strong> An adult holding the child is never a substitute.</li>' +
+  '<li>Motorcycles/mopeds: helmet always, properly fastened.</li>' +
+  '</ul>' +
+
+  '<h2>Capacity and loading</h2>' +
+  '<ul>' +
+  '<li>Passenger and load limits are those on the <strong>vehicle inspection certificate (車検証)</strong>.</li>' +
+  '<li>Children count: <strong>3 children under 12 = 2 adults</strong> for capacity.</li>' +
+  '<li>Cargo may project up to <strong>1.2×</strong> the vehicle\'s length/width (rule updated in 2022 from 1.1× — newer banks use 1.2×). Big or projecting loads need a red marker cloth by day, red light at night.</li>' +
+  '<li>Overloading is prohibited even slightly; “just 10% over is tolerated” is ×.</li>' +
+  '</ul>' +
+
+  '<h2>Vehicle checks</h2>' +
+  '<ul>' +
+  '<li><strong>Daily (operational) checks</strong>: do them yourself at an appropriate interval based on use — brakes, tires, lights, washer fluid, engine. Before a long trip, check.</li>' +
+  '<li>Adjust seat, mirrors, and head restraints <em>before</em> starting. Secure loose objects.</li>' +
+  '</ul>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> “rear seatbelts are recommended but optional” (×), “a child on a lap replaces a child seat” (×), “under 0.15 mg/L you may drive after drinking” (×), “a regular license lets you ride a 125cc motorcycle” (×; only mopeds ≤50cc), karimen practice with a 1-year licensed friend (× — 3+ years).</div>' +
+  chapterFooter('ch2');
+  wireChapterFooter(root, renderers['study/ch2']);
+};
+
+renderers['study/ch3'] = function(){
+  var root = document.getElementById('ch3Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">3</span>Driving Tips <span class="badge high">HIGH</span> <span class="badge stage">STAGE 1</span></h1>' +
+  '<p>The exam\'s center of gravity: right-of-way, speed and stopping, overtaking, parking distances, pedestrian protection, and 徐行. Expect a third of the karimen to come from here.</p>' +
+
+  '<h2>Keep left, lanes</h2>' +
+  '<ul>' +
+  '<li>Vehicles keep <strong>left</strong>; on multi-lane roads the rightmost lane is for passing — cruising in it is a violation.</li>' +
+  '<li>Signal <strong>3 seconds before</strong> changing lanes/turning… and <strong>30 m before</strong> the turn point for left/right turns at intersections.</li>' +
+  '<li>Left turns: hug the left edge in advance. Right turns: move to the center (or right edge on one-ways) in advance, pass just inside the intersection center.</li>' +
+  '</ul>' +
+
+  '<h2>Right-of-way at uncontrolled intersections</h2>' +
+  '<div class="card accent"><ul style="margin:.3em 0">' +
+  '<li>Equal-width roads: <strong>yield to traffic from your LEFT</strong> (and always to streetcars).</li>' +
+  '<li>Clearly <strong>wider road has priority</strong>; from a narrow road, slow down and yield.</li>' +
+  '<li><strong>Priority road</strong> (marked 優先道路): yield to it regardless of width.</li>' +
+  '<li>Turning right? Oncoming straight-ahead and left-turning traffic goes first — <em>even if you entered the intersection first</em>.</li>' +
+  '</ul></div>' +
+  '<p>Note: some English study materials say “yield to the right” — that is wrong for Japan. The law (Art. 36) says give way to vehicles approaching <strong>from the left</strong>.</p>' +
+
+  '<h2>Speed, stopping distance, following distance</h2>' +
+  '<ul>' +
+  '<li>No sign = <span class="num">60 km/h</span> max for cars on ordinary roads. Posted limits bind all vehicles <em>at or below</em> the sign.</li>' +
+  '<li><strong>Stopping distance = free-running distance</strong> (during reaction, ~1 s) <strong>+ braking distance</strong>. Braking distance grows with the <em>square</em> of speed; on wet roads it stretches further.</li>' +
+  '<li>“Safe speed” depends on conditions — a speed <em>under</em> the limit can still be a violation of the safe-driving duty in fog or on ice.</li>' +
+  '</ul>' +
+
+  '<h2>徐行 (slow-driving) — the places you MUST crawl</h2>' +
+  '<p>徐行 = a speed from which you can stop <strong>immediately</strong> (no fixed km/h). Required:</p>' +
+  '<ul>' +
+  '<li>Where a <strong>徐行 SLOW sign</strong> stands</li>' +
+  '<li><strong>Turning left or right</strong> at intersections</li>' +
+  '<li>Entering an <strong>uncontrolled intersection</strong> with poor visibility, or one with a wider/priority crossing road</li>' +
+  '<li><strong>Corners/curves, hilltops (near the crest), steep downhills</strong></li>' +
+  '<li>Passing a stopped streetcar with no safety zone, passing pedestrians with no separation, splashing zones</li>' +
+  '</ul>' +
+
+  '<h2>Pedestrian protection — stop-or-crawl cases</h2>' +
+  '<div class="card accent"><ul style="margin:.3em 0">' +
+  '<li>Pedestrian on/about to enter a crossing: <strong>stop</strong>. Approaching a crossing you cannot confirm is clear: be <em>able to stop</em> just before it.</li>' +
+  '<li><strong>Never overtake/pass a vehicle stopped just before a crossing</strong> — stop first, then proceed checking. (Vehicles stopped before crossings hide pedestrians.)</li>' +
+  '<li>White or yellow <strong>cane</strong>, <strong>guide dog</strong>, unattended <strong>child</strong>, elderly with a walking aid: <strong>STOP or 徐行</strong> — “pass carefully” is not enough.</li>' +
+  '<li>Within <span class="num">1–1.5 m</span> of pedestrians/cyclists, or crawl. School buses with children boarding: 徐行 alongside.</li>' +
+  '</ul></div>' +
+
+  '<h2>Overtaking</h2>' +
+  '<ul>' +
+  '<li>Overtake on the <strong>right</strong> (exception: the vehicle ahead is turning right — then pass on its left).</li>' +
+  '<li><strong>No overtaking</strong>: within <span class="num">30 m</span> of an intersection, crossing, or railroad crossing; on/near hilltops; steep downhills; tunnels (without lane markings); where the sign or a yellow center line forbids it.</li>' +
+  '<li><strong>Double overtaking</strong> (overtaking a vehicle that is itself overtaking) is prohibited — 二重追い越し.</li>' +
+  '<li>Do not speed up while being overtaken. Do not cut back in too early.</li>' +
+  '</ul>' +
+
+  '<h2>Parking &amp; stopping</h2>' +
+  '<ul>' +
+  '<li><strong>Parking</strong> = staying a while, or driver away from the car, or loading over <span class="num">5 minutes</span>. <strong>Stopping</strong> = brief halt (passengers, ≤5-min loading).</li>' +
+  '<li>The distance lists live in <a href="#/anchors">Numeric Anchors</a> — memorize them there: 5 m / 10 m (both banned) vs 1 m / 3 m / 5 m (parking only).</li>' +
+  '<li>Park flush left, engine off, parking brake on; leaving the car, take the key and lock up. On hills, turn wheels toward the curb/edge and use gear (or P).</li>' +
+  '<li>Where parking meters/tickets designate, follow them. Disabled-zone exceptions need the placard.</li>' +
+  '</ul>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> “yield to the right at equal intersections” (× — left), “you entered first so you may turn right before oncoming traffic” (×), “30 m signal before lane change” (× — 3 seconds; 30 m is for turns), “overtaking is always prohibited on yellow center line” (× — crossing it to overtake is what\'s banned), 6-minute “stopping” to unload (× — that\'s parking), passing a vehicle stopped at a crosswalk without stopping (×).</div>' +
+  chapterFooter('ch3');
+  wireChapterFooter(root, renderers['study/ch3']);
+};
+
+renderers['study/ch4'] = function(){
+  var root = document.getElementById('ch4Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">4</span>Dangerous Spots <span class="badge med">MED</span> <span class="badge stage">STAGE 1+2</span></h1>' +
+  '<p>Railroad crossings, curves and slopes, night, and bad weather. Mostly procedural rules — the exam tests whether you know the <em>exact</em> procedure.</p>' +
+
+  '<h2>Railroad crossings — the full ritual</h2>' +
+  '<div class="card accent"><ol style="margin:.3em 0">' +
+  '<li><strong>Stop</strong> just before the crossing (no stop needed only when a signal shows green).</li>' +
+  '<li>Check <strong>both eyes and ears</strong> — open the window and listen.</li>' +
+  '<li>Do not enter while the <strong>warning is sounding or the bar is coming down / down</strong> — even if a train is not visible.</li>' +
+  '<li>Do not enter unless there is <strong>room on the far side</strong> for your whole vehicle.</li>' +
+  '<li>Cross in a <strong>low gear without changing gears</strong> midway (MT); keep to the slightly right-of-center of your lane to avoid edge drop-offs.</li>' +
+  '</ol></div>' +
+  '<p><strong>Stalled inside?</strong> Use the crossing alarm button first; no button → flares/smoke; and try to move the car out (MT: starter-motor crawl). Alerting the train comes before rescuing the car.</p>' +
+
+  '<h2>Slopes and curves</h2>' +
+  '<ul>' +
+  '<li>徐行 near the <strong>crest of a hill</strong>, on <strong>steep downhills</strong>, and on tight corners/curves. Slow down <em>before</em> the curve, not in it.</li>' +
+  '<li><strong>Downhill: engine brake</strong> (low gear); relying on the foot brake invites fade (フェード) and vapor lock. The 30-m no-overtaking rule also applies near crests and steep downhills.</li>' +
+  '<li>On narrow slopes, the <strong>descending</strong> vehicle yields to the climbing one (descending can restart more easily); near a passing place, whoever is nearest uses it.</li>' +
+  '</ul>' +
+
+  '<h2>Night driving</h2>' +
+  '<ul>' +
+  '<li>Headlights at night and in <strong>tunnels</strong>; also when visibility is under <span class="num">50 m</span> (fog, heavy rain, snow).</li>' +
+  '<li><strong>Dip high beams</strong> for oncoming vehicles and when following another vehicle. In lit urban areas, drive on low beams; use high beams to check ahead when safe — “always drive on high beams in the city” is ×.</li>' +
+  '<li>Watch the <strong>moment two beams cross</strong>: a pedestrian between you and an oncoming car can vanish (glare/蒸発). Drunk pedestrians, dark clothing, rain reflections — assume you see less than you think.</li>' +
+  '<li>Parking at night on an unlit road: parking/tail lights or a parked-vehicle marker.</li>' +
+  '</ul>' +
+
+  '<h2>Bad weather</h2>' +
+  '<ul>' +
+  '<li><strong>Rain</strong>: braking distance grows — slow early and brake gently in stages. Beware <strong>hydroplaning</strong> at speed (tires float; do not brake hard — ease off and hold the wheel straight).</li>' +
+  '<li><strong>Fog</strong>: fog lights/low beams (high beams reflect back), horn where designated, follow the center line, wider gaps.</li>' +
+  '<li><strong>Snow/ice</strong>: chains or studless tires; ruts are your friends; bridges and shaded spots freeze first. If skidding, steer <em>into</em> the skid direction, no sudden brake.</li>' +
+  '<li><strong>Strong wind</strong>: grip firmly, slow down — especially exiting tunnels and on bridges.</li>' +
+  '</ul>' +
+
+  '<h2>Emergencies while moving</h2>' +
+  '<ul>' +
+  '<li><strong>Brake failure</strong>: pump → parking brake (gently, or you spin) → shift down → as a last resort, scrub speed on a guardrail/embankment.</li>' +
+  '<li><strong>Tire burst</strong>: grip hard, keep straight, decelerate gradually — do not slam brakes.</li>' +
+  '<li><strong>Accelerator stuck / wrong pedal</strong>: brake with both feet if needed; switch off… but turning the key fully off kills power steering — shift to N first if possible.</li>' +
+  '<li>Stalled on a slope: parking brake immediately; restart procedure calmly.</li>' +
+  '</ul>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> “you may cross while the bell rings if no train is visible” (×), “change to a higher gear midway across the crossing for speed” (×), “climbing vehicle yields on a narrow slope” (× — descending yields), “high beams toward oncoming traffic for better view” (×), “brake hard the moment you hydroplane” (×), headlights “recommended” in tunnels (× — required).</div>' +
+  chapterFooter('ch4');
+  wireChapterFooter(root, renderers['study/ch4']);
+};
+
+renderers['study/ch5'] = function(){
+  var root = document.getElementById('ch5Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">5</span>Expressways <span class="badge high">HIGH</span> <span class="badge stage">STAGE 2</span></h1>' +
+  '<p>Compact, fact-dense, and guaranteed on the honmen. Almost every rule here is a number or a “never.”</p>' +
+
+  '<h2>Who and what may enter</h2>' +
+  '<ul>' +
+  '<li><strong>Prohibited</strong>: pedestrians, bicycles, mopeds, small two-wheelers (≤125cc), small special vehicles, vehicles that cannot reach the minimum speed, and towing with just a rope (only proper tow setups).</li>' +
+  '<li>Before entering: fuel, oil, water, <strong>tire pressure</strong> (slightly higher for sustained high speed is acceptable practice), spare, and load lashing — loose cargo at 100 km/h is lethal.</li>' +
+  '</ul>' +
+
+  '<h2>Speeds (national expressway main lanes, no signs)</h2>' +
+  '<div class="table-wrap"><table>' +
+  '<tr><th>Vehicle</th><th>Max</th><th>Min</th></tr>' +
+  '<tr><td>Regular cars, large motorcycles</td><td><span class="num">100 km/h</span></td><td rowspan="2"><span class="num">50 km/h</span></td></tr>' +
+  '<tr><td>Certain large trucks etc.; any vehicle towing</td><td><span class="num">80 km/h</span></td></tr>' +
+  '</table></div>' +
+  '<ul>' +
+  '<li>The minimum applies only on <strong>divided main lanes</strong> (and not when traffic/weather makes it unsafe).</li>' +
+  '<li>Following distance: ≈ <span class="num">100 m</span> at 100 km/h, <span class="num">80 m</span> at 80 km/h — <strong>double on wet roads</strong>.</li>' +
+  '</ul>' +
+
+  '<h2>Lane discipline</h2>' +
+  '<ul>' +
+  '<li>Drive in the <strong>left lanes</strong>; the rightmost lane is for overtaking only.</li>' +
+  '<li><strong>Acceleration lane</strong>: match main-lane speed before merging; yield to main-lane traffic. <strong>Deceleration lane</strong>: enter it first, then slow.</li>' +
+  '<li><strong>No stopping/parking</strong> on the expressway including the shoulder (exceptions: breakdown, jams, tolls). Driving on the shoulder is prohibited.</li>' +
+  '<li>No U-turns, no reversing, no crossing the median — wrong-way entry is the cardinal sin: if you miss your exit, go to the next one.</li>' +
+  '</ul>' +
+
+  '<h2>Breakdown procedure (tested step by step)</h2>' +
+  '<div class="card accent"><ol style="margin:.3em 0">' +
+  '<li>Move to the <strong>shoulder/emergency bay</strong>; hazard lights on.</li>' +
+  '<li>Place the <strong>warning triangle</strong> (mandatory on expressways) well behind the car; at night add flares/lights.</li>' +
+  '<li><strong>Everyone out, behind the guardrail</strong> — never stay in or stand around the car.</li>' +
+  '<li>Call from an emergency phone (every 1 km) or 110/#9910; wait in safety.</li>' +
+  '</ol></div>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> minimum speed “30 km/h” or applied to all roads (×), “mopeds may use expressways if they keep up” (×), “wait inside the car with seatbelts on after a breakdown” (×), overtaking on the left because the right lane is slow (×), “the shoulder may be used to pass a jam” (×), towing with a rope on the expressway (×).</div>' +
+  chapterFooter('ch5');
+  wireChapterFooter(root, renderers['study/ch5']);
+};
+
+renderers['study/ch6'] = function(){
+  var root = document.getElementById('ch6Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">6</span>Two-wheeled Vehicles <span class="badge med">MED</span> <span class="badge stage">STAGE 2</span></h1>' +
+  '<p>You will face ~11 points of two-wheel questions on the honmen <em>even if you never plan to ride</em>. The testable core is small — learn these and move on.</p>' +
+
+  '<h2>Gear and basics</h2>' +
+  '<ul>' +
+  '<li><strong>Helmet: always</strong>, fastened, both rider and passenger — even for the shortest ride. Long sleeves/gloves; bright colors at night.</li>' +
+  '<li>Know your machine: a bike you can\'t lift off its stand or hold up is too big for you.</li>' +
+  '<li>Brake with <strong>front and rear together</strong>, bike upright, engine brake in concert. Front-only or rear-only invites a skid — especially on wet roads and curves.</li>' +
+  '</ul>' +
+
+  '<h2>Mopeds (原付) — the favorite questions</h2>' +
+  '<ul>' +
+  '<li>Max speed <span class="num">30 km/h</span>, keep to the left edge of the road.</li>' +
+  '<li><strong>Two-step right turn</strong> required where the sign orders it, and at signal-controlled intersections with <strong>3+ lanes</strong>: go straight to the far corner with your right signal on, turn the bike, then proceed on the new green. Where a sign <em>prohibits</em> the two-step turn (or on 2-lane roads), turn like a car from the center.</li>' +
+  '<li>No passengers on a moped. Motorcycles: passengers only with the proper license held >1 year (and never on expressways within the first year / under age 20 without 3 years for expressway tandem — if a question gets this deep, the safe anchor: <strong>1 year for ordinary roads, 3 years AND age 20+ for expressway tandem</strong>).</li>' +
+  '</ul>' +
+
+  '<h2>Riding rules drivers get asked about</h2>' +
+  '<ul>' +
+  '<li>Two-wheelers are <strong>full vehicles</strong>: same signals, same right-of-way, same alcohol rules.</li>' +
+  '<li>Loading limits exist (moped ≈ 30 kg) — “a moped may carry any load that balances” is ×.</li>' +
+  '<li>Car drivers: motorcycles look <strong>farther and slower</strong> than they are — at right turns, that approaching bike arrives sooner than it seems. Give riders full lane respect; do not squeeze past in-lane.</li>' +
+  '</ul>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> “helmets optional for short distances” (×), “moped limit 40 km/h” (×), “two-step right turn at every intersection” (× — sign or 3+ lanes with signals), “front brake only for quick stops” (×), “a passenger is fine on a moped if light” (×).</div>' +
+  chapterFooter('ch6');
+  wireChapterFooter(root, renderers['study/ch6']);
+};
+
+renderers['study/ch79'] = function(){
+  var root = document.getElementById('ch79Root');
+  root.innerHTML =
+  '<h1><span class="chapter-tab">7–9</span>Low-yield Chapters <span class="badge skim">SKIM</span> <span class="badge stage">STAGE 2</span></h1>' +
+  '<p>Passenger transport, accidents/disasters, and owner duties. Only a handful of facts are testable; they are all on this page. Read once, drill, done.</p>' +
+
+  '<h2>Traffic accident — the sequence (memorize the order)</h2>' +
+  '<div class="card accent"><ol style="margin:.3em 0">' +
+  '<li><strong>Stop immediately.</strong> Continuing is hit-and-run, no matter how minor.</li>' +
+  '<li><strong>Prevent further danger</strong>: move vehicles off the road if drivable, hazards on, secure the scene.</li>' +
+  '<li><strong>Aid the injured</strong>: call <span class="num">119</span>; give first aid (don\'t move head-injury victims unless danger demands it).</li>' +
+  '<li><strong>Report to the police (110)</strong> — a legal duty for the driver, even for property-only damage, even if both parties “agree.”</li>' +
+  '</ol></div>' +
+  '<p>Witnesses should cooperate; the driver\'s report duty cannot be delegated to “the other guy will report it.” Even feeling fine, see a doctor — and never settle on the spot.</p>' +
+
+  '<h2>Breakdown &amp; disasters</h2>' +
+  '<ul>' +
+  '<li>Ordinary-road breakdown: get off the roadway; at night, lights/flares so following traffic sees you.</li>' +
+  '<li><strong>Earthquake alert while driving</strong>: slow down calmly, radio on, follow instructions. If you must abandon the car: off the road (or far left), engine off, <strong>key left in the car</strong> (inserted or visible), windows closed, <strong>doors unlocked</strong>.</li>' +
+  '<li>Do not evacuate by car (except tsunami with no alternative) — abandoned cars block emergency vehicles.</li>' +
+  '<li><strong>Tsunami</strong>: head for high ground immediately; leave the car if it jams.</li>' +
+  '</ul>' +
+
+  '<h2>Owner / user duties (Ch. 9 in one breath)</h2>' +
+  '<ul>' +
+  '<li>The owner keeps the car <strong>inspected (車検), insured (自賠責 compulsory liability), and maintained</strong>; compulsory insurance is mandatory to drive — voluntary insurance is wise but optional.</li>' +
+  '<li>Provide a <strong>garage/parking spot</strong> — the street is not storage (車庫法); long-term street parking is an offense.</li>' +
+  '<li>Never lend your car to someone <strong>unlicensed or drinking</strong> — the lender is punished too.</li>' +
+  '<li>Illegally parked vehicles: the <strong>owner</strong> bears responsibility (放置違反金) even if someone else drove.</li>' +
+  '</ul>' +
+
+  '<h2>Passenger transport / substitute drivers (Ch. 7 in one line each)</h2>' +
+  '<ul>' +
+  '<li>Carrying passengers <strong>for fare requires a Class 2 license</strong> (taxis, buses); substitute (代行) drivers driving the customer\'s car also need Class 2.</li>' +
+  '<li>Bus/taxi drivers\' extra duties (checking sleepy passengers, door safety) exist but are practically never tested for a regular license.</li>' +
+  '</ul>' +
+  '<div class="card warn"><strong>Test bait from this chapter:</strong> “minor scratch, both agreed, so no police report needed” (×), “call your insurer first, then police” (× — injured/119 and 110 come first), “lock the car when evacuating for an earthquake” (×), “voluntary insurance is legally required” (× — compulsory 自賠責 is), “a Class 1 license is fine for paid passenger transport” (×).</div>' +
+  chapterFooter('ch79');
+  wireChapterFooter(root, renderers['study/ch79']);
+};
+
+/* --- hazard prediction intro page --- */
+renderers['hazard'] = function(){
+  var root = document.getElementById('hazardRoot');
+  root.innerHTML =
+  '<h1>Hazard Prediction — 危険予測</h1>' +
+  '<p>The honmen ends with <strong>5 illustrated questions worth 2 points each</strong>. Each shows a scene and three statements; you get the 2 points <strong>only if all three answers are correct</strong>. That is 10 of the 100 points — and you can only afford to lose 10 in total. Treat these as unmissable.</p>' +
+  '<h2>How to think</h2>' +
+  '<ul>' +
+  '<li><strong>かもしれない運転 ("it MIGHT happen" driving) is always ○.</strong> Statements that prepare for hidden pedestrians, doors opening, bikes emerging — true.</li>' +
+  '<li><strong>だろう運転 ("they\'ll PROBABLY yield" driving) is always ×.</strong> Statements that assume others stop, see you, or behave — false.</li>' +
+  '<li>Statements that <strong>fixate on one hazard and dismiss the rest</strong> ("I only need to watch the bicycle") — false.</li>' +
+  '<li>Maintaining speed because you have priority — false. Priority never substitutes for safety.</li>' +
+  '</ul>' +
+  '<div class="callout"><span class="lbl">Scoring reality</span>Read all three statements against the scene\'s stated speed and sight lines. One careless ○/× wipes the whole 2 points.</div>' +
+  '<h2>Practice</h2>' +
+  '<p>Five scenarios are built in. They are answered like the real exam (no feedback until you submit) and also appear at the end of honmen sets.</p>' +
+  '<div class="btn-row"><button class="btn" id="hazAll">Practice all 5 scenarios</button></div>';
+  document.getElementById('hazAll').addEventListener('click', function(){
+    startQuiz({mode:'hazardPractice', label:'Hazard practice', items:[], hazardItems:shuffle(HAZARD_QUESTIONS), ptsPer:1, passPct:90});
+  });
+};
+
+/* ===== 07 QUIZ ENGINE ===== */
+function qstat(id){ return Store.state.q[id] || {a:0,c:0,streak:0,last:0,lastCorrect:false}; }
+function recordAnswer(id, correct){
+  var s = qstat(id);
+  s.a += 1;
+  if (correct) { s.c += 1; s.streak += 1; } else { s.streak = 0; }
+  s.last = Date.now();
+  s.lastCorrect = correct;
+  Store.state.q[id] = s;
+  var wq = Store.state.wrongQueue;
+  var pos = wq.indexOf(id);
+  if (!correct && pos === -1) wq.push(id);
+  if (correct && pos !== -1 && s.streak >= 2) wq.splice(pos, 1);
+  Store.save();
+}
+/* weighted pick: prefer least-recently-seen (mocks) or weakest (drills) */
+function pickLRS(pool, n){
+  var sorted = pool.slice().sort(function(a,b){
+    return (qstat(a.id).last + Math.random()*8.64e7) - (qstat(b.id).last + Math.random()*8.64e7);
+  });
+  return shuffle(sorted.slice(0, n));
+}
+function pickWeak(pool, n){
+  var sorted = pool.slice().sort(function(a,b){
+    var sa = qstat(a.id), sb = qstat(b.id);
+    var ra = sa.a ? sa.c/sa.a : -1, rb = sb.a ? sb.c/sb.a : -1; // unseen first
+    return (ra + Math.random()*0.3) - (rb + Math.random()*0.3);
+  });
+  return shuffle(sorted.slice(0, n));
+}
+
+var Quiz = {
+  active:false, run:null,
+  abandon:function(){
+    Quiz.active = false; Quiz.run = null;
+    document.body.classList.remove('quiz-active');
+    if (Quiz._timerInt) { clearInterval(Quiz._timerInt); Quiz._timerInt = null; }
+  },
+  _timerInt:null
+};
+
+function startQuiz(opts){
+  // opts: {mode,label,items,hazardItems,instant,minutes,ptsPer,passPct}
+  Quiz.active = true;
+  Quiz.run = {
+    mode: opts.mode, label: opts.label,
+    items: opts.items, hazard: opts.hazardItems || [],
+    instant: !!opts.instant,
+    idx: 0,
+    answers: new Array(opts.items.length).fill(null),
+    hazardAnswers: (opts.hazardItems || []).map(function(){ return [null,null,null]; }),
+    flags: {},
+    answered: false, // instant-mode: current question answered & showing explanation
+    startTs: Date.now(),
+    deadline: opts.minutes ? Date.now() + opts.minutes*60000 : null,
+    ptsPer: opts.ptsPer || 1,
+    passPct: opts.passPct || 90
+  };
+  document.body.classList.add('quiz-active');
+  if (Quiz._timerInt) clearInterval(Quiz._timerInt);
+  if (Quiz.run.deadline) {
+    Quiz._timerInt = setInterval(function(){
+      var el = document.getElementById('timerChip');
+      if (!Quiz.active || !Quiz.run || !Quiz.run.deadline) return;
+      var left = Quiz.run.deadline - Date.now();
+      if (left <= 0) { finishQuiz(); toast('Time is up — submitted automatically.'); return; }
+      if (el) {
+        var m = Math.floor(left/60000), s = Math.floor((left%60000)/1000);
+        el.textContent = m + ':' + (s<10?'0':'') + s;
+        el.classList.toggle('low', left < 5*60000);
+      }
+    }, 500);
+  }
+  navigate('quiz');
+  renderQuizRunner();
+}
+
+function totalScreens(run){ return run.items.length + run.hazard.length; }
+
+function renderQuizRunner(){
+  var run = Quiz.run;
+  var root = document.getElementById('quizRoot');
+  var total = totalScreens(run);
+  var i = run.idx;
+  var isHazard = i >= run.items.length;
+  var pct = Math.round(((i) / total) * 100);
+  var timerHtml = run.deadline ? '<span class="timer-chip" id="timerChip">–:––</span>' : '';
+  var head =
+    '<div class="quiz-shell">' +
+    '<div class="quiz-meta"><strong>' + esc(run.label) + '</strong>' +
+    '<span>Q ' + (i+1) + ' / ' + total + '</span>' + timerHtml + '</div>' +
+    '<div class="quiz-progressbar"><div style="width:' + pct + '%"></div></div>';
+
+  if (isHazard) {
+    root.innerHTML = head + renderHazardScreen(run, i - run.items.length) + '</div>';
+  } else {
+    var q = run.items[i];
+    var picked = run.answers[i];
+    var body =
+      '<div class="q-statement">' + esc(q.statement) + '</div>' +
+      '<div class="ox-sticky">' +
+      '<div class="ox-bar">' +
+        '<button class="o-btn' + (picked===true ?' picked':'') + '" data-ans="true" ' + (run.answered?'disabled':'') + '>○<div style="font-size:.65rem;font-weight:600">TRUE / correct</div></button>' +
+        '<button class="x-btn' + (picked===false?' picked':'') + '" data-ans="false" ' + (run.answered?'disabled':'') + '>×<div style="font-size:.65rem;font-weight:600">FALSE / wrong</div></button>' +
+      '</div>' +
+      '<div class="ox-hint">Keys: O / → = ○ · X / ← = × · Enter = next</div>' +
+      '</div>' +
+      '<div id="feedback"></div>' +
+      '<div class="btn-row" id="quizNav"></div>';
+    root.innerHTML = head + body + '</div>';
+    if (run.answered) showFeedback(q, picked);
+    renderQuizNavButtons();
+    root.querySelectorAll('.ox-bar button').forEach(function(b){
+      b.addEventListener('click', function(){ answerCurrent(b.dataset.ans === 'true'); });
+    });
+  }
+}
+
+function renderQuizNavButtons(){
+  var run = Quiz.run;
+  var nav = document.getElementById('quizNav');
+  if (!nav) return;
+  var i = run.idx, total = totalScreens(run);
+  var html = '';
+  if (run.instant) {
+    if (run.answered) {
+      html += '<button class="btn" data-act="next">' + (i+1 >= total ? 'Finish' : 'Next →') + '</button>';
+    }
+    html += '<button class="btn ghost small" data-act="quit">End drill</button>';
+  } else {
+    if (i > 0) html += '<button class="btn secondary" data-act="back">← Back</button>';
+    if (run.answers[i] !== null && i+1 < total) html += '<button class="btn" data-act="next">Next →</button>';
+    html += '<button class="btn ghost small" data-act="flag">' + (run.flags[i] ? '⚑ Flagged' : 'Flag for review') + '</button>';
+    if (i+1 >= total || Object.keys(run.flags).length || run.answers.indexOf(null) === -1) {
+      html += '<button class="btn danger" data-act="submit">Submit answers</button>';
+    }
+  }
+  nav.innerHTML = html;
+  nav.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){ quizNavAction(b.dataset.act); });
+  });
+}
+
+function quizNavAction(act){
+  var run = Quiz.run;
+  if (act === 'next') {
+    if (run.idx + 1 >= totalScreens(run)) { finishQuiz(); return; }
+    run.idx += 1; run.answered = false; renderQuizRunner(); window.scrollTo(0,0);
+  } else if (act === 'back') {
+    if (run.idx > 0) { run.idx -= 1; renderQuizRunner(); }
+  } else if (act === 'flag') {
+    if (run.flags[run.idx]) delete run.flags[run.idx]; else run.flags[run.idx] = true;
+    renderQuizNavButtons();
+  } else if (act === 'submit') {
+    var blank = run.answers.filter(function(a){ return a === null; }).length;
+    run.hazardAnswers.forEach(function(h){ h.forEach(function(p){ if (p === null) blank++; }); });
+    if (blank > 0 && !confirm(blank + ' unanswered item(s) will count as wrong. Submit anyway?')) return;
+    finishQuiz();
+  } else if (act === 'quit') {
+    finishQuiz();
+  }
+}
+
+function answerCurrent(val){
+  var run = Quiz.run;
+  if (!run || run.idx >= run.items.length) return;
+  if (run.instant && run.answered) return;
+  var q = run.items[run.idx];
+  run.answers[run.idx] = val;
+  if (run.instant) {
+    run.answered = true;
+    var correct = (val === q.answer);
+    recordAnswer(q.id, correct);
+    renderQuizRunner();
+  } else {
+    // exam mode: silent advance
+    if (run.idx + 1 < totalScreens(run)) { run.idx += 1; renderQuizRunner(); window.scrollTo(0,0); }
+    else renderQuizRunner(); // last question: stay, show submit
+  }
+}
+
+function showFeedback(q, picked){
+  var fb = document.getElementById('feedback');
+  if (!fb) return;
+  var correct = (picked === q.answer);
+  var trap = q.trapType ? '<div class="trap-tag"><span class="badge trap">⚠ ' + esc(TRAPS[q.trapType].label) + '</span></div>' : '';
+  fb.innerHTML =
+    '<div class="verdict ' + (correct?'correct':'wrong') + '">' + (correct ? '○ Correct' : '× Wrong — the answer is ' + (q.answer ? '○ (true)' : '× (false)')) + '</div>' +
+    '<div class="explain">' + trap + esc(q.explanation) + '</div>';
+}
+
+/* --- finishing & results --- */
+function finishQuiz(){
+  var run = Quiz.run;
+  if (!run) return;
+  if (Quiz._timerInt) { clearInterval(Quiz._timerInt); Quiz._timerInt = null; }
+  var durSec = Math.round((Date.now() - run.startTs)/1000);
+
+  var byTopic = {}, byTrap = {};
+  function bump(map, key, correct){
+    if (!map[key]) map[key] = [0,0];
+    map[key][1] += 1;
+    if (correct) map[key][0] += 1;
+  }
+  var pts = 0, totalPts = 0;
+  var reviewRows = [];
+  run.items.forEach(function(q, i){
+    var picked = run.answers[i];
+    var correct = (picked === q.answer);
+    totalPts += run.ptsPer;
+    if (correct) pts += run.ptsPer;
+    bump(byTopic, q.topic, correct);
+    if (q.trapType) bump(byTrap, q.trapType, correct);
+    if (!run.instant) recordAnswer(q.id, correct);
+    reviewRows.push({q:q, picked:picked, correct:correct});
+  });
+  var hazardRows = [];
+  run.hazard.forEach(function(h, hi){
+    totalPts += 2;
+    var ans = run.hazardAnswers[hi];
+    var allOk = h.parts.every(function(p, pi){ return ans[pi] === p.answer; });
+    if (allOk) pts += 2;
+    bump(byTopic, h.topic, allOk);
+    recordAnswer(h.id, allOk);
+    hazardRows.push({h:h, ans:ans, correct:allOk});
+  });
+
+  var pctScore = totalPts ? Math.round(pts/totalPts*100) : 0;
+  var pass = pctScore >= run.passPct;
+  var isMock = !run.instant;
+  if (isMock) {
+    Store.state.history.push({
+      mode: run.mode, ts: Date.now(), score: pts, total: totalPts, pct: pctScore,
+      pass: pass, byTopic: byTopic, byTrap: byTrap, durSec: durSec
+    });
+    Store.state.history = Store.state.history.slice(-40);
+    Store.save();
+  }
+  Quiz.active = false;
+  document.body.classList.remove('quiz-active');
+  renderResults({run:run, pts:pts, totalPts:totalPts, pct:pctScore, pass:pass,
+                 byTopic:byTopic, byTrap:byTrap, reviewRows:reviewRows, hazardRows:hazardRows, durSec:durSec});
+  Quiz.run = null;
+}
+
+function minibarRow(name, pair, weakLink){
+  var pct = pair[1] ? Math.round(pair[0]/pair[1]*100) : 0;
+  var weak = pct < 80;
+  return '<div class="minibar' + (weak?' weak':'') + '">' +
+    '<span class="nm">' + esc(name) + '</span>' +
+    '<span class="track"><i style="width:' + pct + '%"></i></span>' +
+    '<span class="pct">' + pct + '%</span>' +
+    (weak && weakLink ? '<a class="btn small secondary" href="' + weakLink + '">Drill</a>' : '') +
+    '</div>';
+}
+
+function renderResults(res){
+  var root = document.getElementById('quizRoot');
+  var run = res.run;
+  var needPts = Math.ceil(run.passPct/100 * res.totalPts);
+  var verdictLine = res.pass
+    ? 'PASS at the real exam standard (' + run.passPct + '%).'
+    : 'Below the ' + needPts + '/' + res.totalPts + ' bar — ' + Math.ceil((needPts - res.pts)/run.ptsPer) + ' more correct needed.';
+  var topicBars = Object.keys(res.byTopic).map(function(t){
+    return minibarRow(TOPICS[t] ? TOPICS[t].label : t, res.byTopic[t], '#/quiz/drill/' + t);
+  }).join('');
+  var trapBars = Object.keys(res.byTrap).map(function(t){
+    return minibarRow(TRAPS[t].label, res.byTrap[t], '#/quiz/trap/' + t);
+  }).join('');
+  var wrongCount = res.reviewRows.filter(function(r){ return !r.correct; }).length;
+
+  var reviewHtml = res.reviewRows.map(function(r, i){
+    var pickedTxt = r.picked === null ? '—' : (r.picked ? '○' : '×');
+    var trap = r.q.trapType ? ' <span class="badge trap">' + esc(TRAPS[r.q.trapType].label) + '</span>' : '';
+    return '<div class="review-item ' + (r.correct?'right':'wrong') + '" data-wrong="' + (!r.correct) + '">' +
+      '<div class="ri-head"><strong>Q' + (i+1) + '</strong><span>your answer: ' + pickedTxt +
+      ' · correct: ' + (r.q.answer ? '○' : '×') + '</span>' + trap + '</div>' +
+      '<div>' + esc(r.q.statement) + '</div>' +
+      '<div style="color:var(--ink-soft);margin-top:4px">' + esc(r.q.explanation) + '</div></div>';
+  }).join('');
+  var hazardHtml = res.hazardRows.map(function(r, i){
+    var parts = r.h.parts.map(function(p, pi){
+      var ok = r.ans[pi] === p.answer;
+      return '<div style="margin:6px 0;' + (ok?'':'color:var(--red)') + '">' + (ok ? '○' : '×') + ' ' + esc(p.statement) +
+        '<div style="color:var(--ink-soft)">' + esc(p.explanation) + '</div></div>';
+    }).join('');
+    return '<div class="review-item ' + (r.correct?'right':'wrong') + '">' +
+      '<div class="ri-head"><strong>Hazard ' + (i+1) + '</strong><span>' + (r.correct ? '2 / 2 pts' : '0 / 2 pts (all 3 must be correct)') + '</span></div>' +
+      parts + '</div>';
+  }).join('');
+
+  root.innerHTML =
+    '<h1>Result — ' + esc(run.label) + '</h1>' +
+    '<div class="result-score">' + res.pts + ' / ' + res.totalPts + ' pts (' + res.pct + '%)</div>' +
+    '<div class="' + (res.pass ? 'card ok' : 'card warn') + '"><strong>' + verdictLine + '</strong></div>' +
+    '<div class="passline"><div class="fill' + (res.pass?' pass':'') + '" style="width:' + res.pct + '%"></div>' +
+    '<div class="mark" style="left:' + run.passPct + '%"><span>' + run.passPct + '% pass line</span></div></div>' +
+    (topicBars ? '<h2>By topic</h2>' + topicBars : '') +
+    (trapBars ? '<h2>By trap type</h2><p style="font-size:.88rem;color:var(--ink-soft)">If one trap type stays red across quizzes, re-drill that pattern — don’t re-read whole chapters.</p>' + trapBars : '') +
+    '<div class="btn-row">' +
+      (wrongCount ? '<button class="btn" id="retryWrong">Retry the ' + wrongCount + ' wrong</button>' : '') +
+      '<a class="btn secondary" href="#/quiz">Quiz Center</a>' +
+      '<a class="btn ghost" href="#/home">Dashboard</a>' +
+      (wrongCount ? '<button class="btn ghost small" id="toggleWrong">Show wrong only</button>' : '') +
+    '</div>' +
+    '<h2>Answer review</h2><div id="reviewList">' + reviewHtml + hazardHtml + '</div>';
+
+  var retry = document.getElementById('retryWrong');
+  if (retry) retry.addEventListener('click', function(){
+    var wrongQs = res.reviewRows.filter(function(r){ return !r.correct; }).map(function(r){ return r.q; });
+    startQuiz({mode:'retry', label:'Retry wrong answers', items:shuffle(wrongQs), instant:true});
+  });
+  var tog = document.getElementById('toggleWrong');
+  if (tog) tog.addEventListener('click', function(){
+    var showingAll = tog.dataset.on !== '1';
+    document.querySelectorAll('#reviewList .review-item.right').forEach(function(el){ el.style.display = showingAll ? 'none' : ''; });
+    tog.dataset.on = showingAll ? '1' : '0';
+    tog.textContent = showingAll ? 'Show all' : 'Show wrong only';
+  });
+  window.scrollTo(0,0);
+}
+
+/* --- hazard screens (engine side; scenes arrive with HAZARD_QUESTIONS) --- */
+function renderHazardScreen(run, hi){
+  var h = run.hazard[hi];
+  var ans = run.hazardAnswers[hi];
+  var partsHtml = h.parts.map(function(p, pi){
+    var a = ans[pi];
+    return '<div class="card" style="margin:8px 0">' +
+      '<div style="font-size:.95rem">(' + (pi+1) + ') ' + esc(p.statement) + '</div>' +
+      '<div class="ox-bar" style="margin-top:8px;max-width:280px">' +
+      '<button class="o-btn' + (a===true ?' picked':'') + '" style="min-height:44px;font-size:1.3rem" data-hz="' + pi + '" data-ans="true">○</button>' +
+      '<button class="x-btn' + (a===false?' picked':'') + '" style="min-height:44px;font-size:1.3rem" data-hz="' + pi + '" data-ans="false">×</button>' +
+      '</div></div>';
+  }).join('');
+  setTimeout(function(){
+    document.querySelectorAll('[data-hz]').forEach(function(b){
+      b.addEventListener('click', function(){
+        ans[parseInt(b.dataset.hz,10)] = (b.dataset.ans === 'true');
+        renderQuizRunner();
+      });
+    });
+    renderQuizNavButtons();
+  }, 0);
+  var svg = h.sceneSvg ? '<svg viewBox="0 0 400 240" style="width:100%;max-width:440px;border:1px solid var(--line-strong);background:#fff;display:block"><use href="#' + h.sceneSvg + '"></use></svg>' : '';
+  return '<div class="callout"><span class="lbl">Hazard prediction · 2 pts, all 3 parts must be correct</span>' + esc(h.sceneText) + '</div>' +
+    svg + partsHtml +
+    '<div class="btn-row" id="quizNav"></div>';
+}
+
+/* keyboard */
+document.addEventListener('keydown', function(e){
+  if (!Quiz.active || !Quiz.run) return;
+  if (e.target && /TEXTAREA|INPUT/.test(e.target.tagName)) return;
+  var k = e.key.toLowerCase();
+  if (Quiz.run.idx < Quiz.run.items.length) {
+    if (k === 'o' || k === 'arrowright') { answerCurrent(true); e.preventDefault(); }
+    else if (k === 'x' || k === 'arrowleft') { answerCurrent(false); e.preventDefault(); }
+  }
+  if (k === 'enter' || k === ' ') {
+    var run = Quiz.run;
+    if (run.instant && run.answered) { quizNavAction('next'); e.preventDefault(); }
+    else if (!run.instant && run.answers[run.idx] !== null) { quizNavAction('next'); e.preventDefault(); }
+  }
+});
+
+/* --- quiz picker + param routes --- */
+function lastMock(mode){
+  var hs = Store.state.history.filter(function(h){ return h.mode === mode; });
+  return hs.length ? hs[hs.length-1] : null;
+}
+function startMode(mode, param){
+  var s1 = QUESTIONS.filter(function(q){ return q.stage === 1; });
+  var all = QUESTIONS;
+  if (mode === 'karimen') {
+    startQuiz({mode:'karimen', label:'Karimen mock', items:pickLRS(s1, EXAMS.karimen.count),
+               minutes:Store.state.settings.timer ? EXAMS.karimen.minutes : null, ptsPer:2, passPct:90});
+  } else if (mode === 'honmen') {
+    startQuiz({mode:'honmen', label:'Honmen set (half-length)', items:pickLRS(all, EXAMS.honmen.count),
+               hazardItems:shuffle(HAZARD_QUESTIONS).slice(0, EXAMS.honmen.hazardCount),
+               minutes:Store.state.settings.timer ? EXAMS.honmen.minutes : null, ptsPer:1, passPct:90});
+  } else if (mode === 'honmenFull') {
+    startQuiz({mode:'honmenFull', label:'Full honmen (90+5)', items:pickLRS(all, EXAMS.honmenFull.count),
+               hazardItems:shuffle(HAZARD_QUESTIONS).slice(0, EXAMS.honmenFull.hazardCount),
+               minutes:Store.state.settings.timer ? EXAMS.honmenFull.minutes : null, ptsPer:1, passPct:90});
+  } else if (mode === 'drill') {
+    var pool = param ? QUESTIONS.filter(function(q){ return q.topic === param; }) : QUESTIONS;
+    if (!pool.length) { toast('No questions for that topic yet.'); return; }
+    var lbl = param && TOPICS[param] ? 'Drill: ' + TOPICS[param].label : 'Mixed drill';
+    startQuiz({mode:'drill', label:lbl, items:pickWeak(pool, Math.min(10, pool.length)), instant:true});
+  } else if (mode === 'trap') {
+    var tpool = QUESTIONS.filter(function(q){ return q.trapType === param; });
+    if (!tpool.length) { toast('No questions for that trap type yet.'); return; }
+    startQuiz({mode:'trap', label:'Trap drill: ' + TRAPS[param].label, items:pickWeak(tpool, Math.min(10, tpool.length)), instant:true});
+  } else if (mode === 'review') {
+    var ids = Store.state.wrongQueue.slice(0, 20);
+    var rpool = ids.map(function(id){
+      return QUESTIONS.filter(function(q){ return q.id === id; })[0];
+    }).filter(Boolean);
+    if (!rpool.length) { toast('Review queue is empty — nothing to review!'); return; }
+    startQuiz({mode:'review', label:'Review queue (' + rpool.length + ')', items:rpool, instant:true});
+  }
+}
+
+renderers['quiz'] = function(params){
+  if (Quiz.active && Quiz.run) { renderQuizRunner(); return; }
+  if (params && params.length) {
+    // #/quiz/drill/<topic>, #/quiz/trap/<type>, #/quiz/mode/<mode>
+    var kind = params[0], arg = params[1];
+    if (kind === 'drill' || kind === 'trap') { startMode(kind, arg); return; }
+    if (kind === 'mode') { startMode(arg); return; }
+  }
+  renderQuizPicker();
+};
+
+function renderQuizPicker(){
+  var root = document.getElementById('quizRoot');
+  var wq = Store.state.wrongQueue.length;
+  function lastTxt(mode){
+    var h = lastMock(mode);
+    return h ? 'Last: ' + h.pct + '% ' + (h.pass ? '(pass)' : '(below bar)') : 'Not taken yet';
+  }
+  var s1count = QUESTIONS.filter(function(q){ return q.stage===1; }).length;
+  var topicOpts = Object.keys(TOPICS).map(function(t){
+    var n = QUESTIONS.filter(function(q){ return q.topic === t; }).length;
+    return '<option value="' + t + '">' + TOPICS[t].label + ' (' + n + ')</option>';
+  }).join('');
+  var trapOpts = Object.keys(TRAPS).map(function(t){
+    var n = QUESTIONS.filter(function(q){ return q.trapType === t; }).length;
+    return '<option value="' + t + '">' + TRAPS[t].label + ' (' + n + ')</option>';
+  }).join('');
+  root.innerHTML =
+    '<h1>Quiz Center</h1>' +
+    '<p>Real exam standard is <strong>90%</strong>. Drill with instant feedback to learn; take mocks under exam conditions to measure.</p>' +
+    '<div class="mode-grid">' +
+    '<div class="mode-card"><h3>Karimen mock</h3><div class="desc">50 true/false from Stage 1 (' + s1count + ' in pool) · 2 pts each · pass 90/100 · 30-min timer.</div>' +
+      '<div class="last">' + lastTxt('karimen') + '</div><button class="btn" data-start="karimen">Start mock</button></div>' +
+    '<div class="mode-card"><h3>Honmen set</h3><div class="desc">45 text questions (Stage 1+2) + ' + EXAMS.honmen.hazardCount + ' hazard scenarios · pass 90% · 25-min timer. Half-length by design.</div>' +
+      '<div class="last">' + lastTxt('honmen') + '</div><button class="btn" data-start="honmen">Start set</button></div>' +
+    '<div class="mode-card"><h3>Full honmen (90+5)</h3><div class="desc">Full-length, 50-min timer. Note: uses nearly the whole pool — scores inflate if repeated.</div>' +
+      '<div class="last">' + lastTxt('honmenFull') + '</div><button class="btn secondary" data-start="honmenFull">Start full</button></div>' +
+    '<div class="mode-card"><h3>Review queue</h3><div class="desc">Re-answer everything you have gotten wrong. Two correct answers in a row clears a question.</div>' +
+      '<div class="last">' + wq + ' in queue</div><button class="btn' + (wq ? '' : ' ghost') + '" data-start="review">Review wrong answers</button></div>' +
+    '</div>' +
+    '<h2>Topic drill</h2>' +
+    '<div class="btn-row"><select id="topicSel" style="font-size:16px;padding:8px;border:1px solid var(--line-strong);background:#fff;max-width:70%">' + topicOpts + '</select>' +
+    '<button class="btn" id="startTopic">Drill 10</button></div>' +
+    '<h2>Trap drill</h2>' +
+    '<div class="btn-row"><select id="trapSel" style="font-size:16px;padding:8px;border:1px solid var(--line-strong);background:#fff;max-width:70%">' + trapOpts + '</select>' +
+    '<button class="btn" id="startTrap">Drill 10</button></div>' +
+    '<label style="display:block;margin-top:18px;font-size:.9rem"><input type="checkbox" id="timerTog" ' + (Store.state.settings.timer?'checked':'') + '> Use exam timers on mocks</label>';
+
+  root.querySelectorAll('[data-start]').forEach(function(b){
+    b.addEventListener('click', function(){ startMode(b.dataset.start); });
+  });
+  document.getElementById('startTopic').addEventListener('click', function(){
+    startMode('drill', document.getElementById('topicSel').value);
+  });
+  document.getElementById('startTrap').addEventListener('click', function(){
+    startMode('trap', document.getElementById('trapSel').value);
+  });
+  document.getElementById('timerTog').addEventListener('change', function(e){
+    Store.state.settings.timer = e.target.checked; Store.save();
+  });
+}
+
+/* ===== 08 BOOT ===== */
+function validateData(){
+  var errs = [], counts = {};
+  var ids = {};
+  QUESTIONS.forEach(function(q){
+    if (ids[q.id]) errs.push('duplicate id ' + q.id);
+    ids[q.id] = 1;
+    if (!TOPICS[q.topic]) errs.push(q.id + ': unknown topic ' + q.topic);
+    if (q.stage !== 1 && q.stage !== 2) errs.push(q.id + ': bad stage');
+    if (typeof q.answer !== 'boolean') errs.push(q.id + ': answer must be boolean');
+    if (!q.statement || !q.explanation) errs.push(q.id + ': missing statement/explanation');
+    if (q.trapType && !TRAPS[q.trapType]) errs.push(q.id + ': unknown trapType ' + q.trapType);
+    counts[q.topic] = (counts[q.topic] || 0) + 1;
+  });
+  HAZARD_QUESTIONS.forEach(function(h){
+    if (ids[h.id]) errs.push('duplicate id ' + h.id);
+    ids[h.id] = 1;
+    if (!h.parts || h.parts.length !== 3) errs.push(h.id + ': hazard needs exactly 3 parts');
+  });
+  var s1 = QUESTIONS.filter(function(q){ return q.stage === 1; }).length;
+  console.log('[JDL] questions:', QUESTIONS.length, '(stage1:', s1 + ')', 'hazard:', HAZARD_QUESTIONS.length);
+  console.log('[JDL] per-topic:', counts);
+  if (errs.length) console.error('[JDL] DATA ERRORS:', errs);
+  else console.log('[JDL] data validation passed');
+}
+
+buildNav();
+Store.load();
+validateData();
+dispatch();
+
+})();
+</script>
+</body>
+</html>
