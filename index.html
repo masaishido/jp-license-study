@@ -1646,30 +1646,112 @@ function sigHead(lit, opts){
     lens(24, 'g', lit === 'g', opts.flash) + lens(62, 'y', lit === 'y', opts.flash) + lens(100, 'r', lit === 'r', opts.flash) +
     arrowRow + '</svg>';
 }
-/* police officer figure: pose 'front'|'side'|'raisedFront'|'raisedSide'|'torch' */
+/* police officer figure: pose 'front'|'side'|'raisedFront'|'torch'
+   viewBox 0 0 90 120. A recognizable peaked-cap officer in a blue uniform with
+   white traffic gloves; each pose makes one gesture unambiguous on its own. */
 function officerFig(pose){
-  var body;
-  if (pose === 'front') {
-    body = '<line x1="6" y1="28" x2="42" y2="28" stroke="#1d1d1f" stroke-width="3.4"/>' + // arms out
-           '<rect x="19" y="22" width="10" height="22" fill="#1A50A2"/>';
-  } else if (pose === 'side') {
-    body = '<line x1="24" y1="28" x2="46" y2="28" stroke="#1d1d1f" stroke-width="3.4"/>' +
-           '<rect x="20" y="22" width="7" height="22" fill="#1A50A2"/>';
-  } else if (pose === 'raisedFront') {
-    body = '<line x1="24" y1="26" x2="24" y2="2" stroke="#1d1d1f" stroke-width="3.4"/>' +
-           '<line x1="6" y1="30" x2="24" y2="26" stroke="#1d1d1f" stroke-width="3"/>' +
-           '<rect x="19" y="22" width="10" height="22" fill="#1A50A2"/>';
-  } else { // torch
-    body = '<line x1="6" y1="28" x2="42" y2="28" stroke="#1d1d1f" stroke-width="3.4"/>' +
-           '<circle cx="46" cy="28" r="5" fill="#f2b705"/>' +
-           '<path d="M10 18 Q24 10 38 18" stroke="#f2b705" stroke-width="2" fill="none" stroke-dasharray="3,3"/>' +
-           '<rect x="19" y="22" width="10" height="22" fill="#1d1d1f"/>';
+  var NAVY='#1A50A2', DK='#16213e', SKIN='#e8c39e', GOLD='#F2B705', BRIM='#10182b';
+  var night = (pose === 'torch');
+  var uni = night ? '#1f2533' : NAVY;          // jacket / sleeves
+  var skin = night ? '#cbb699' : SKIN;
+  var trouser = night ? '#10141d' : DK;
+
+  function sleeve(x1,y1,x2,y2){
+    return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+uni+
+           '" stroke-width="8.5" stroke-linecap="round"/>';
   }
-  return '<svg viewBox="0 0 48 60" style="max-width:74px;margin:0 auto">' +
-    '<circle cx="24" cy="12" r="7" fill="#e8c39e"/><rect x="16" y="3" width="16" height="5" rx="2" fill="#1A50A2"/>' +
-    body +
-    '<line x1="22" y1="44" x2="18" y2="58" stroke="#1d1d1f" stroke-width="3.2"/>' +
-    '<line x1="26" y1="44" x2="30" y2="58" stroke="#1d1d1f" stroke-width="3.2"/></svg>';
+  // white traffic glove, outlined so it reads on the white panel
+  function glove(x,y){
+    return '<circle cx="'+x+'" cy="'+y+'" r="5.6" fill="#fff" stroke="'+uni+'" stroke-width="1.7"/>';
+  }
+  var legs =
+    '<path d="M32 91 L30 116 L40 116 L44 96 L48 116 L58 116 L56 91 Z" fill="'+trouser+'"/>' +
+    '<ellipse cx="35" cy="116.5" rx="6.5" ry="2.6" fill="#0a0e1a"/>' +
+    '<ellipse cx="53" cy="116.5" rx="6.5" ry="2.6" fill="#0a0e1a"/>';
+
+  // frontal head: symmetric peaked cap, two eyes, centre cap badge
+  var headFront =
+    '<circle cx="45" cy="32" r="12.5" fill="'+skin+'"/>' +
+    '<circle cx="32.5" cy="32" r="3" fill="'+skin+'"/><circle cx="57.5" cy="32" r="3" fill="'+skin+'"/>' +
+    '<circle cx="40.5" cy="32" r="1.7" fill="#1d1d1f"/><circle cx="49.5" cy="32" r="1.7" fill="#1d1d1f"/>' +
+    '<line x1="42" y1="38" x2="48" y2="38" stroke="#9a6b4f" stroke-width="1.2"/>' +
+    '<ellipse cx="45" cy="25" rx="16.5" ry="4.5" fill="'+BRIM+'"/>' +          // visor
+    '<rect x="29" y="15.5" width="32" height="8" rx="2" fill="'+NAVY+'"/>' +    // band
+    '<rect x="29" y="21" width="32" height="1.8" fill="'+GOLD+'"/>' +
+    '<path d="M29 17 Q45 1 61 17 Z" fill="'+NAVY+'"/>' +                        // crown
+    '<circle cx="45" cy="18.5" r="2.6" fill="'+GOLD+'"/>';                      // badge
+  // profile head: brim juts forward, one eye, a nose
+  var headSide =
+    '<circle cx="45" cy="32" r="12.5" fill="'+skin+'"/>' +
+    '<path d="M57 30 l5 2.5 -5 2.5 z" fill="'+skin+'"/>' +                      // nose
+    '<circle cx="51" cy="31" r="1.7" fill="#1d1d1f"/>' +                       // eye
+    '<circle cx="39" cy="33" r="2.8" fill="'+skin+'"/>' +                      // back ear
+    '<ellipse cx="55" cy="24" rx="13" ry="3.8" fill="'+BRIM+'" transform="rotate(-7 55 24)"/>' +
+    '<rect x="33" y="15.5" width="25" height="8" rx="2" fill="'+NAVY+'"/>' +
+    '<rect x="33" y="21" width="25" height="1.8" fill="'+GOLD+'"/>' +
+    '<path d="M33 17 Q44 2 58 16 Z" fill="'+NAVY+'"/>' +
+    '<circle cx="54" cy="18.5" r="2.4" fill="'+GOLD+'"/>';
+
+  var torsoFront =
+    '<rect x="41" y="42" width="8" height="7" fill="'+skin+'"/>' +             // neck
+    '<path d="M27 60 Q45 47 63 60 L60 92 L30 92 Z" fill="'+uni+'"/>' +         // jacket
+    '<path d="M45 49 L38 60 L45 64 L52 60 Z" fill="'+DK+'"/>' +                // collar V
+    '<circle cx="45" cy="70" r="1.6" fill="'+GOLD+'"/><circle cx="45" cy="79" r="1.6" fill="'+GOLD+'"/>' +
+    '<rect x="30" y="88" width="30" height="5" fill="'+DK+'"/>' +              // belt
+    '<rect x="43" y="88" width="4" height="5" fill="'+GOLD+'"/>';             // buckle
+  var torsoSide =
+    '<rect x="42" y="42" width="7" height="7" fill="'+skin+'"/>' +
+    '<path d="M38 58 Q54 56 51 80 L49 92 L36 92 L37 58 Z" fill="'+uni+'"/>' +  // chest forward
+    '<rect x="36" y="88" width="15" height="5" fill="'+DK+'"/>' +
+    '<rect x="46" y="88" width="4" height="5" fill="'+GOLD+'"/>';
+  // rear view: back of the cap (no visor/badge), no face, nape hairline, jacket centre seam
+  var headBack =
+    '<circle cx="45" cy="32" r="12.5" fill="'+skin+'"/>' +
+    '<circle cx="32.5" cy="32" r="3" fill="'+skin+'"/><circle cx="57.5" cy="32" r="3" fill="'+skin+'"/>' +
+    '<path d="M34 39 Q45 45 56 39 L56 33 Q45 36 34 33 Z" fill="#3a2a1c"/>' +     // nape hair
+    '<rect x="29" y="15.5" width="32" height="8" rx="2" fill="'+NAVY+'"/>' +      // cap band
+    '<rect x="29" y="21" width="32" height="1.8" fill="'+GOLD+'"/>' +
+    '<path d="M29 17 Q45 1 61 17 Z" fill="'+NAVY+'"/>' +                          // crown dome
+    '<rect x="41" y="22" width="8" height="2.4" rx="1" fill="'+DK+'"/>';          // cap adjuster strap
+  var torsoBack =
+    '<rect x="41" y="42" width="8" height="7" fill="'+skin+'"/>' +               // nape
+    '<path d="M27 60 Q45 47 63 60 L60 92 L30 92 Z" fill="'+uni+'"/>' +           // jacket
+    '<path d="M39 50 Q45 54 51 50 L51 53 Q45 56 39 53 Z" fill="'+DK+'"/>' +      // back collar
+    '<path d="M30 59 Q45 53 60 59" fill="none" stroke="#0f1b33" stroke-width="1.3"/>' + // shoulder yoke
+    '<line x1="45" y1="55" x2="45" y2="88" stroke="#0f1b33" stroke-width="1.3"/>' +     // centre seam
+    '<rect x="30" y="88" width="30" height="5" fill="'+DK+'"/>';                 // belt (no front buckle)
+
+  var head, torso, arms;
+  if (pose === 'side') {
+    head = headSide; torso = torsoSide;
+    // arms extend along the line of travel (front-to-back) = horizontal here
+    arms = sleeve(45,57, 19,57) + sleeve(45,57, 71,57) + glove(17,57) + glove(73,57);
+  } else if (pose === 'raisedFront') {
+    head = headFront; torso = torsoFront;
+    // one arm straight up beside the head, the other down at the side
+    arms = sleeve(60,59, 61,16) + glove(61,13) +
+           sleeve(31,60, 26,87) + glove(25,89);
+  } else if (pose === 'torch') {
+    head = headFront; torso = torsoFront;
+    // one gloved hand swings a lit baton sideways; motion arc shows the sweep
+    arms = sleeve(30,61, 25,87) + glove(24,89) +
+           sleeve(60,61, 75,57) + glove(77,56) +
+           '<path d="M68 66 Q84 56 93 40" fill="none" stroke="'+GOLD+
+           '" stroke-width="2" stroke-dasharray="3 3" opacity=".85"/>' +
+           '<line x1="77" y1="56" x2="90" y2="46" stroke="#C0272D" stroke-width="4.5" stroke-linecap="round"/>' +
+           '<circle cx="91" cy="45" r="7" fill="'+GOLD+'" opacity=".45"/>' +
+           '<circle cx="91" cy="45" r="3.4" fill="#ffd24d"/>';
+  } else if (pose === 'back') {
+    head = headBack; torso = torsoBack;
+    arms = sleeve(30,61, 10,61) + sleeve(60,61, 80,61) + glove(8,61) + glove(82,61);
+  } else { // front
+    head = headFront; torso = torsoFront;
+    arms = sleeve(30,61, 10,61) + sleeve(60,61, 80,61) + glove(8,61) + glove(82,61);
+  }
+
+  return '<svg viewBox="0 0 90 120" style="max-width:90px;margin:0 auto;display:block">' +
+    (night ? '<rect x="0" y="0" width="90" height="120" fill="#0e1320" rx="4"/>' : '') +
+    legs + torso + arms + head + '</svg>';
 }
 function nb(x, y, n, col){
   return '<circle cx="' + x + '" cy="' + y + '" r="11" fill="' + (col || '#1d1d1f') + '"/>' +
@@ -1679,6 +1761,36 @@ function lightChip(col, label){
   var fills = {g:'#19a974', y:'#f2b705', r:'#d6342c'};
   return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:700">' +
     '<span style="width:13px;height:13px;border-radius:50%;background:' + fills[col] + ';display:inline-block"></span>' + label + '</span>';
+}
+/* side-profile car drawn around its ground-contact centre (local y=0), facing
+   right by default. Yellow headlight + red tail-light show heading direction;
+   pass faceLeft=true to mirror. For slope scenes: translate to the contact
+   point, then rotate by the slope angle. */
+function sideCar(color, win, faceLeft){
+  var car =
+    '<ellipse cx="0" cy="1" rx="30" ry="3.5" fill="rgba(0,0,0,.16)"/>' +
+    '<circle cx="-18" cy="-7" r="7" fill="#222"/><circle cx="-18" cy="-7" r="3" fill="#9aa0a6"/>' +
+    '<circle cx="18" cy="-7" r="7" fill="#222"/><circle cx="18" cy="-7" r="3" fill="#9aa0a6"/>' +
+    '<path d="M-31 -10 L-31 -21 Q-31 -22.5 -29.5 -22.5 L-12 -22.5 L-6 -33 L10 -33 L19 -22 L30 -20.5 Q31 -20 31 -18.5 L31 -10 Z" fill="'+color+'" stroke="#222" stroke-width="1"/>' +
+    '<path d="M-5 -31.5 L8.5 -31.5 L15 -23 L-5 -23 Z" fill="'+win+'"/>' +
+    '<line x1="3" y1="-31.5" x2="3" y2="-23" stroke="'+color+'" stroke-width="1.4"/>' +
+    '<rect x="27" y="-18.5" width="4.5" height="4.5" rx="1" fill="#ffe27a" stroke="#caa400" stroke-width=".5"/>' +
+    '<circle cx="-30.5" cy="-13" r="1.9" fill="#c0272d"/>';
+  return faceLeft ? '<g transform="scale(-1,1)">' + car + '</g>' : car;
+}
+/* top-down (overhead) car for lane diagrams, centred at origin, heading LEFT
+   (Japan drives on the left, so in an overhead view traffic runs right-to-left
+   and the rightmost/passing lane is at the top). Yellow headlights + windshield
+   lead at the front-left; red tail-lights at the rear-right. */
+function topCar(color, win){
+  return ''+
+    '<rect x="-23" y="-11" width="46" height="22" rx="6" transform="translate(1.5,2)" fill="rgba(0,0,0,.14)"/>' +
+    '<rect x="-23" y="-11" width="46" height="22" rx="6" fill="'+color+'" stroke="#222" stroke-width="1"/>' +
+    '<rect x="-8" y="-9" width="20" height="18" rx="2" fill="'+color+'" stroke="#333" stroke-width=".8"/>' +   // roof
+    '<polygon points="-8,-9 -8,9 -13,6.5 -13,-6.5" fill="'+win+'"/>' +                                          // windshield (front)
+    '<polygon points="12,-9 12,9 16,6.5 16,-6.5" fill="'+win+'"/>' +                                            // rear window
+    '<rect x="-23" y="-10" width="4" height="4" rx="1" fill="#ffe27a"/><rect x="-23" y="6" width="4" height="4" rx="1" fill="#ffe27a"/>' +  // headlights
+    '<rect x="19.5" y="-10" width="3.5" height="4" rx="1" fill="#c0272d"/><rect x="19.5" y="6" width="3.5" height="4" rx="1" fill="#c0272d"/>'; // tail-lights
 }
 
 /* --- chapter digests --- */
@@ -1704,7 +1816,8 @@ renderers['study/ch1'] = function(){
   '<h2>Police hand signals</h2>' +
   '<p>One rule decodes all four pictures: <strong>if the officer\'s chest or back points at you, you are at red.</strong></p>' +
   '<div class="fig-grid">' +
-  panel(officerFig('front'), 'Front/back toward you<br>' + lightChip('r','= RED for you')) +
+  panel(officerFig('front'), 'Front toward you<br>' + lightChip('r','= RED for you')) +
+  panel(officerFig('back'), 'Back toward you<br>' + lightChip('r','= RED for you')) +
   panel(officerFig('side'), 'Side toward you, arms out<br>' + lightChip('g','= GREEN for you')) +
   panel(officerFig('raisedFront'), 'Arm raised vertically<br>' + lightChip('y','parallel traffic = YELLOW') + '<br>' + lightChip('r','facing traffic = RED')) +
   panel(officerFig('torch'), 'Night: flashlight swung<br>' + lightChip('r','facing the swing = RED')) +
@@ -2074,12 +2187,16 @@ renderers['study/ch4'] = function(){
   '</ul>' +
   fig('<svg viewBox="0 0 560 170">' +
     '<polygon points="0,160 560,30 560,160" fill="#b0aca0"/>' +
-    '<g transform="rotate(77 470 52)"><use href="#hz-car" x="470" y="52"/></g>' +
-    '<text x="460" y="22" font-size="15" font-weight="bold" fill="#C0272D" text-anchor="middle">descending — YIELDS</text>' +
-    '<path d="M428 70 q-20 18 -8 36" stroke="#C0272D" stroke-width="3" fill="none" stroke-dasharray="5,4"/><polygon points="423,112 412,104 424,98" fill="#C0272D"/>' +
-    '<g transform="rotate(-103 150 128)"><use href="#hz-you" x="150" y="128"/></g>' +
-    '<path d="M186 116 L260 99" stroke="#0e7a5f" stroke-width="3.5"/><polygon points="270,96 257,92 260,104" fill="#0e7a5f"/>' +
-    '<text x="160" y="162" font-size="15" font-weight="bold" fill="#0e7a5f">climbing — goes first</text>' +
+    '<line x1="0" y1="160" x2="560" y2="30" stroke="#8d897d" stroke-width="2"/>' +     // road surface
+    // descending car: heads down-left, sits on the slope (mirror + slope tilt)
+    '<g transform="translate(470,49) rotate(-13)">' + sideCar('#6b7077', '#c9cdd3', true) + '</g>' +
+    '<text x="468" y="16" font-size="15" font-weight="bold" fill="#C0272D" text-anchor="middle">descending — YIELDS</text>' +
+    '<path d="M436 66 q-22 16 -12 36" stroke="#C0272D" stroke-width="3" fill="none" stroke-dasharray="5,4"/><polygon points="421,108 410,99 422,95" fill="#C0272D"/>' +
+    // your car: climbing up-right, sits on the slope
+    '<g transform="translate(150,125) rotate(-13)">' + sideCar('#1A50A2', '#cfe0f5', false) + '</g>' +
+    '<text x="150" y="84" font-size="13" font-weight="bold" fill="#1A50A2" text-anchor="middle">you</text>' +
+    '<path d="M188 110 L262 93" stroke="#0e7a5f" stroke-width="3.5"/><polygon points="272,90 259,86 262,98" fill="#0e7a5f"/>' +
+    '<text x="150" y="162" font-size="15" font-weight="bold" fill="#0e7a5f" text-anchor="middle">climbing — goes first</text>' +
     '</svg>',
     'Narrow slope, no room to pass: the descending vehicle pulls aside. (Restarting on an uphill is the hard, dangerous maneuver — so the climber keeps moving.)') +
 
@@ -2161,8 +2278,15 @@ renderers['study/ch5'] = function(){
     '<text x="14" y="106" font-size="16" font-weight="bold" fill="#fff">cruising lanes — drive here</text>' +
     '<text x="14" y="152" font-size="16" font-weight="bold" fill="#fff">cruising / merging</text>' +
     '<text x="14" y="192" font-size="15" font-weight="bold" fill="#C0272D">shoulder — emergencies ONLY, never for driving or passing</text>' +
-    '<g transform="rotate(90 480 100)"><use href="#hz-you" x="480" y="100"/></g>' +
-    '<g transform="rotate(90 300 52)"><use href="#hz-car" x="300" y="52"/></g>' +
+    // travel-direction marker in the empty top margin (right-to-left = drive on the left)
+    '<line x1="40" y1="12" x2="112" y2="12" stroke="#5b5750" stroke-width="2"/>' +
+    '<polygon points="32,12 46,6 46,18" fill="#5b5750"/>' +
+    '<text x="120" y="16" font-size="11" fill="#5b5750">direction of travel</text>' +
+    // overtaking car, ahead in the passing lane, clear of the label
+    '<g transform="translate(548,52)">' + topCar('#6b7077', '#cdd1d6') + '</g>' +
+    // your car, cruising lane
+    '<g transform="translate(470,100)">' + topCar('#1A50A2', '#cfe0f5') + '</g>' +
+    '<text x="470" y="86" font-size="12" font-weight="bold" fill="#1A50A2" text-anchor="middle">you</text>' +
     '</svg>',
     'Cruise left, pass right, shoulder never. Cruising in the rightmost lane is itself a violation (通行帯違反).') +
 
@@ -2175,8 +2299,8 @@ renderers['study/ch5'] = function(){
   '</ol></div>' +
   '<div class="fig-grid">' +
   panel('<svg viewBox="0 0 130 110"><rect x="0" y="10" width="80" height="90" fill="#b0aca0"/><rect x="80" y="10" width="50" height="90" fill="#c5c0b4"/><line x1="80" y1="10" x2="80" y2="100" stroke="#fff" stroke-width="3"/><g transform="translate(103,55)"><rect x="-11" y="-20" width="22" height="40" rx="4" fill="#1A50A2"/><rect x="-8" y="-14" width="16" height="9" rx="2" fill="#9db9e8"/></g><g fill="#f2b705"><polygon points="103,18 96,30 110,30"/><polygon points="103,92 96,80 110,80"/></g></svg>', 'Shoulder + hazard lights', 1) +
-  panel('<svg viewBox="0 0 130 110"><rect x="80" y="0" width="50" height="110" fill="#c5c0b4"/><g transform="translate(103,30)"><rect x="-11" y="-20" width="22" height="40" rx="4" fill="#1A50A2"/></g><polygon points="103,75 88,100 118,100" fill="none" stroke="#C0272D" stroke-width="5"/><text x="40" y="95" font-size="12" font-weight="bold" fill="#1d1d1f">triangle BEHIND</text></svg>', 'Warning triangle well behind (mandatory)', 2) +
-  panel('<svg viewBox="0 0 130 110"><rect x="0" y="0" width="60" height="110" fill="#c5c0b4"/><line x1="60" y1="0" x2="60" y2="110" stroke="#7a766a" stroke-width="6"/><g transform="translate(90,50)"><use href="#hz-ped" transform="scale(1.4)"/></g><text x="92" y="98" text-anchor="middle" font-size="12" font-weight="bold" fill="#0e7a5f">behind the rail</text></svg>', 'EVERYONE out, behind the guardrail', 3) +
+  panel('<svg viewBox="0 0 130 110"><rect x="80" y="0" width="50" height="110" fill="#c5c0b4"/><g transform="translate(103,30)"><rect x="-11" y="-20" width="22" height="40" rx="4" fill="#1A50A2"/></g><polygon points="103,75 88,100 118,100" fill="none" stroke="#C0272D" stroke-width="5"/><text x="38" y="86" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d1d1f">triangle</text><text x="38" y="101" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d1d1f">BEHIND</text></svg>', 'Warning triangle well behind (mandatory)', 2) +
+  panel('<svg viewBox="0 0 130 110"><rect x="0" y="0" width="60" height="110" fill="#c5c0b4"/><line x1="60" y1="0" x2="60" y2="110" stroke="#7a766a" stroke-width="6"/><g transform="translate(92,46)"><use href="#hz-ped" transform="scale(1.4)"/></g><text x="95" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#0e7a5f">behind</text><text x="95" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#0e7a5f">the rail</text></svg>', 'EVERYONE out, behind the guardrail', 3) +
   panel('<svg viewBox="0 0 130 110"><rect x="40" y="14" width="50" height="74" rx="6" fill="#0e7a5f"/><circle cx="65" cy="38" r="9" fill="#fff"/><rect x="52" y="56" width="26" height="18" rx="3" fill="#fff"/><text x="65" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d1d1f">every 1 km · #9910</text></svg>', 'Call from safety', 4) +
   '</div>' +
   '<div class="card warn"><strong>Test bait from this chapter:</strong> minimum speed “30 km/h” or applied to all roads (×), “mopeds may use expressways if they keep up” (×), “wait inside the car with seatbelts on after a breakdown” (×), overtaking on the left because the right lane is slow (×), “the shoulder may be used to pass a jam” (×), towing with a rope on the expressway (×).</div>' +
