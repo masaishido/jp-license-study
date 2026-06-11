@@ -185,6 +185,11 @@ td .num,th .num,.num{font-variant-numeric:tabular-nums;font-weight:700;color:var
   background:#fff;border:1px solid var(--line-strong);padding:18px 18px;
   font-size:1.08rem;min-height:7em;display:flex;align-items:center;
 }
+.q-sign-figure{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+  gap:18px;margin:14px 0 4px;
+}
+.q-sign-figure svg{height:84px;width:auto}
 .ox-bar{
   display:flex;gap:12px;margin-top:18px;
 }
@@ -553,49 +558,49 @@ var QUESTIONS = [
  explanation:'Each direction obeys its own light — a red for the perpendicular road tells you nothing about yours.'},
 
 // ---- signs & markings (15) ----
-{id:'sgn-001', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+{id:'sgn-001', topic:'signs', stage:1, answer:false, trapType:'lookalike', signKeys:'noParking',
  statement:'The round sign with a red circle and a single diagonal red bar over a blue background means parking and stopping are both prohibited.',
  explanation:'ONE diagonal = No PARKING (brief stopping allowed). The X (two diagonals) = no parking AND no stopping. Count the slashes.'},
-{id:'sgn-002', topic:'signs', stage:1, answer:true, trapType:'lookalike',
+{id:'sgn-002', topic:'signs', stage:1, answer:true, trapType:'lookalike', signKeys:'noEntry',
  statement:'The red disc with a horizontal white bar means "No entry" and is typically posted facing traffic at the exit end of a one-way road.',
  explanation:'進入禁止 — you may not enter from the side facing the sign; traffic flows the other way.'},
-{id:'sgn-003', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+{id:'sgn-003', topic:'signs', stage:1, answer:false, trapType:'lookalike', signKeys:'minSpeed30',
  statement:'A white circular sign with a red border and a number, with a horizontal line under the number, indicates the maximum speed limit.',
  explanation:'The UNDERLINED number is the MINIMUM speed limit (used on expressway main lanes). Without the line it is the maximum.'},
-{id:'sgn-004', topic:'signs', stage:1, answer:true,
+{id:'sgn-004', topic:'signs', stage:1, answer:true, signKeys:'warnCross',
  statement:'Yellow diamond-shaped signs are warning signs: they alert you to danger ahead but do not themselves impose specific speed obligations.',
  explanation:'Warning signs alert (crossing ahead, curve, school). Obligations like 徐行 come from regulatory signs or the law, not the yellow diamond itself.'},
-{id:'sgn-005', topic:'signs', stage:1, answer:true,
+{id:'sgn-005', topic:'signs', stage:1, answer:true, signKeys:'onlyStraight',
  statement:'Blue circular signs indicate something you must do, such as proceeding only in the direction of the arrows.',
  explanation:'Blue circle = instruction (obligation). Red border = prohibition. The color/shape system decodes unfamiliar signs.'},
-{id:'sgn-006', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+{id:'sgn-006', topic:'signs', stage:1, answer:false, trapType:'lookalike', signKeys:'slow',
  statement:'The inverted red triangle sign reading 徐行 (SLOW) requires you to come to a complete stop before proceeding.',
  explanation:'徐行 requires slowing to a speed from which you can stop immediately — not a complete stop. The complete stop belongs to 止まれ (STOP).'},
-{id:'sgn-007', topic:'signs', stage:1, answer:true,
+{id:'sgn-007', topic:'signs', stage:1, answer:true, signKeys:'stop',
  statement:'At a 止まれ (STOP) sign, you must stop completely at the stop line, or just before the intersection if there is no line.',
  explanation:'A rolling crawl does not satisfy a stop sign — wheels fully stopped, then check and go.'},
-{id:'sgn-008', topic:'signs', stage:1, answer:false, trapType:'numberSwap',
+{id:'sgn-008', topic:'signs', stage:1, answer:false, trapType:'numberSwap', signKeys:'centerLineYellow',
  statement:'A road marking of a yellow center line means overtaking is prohibited in all cases.',
  explanation:'A yellow center line prohibits crossing it (or protruding over it) to overtake. Overtaking that stays within your own side — e.g., a moped — can still be legal.'},
-{id:'sgn-009', topic:'signs', stage:1, answer:true,
+{id:'sgn-009', topic:'signs', stage:1, answer:true, signKeys:'auxPlate',
  statement:'A white rectangular plate mounted under a main sign is an auxiliary sign that limits or clarifies the main sign, for example by showing hours or vehicle types.',
  explanation:'Auxiliary plates ("8-20", "except large vehicles") modify the main sign above them.'},
-{id:'sgn-010', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+{id:'sgn-010', topic:'signs', stage:1, answer:false, trapType:'lookalike', signKeys:'closedAll',
  statement:'The circular sign with a red border and a red X over a white background means vehicles are prohibited, but pedestrians may still use the road.',
  explanation:'The red X on white (通行止め) closes the road to EVERYTHING — pedestrians and vehicles. The single-slash version (車両通行止め) is the vehicles-only ban.'},
-{id:'sgn-011', topic:'signs', stage:1, answer:true,
+{id:'sgn-011', topic:'signs', stage:1, answer:true, signKeys:'markDiamond',
  statement:'A diamond-shaped marking painted on the road surface warns that a pedestrian crossing is ahead.',
  explanation:'The painted diamond appears 30–50 m before a crossing — be ready to stop for pedestrians.'},
-{id:'sgn-012', topic:'signs', stage:1, answer:false, trapType:'partialTruth',
+{id:'sgn-012', topic:'signs', stage:1, answer:false, trapType:'partialTruth', signKeys:'speed40',
  statement:'A maximum speed sign of 40 applies to regular cars but not to motorcycles, which may follow the default 60 km/h limit.',
  explanation:'Posted limits bind ALL vehicles (mopeds keep their lower 30 km/h limit). A motorcycle must also obey the 40.'},
-{id:'sgn-013', topic:'signs', stage:1, answer:false, trapType:'lookalike',
+{id:'sgn-013', topic:'signs', stage:1, answer:false, trapType:'lookalike', signKeys:'pedOnly',
  statement:'A blue square sign with a pedestrian symbol means pedestrians are prohibited from entering.',
  explanation:'Blue square = indication/permission (e.g., pedestrian crossing or pedestrians-only road). Prohibitions are red-bordered. Blue allows; red forbids.'},
-{id:'sgn-014', topic:'signs', stage:1, answer:true,
+{id:'sgn-014', topic:'signs', stage:1, answer:true, signKeys:'laneLineYellow',
  statement:'You may not change lanes across a yellow lane line.',
  explanation:'Yellow lane boundaries prohibit lane changes across them; white broken lines allow them when safe.'},
-{id:'sgn-015', topic:'signs', stage:1, answer:true, trapType:'lookalike',
+{id:'sgn-015', topic:'signs', stage:1, answer:true, trapType:'lookalike', signKeys:['slow','stop'],
  statement:'The 徐行 sign and the 止まれ sign are both inverted triangles, but only 止まれ requires a complete stop.',
  explanation:'Same shape family, different duty: 徐行 = immediately-stoppable crawl; 止まれ = full stop. The exam loves swapping their duties.'},
 
@@ -1662,7 +1667,12 @@ var SIGN = {
   warnCurve: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="9" y="9" width="38" height="38" rx="5" transform="rotate(45 28 28)" fill="#F2B705" stroke="#1d1d1f" stroke-width="2"/><path d="M22 42 V30 Q22 22 30 22 H34" stroke="#1d1d1f" stroke-width="4.5" fill="none"/><polygon points="40,22 31,16 31,28" fill="#1d1d1f"/></svg>',
   warnCross: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="9" y="9" width="38" height="38" rx="5" transform="rotate(45 28 28)" fill="#F2B705" stroke="#1d1d1f" stroke-width="2"/><path d="M28 14 V42 M14 28 H42" stroke="#1d1d1f" stroke-width="5"/></svg>',
   priorityRoad: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="3" y="3" width="50" height="50" rx="4" fill="#1A50A2"/><rect x="22" y="6" width="12" height="44" fill="#fff"/><rect x="10" y="24" width="36" height="8" fill="#fff" fill-opacity=".55"/></svg>',
-  parkOK: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="3" y="3" width="50" height="50" rx="4" fill="#1A50A2"/><text x="28" y="40" text-anchor="middle" fill="#fff" font-size="32" font-weight="bold">P</text></svg>'
+  parkOK: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="3" y="3" width="50" height="50" rx="4" fill="#1A50A2"/><text x="28" y="40" text-anchor="middle" fill="#fff" font-size="32" font-weight="bold">P</text></svg>',
+  speed40: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff" stroke="#C0272D" stroke-width="6"/><text x="28" y="38" text-anchor="middle" fill="#1A50A2" font-size="24" font-weight="bold">40</text></svg>',
+  centerLineYellow: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="8" y="2" width="40" height="52" fill="#5b5b5b"/><rect x="11" y="2" width="3" height="52" fill="#fff" fill-opacity=".7"/><rect x="42" y="2" width="3" height="52" fill="#fff" fill-opacity=".7"/><rect x="26" y="2" width="4" height="52" fill="#F2B705"/></svg>',
+  laneLineYellow: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="4" y="2" width="48" height="52" fill="#5b5b5b"/><rect x="6" y="2" width="2.5" height="52" fill="#fff" fill-opacity=".7"/><rect x="47.5" y="2" width="2.5" height="52" fill="#fff" fill-opacity=".7"/><rect x="22" y="2" width="3.5" height="52" fill="#F2B705"/><g fill="#fff" fill-opacity=".8"><rect x="36" y="6" width="2.5" height="9"/><rect x="36" y="22" width="2.5" height="9"/><rect x="36" y="38" width="2.5" height="9"/></g></svg>',
+  markDiamond: '<svg width="56" height="56" viewBox="0 0 56 56"><rect x="8" y="2" width="40" height="52" fill="#5b5b5b"/><rect x="11" y="2" width="3" height="52" fill="#fff" fill-opacity=".55"/><rect x="42" y="2" width="3" height="52" fill="#fff" fill-opacity=".55"/><polygon points="28,12 40,28 28,44 16,28" fill="none" stroke="#fff" stroke-width="4"/></svg>',
+  auxPlate: '<svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="17" r="14" fill="#1A50A2" stroke="#C0272D" stroke-width="3.5"/><line x1="19" y1="26" x2="37" y2="8" stroke="#C0272D" stroke-width="3"/><rect x="12" y="36" width="32" height="15" rx="2" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="28" y="47" text-anchor="middle" fill="#1d1d1f" font-size="10" font-weight="bold">8-20</text></svg>'
 };
 function signFig(key, label){
   return '<span class="sign-figure">' + SIGN[key] + label + '</span>';
@@ -2562,6 +2572,15 @@ function startQuiz(opts){
 
 function totalScreens(run){ return run.items.length + run.hazard.length; }
 
+// Sign illustration(s) for a quiz question. Decorative: the statement text
+// already describes the sign, so the figure is aria-hidden to avoid a double read.
+function quizFigure(q){
+  if (!q.signKeys) return '';
+  var keys = (typeof q.signKeys === 'string') ? [q.signKeys] : q.signKeys;
+  var inner = keys.map(function(k){ return SIGN[k] || ''; }).join('');
+  return '<div class="q-sign-figure" aria-hidden="true">' + inner + '</div>';
+}
+
 function renderQuizRunner(){
   var run = Quiz.run;
   var root = document.getElementById('quizRoot');
@@ -2583,6 +2602,7 @@ function renderQuizRunner(){
     var picked = run.answers[i];
     var body =
       '<div class="q-statement">' + esc(q.statement) + '</div>' +
+      quizFigure(q) +
       '<div class="ox-sticky">' +
       '<div class="ox-bar">' +
         '<button class="o-btn' + (picked===true ?' picked':'') + '" data-ans="true" ' + (run.answered?'disabled':'') + '>○<div style="font-size:.65rem;font-weight:600">TRUE / correct</div></button>' +
@@ -2961,6 +2981,10 @@ function validateData(){
     if (typeof q.answer !== 'boolean') errs.push(q.id + ': answer must be boolean');
     if (!q.statement || !q.explanation) errs.push(q.id + ': missing statement/explanation');
     if (q.trapType && !TRAPS[q.trapType]) errs.push(q.id + ': unknown trapType ' + q.trapType);
+    if (q.signKeys) {
+      var sk = (typeof q.signKeys === 'string') ? [q.signKeys] : q.signKeys;
+      sk.forEach(function(k){ if (!SIGN[k]) errs.push(q.id + ': unknown signKey ' + k); });
+    }
     counts[q.topic] = (counts[q.topic] || 0) + 1;
   });
   HAZARD_QUESTIONS.forEach(function(h){
