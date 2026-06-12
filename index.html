@@ -375,89 +375,15 @@ textarea.io{
     <g id="hz-ped"><circle r="4" fill="#C0272D"/><line x1="0" y1="4" x2="0" y2="13" stroke="#C0272D" stroke-width="2.6"/><line x1="-5" y1="8" x2="5" y2="8" stroke="#C0272D" stroke-width="2.4"/><line x1="0" y1="13" x2="-4" y2="20" stroke="#C0272D" stroke-width="2.4"/><line x1="0" y1="13" x2="4" y2="20" stroke="#C0272D" stroke-width="2.4"/></g>
     <g id="hz-bike"><circle cx="-6" cy="6" r="5" fill="none" stroke="#C0272D" stroke-width="2"/><circle cx="6" cy="6" r="5" fill="none" stroke="#C0272D" stroke-width="2"/><line x1="-6" y1="6" x2="0" y2="-4" stroke="#C0272D" stroke-width="2"/><line x1="0" y1="-4" x2="6" y2="6" stroke="#C0272D" stroke-width="2"/><circle cx="0" cy="-8" r="3" fill="#C0272D"/></g>
 
-    <!-- scene 1: blind uncontrolled intersection, parked truck hides a cyclist -->
-    <symbol id="haz-scene-1" viewBox="0 0 400 240">
-      <rect width="400" height="240" fill="#e9e4d8"/>
-      <rect x="165" y="0" width="70" height="240" fill="#b0aca0"/>
-      <rect x="0" y="85" width="400" height="70" fill="#b0aca0"/>
-      <line x1="200" y1="0" x2="200" y2="85" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <line x1="200" y1="155" x2="200" y2="240" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <line x1="0" y1="120" x2="165" y2="120" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <line x1="235" y1="120" x2="400" y2="120" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <use href="#hz-truck" x="120" y="138"/>
-      <text x="120" y="186" text-anchor="middle" font-size="11" fill="#4a4a42" font-weight="bold">parked truck</text>
-      <use href="#hz-bike" x="60" y="130"/>
-      <text x="60" y="158" text-anchor="middle" font-size="11" fill="#C0272D" font-weight="bold">bicycle →</text>
-      <use href="#hz-you" x="200" y="205"/>
-      <path d="M200 178 L200 150" stroke="#1A50A2" stroke-width="3" marker-end="none"/>
-      <polygon points="200,142 194,154 206,154" fill="#1A50A2"/>
-    </symbol>
-
-    <!-- scene 2: right turn, oncoming car with motorcycle behind it -->
-    <symbol id="haz-scene-2" viewBox="0 0 400 240">
-      <rect width="400" height="240" fill="#e9e4d8"/>
-      <rect x="160" y="0" width="80" height="240" fill="#b0aca0"/>
-      <rect x="160" y="85" width="240" height="70" fill="#b0aca0"/>
-      <line x1="200" y1="0" x2="200" y2="240" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <line x1="240" y1="120" x2="400" y2="120" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <use href="#hz-car" x="219" y="40"/>
-      <text x="262" y="36" font-size="11" fill="#555" font-weight="bold">oncoming car ↓</text>
-      <use href="#hz-bike" x="219" y="14"/>
-      <text x="262" y="64" font-size="11" fill="#C0272D" font-weight="bold">motorcycle behind it</text>
-      <use href="#hz-you" x="181" y="200"/>
-      <path d="M181 175 Q185 120 260 118" stroke="#1A50A2" stroke-width="3" fill="none" stroke-dasharray="6,5"/>
-      <polygon points="268,118 254,111 254,125" fill="#1A50A2"/>
-      <text x="300" y="108" font-size="11" fill="#1A50A2" font-weight="bold">your turn</text>
-    </symbol>
-
-    <!-- scene 3: two lanes, car stopped before a crosswalk in the left lane -->
-    <symbol id="haz-scene-3" viewBox="0 0 400 240">
-      <rect width="400" height="240" fill="#e9e4d8"/>
-      <rect x="120" y="0" width="160" height="240" fill="#b0aca0"/>
-      <line x1="200" y1="0" x2="200" y2="240" stroke="#fff" stroke-dasharray="10,8" stroke-width="2"/>
-      <g fill="#fff"><rect x="128" y="62" width="144" height="7"/><rect x="128" y="76" width="144" height="7"/><rect x="128" y="90" width="144" height="7"/></g>
-      <text x="290" y="84" font-size="11" fill="#555" font-weight="bold">crosswalk</text>
-      <use href="#hz-car" x="160" y="135"/>
-      <text x="92" y="140" font-size="11" fill="#555" font-weight="bold">stopped</text>
-      <use href="#hz-ped" x="138" y="48"/>
-      <text x="96" y="44" font-size="11" fill="#C0272D" font-weight="bold">pedestrian?</text>
-      <use href="#hz-you" x="240" y="205"/>
-      <polygon points="240,150 234,162 246,162" fill="#1A50A2"/>
-      <line x1="240" y1="160" x2="240" y2="180" stroke="#1A50A2" stroke-width="3"/>
-    </symbol>
-
-    <!-- scene 4: narrow street, parked cars, child with a ball -->
-    <symbol id="haz-scene-4" viewBox="0 0 400 240">
-      <rect width="400" height="240" fill="#e9e4d8"/>
-      <rect x="0" y="80" width="400" height="80" fill="#b0aca0"/>
-      <rect x="0" y="74" width="400" height="6" fill="#d8d2c4"/>
-      <rect x="0" y="160" width="400" height="6" fill="#d8d2c4"/>
-      <g transform="rotate(90 120 100)"><use href="#hz-car" x="120" y="100"/></g>
-      <g transform="rotate(90 210 100)"><use href="#hz-car" x="210" y="100"/></g>
-      <text x="165" y="70" text-anchor="middle" font-size="11" fill="#555" font-weight="bold">parked cars</text>
-      <circle cx="262" cy="120" r="6" fill="#C0272D" opacity=".85"/>
-      <text x="262" y="106" text-anchor="middle" font-size="11" fill="#C0272D" font-weight="bold">ball</text>
-      <use href="#hz-ped" x="285" y="176"/>
-      <text x="285" y="212" text-anchor="middle" font-size="11" fill="#C0272D" font-weight="bold">child</text>
-      <g transform="rotate(-90 60 120)"><use href="#hz-you" x="60" y="120"/></g>
-      <text x="56" y="150" font-size="11" fill="#1A50A2" font-weight="bold">you →</text>
-    </symbol>
-
-    <!-- scene 5: night, rain, crossing ahead, oncoming glare -->
-    <symbol id="haz-scene-5" viewBox="0 0 400 240">
-      <rect width="400" height="240" fill="#2b2b33"/>
-      <rect x="120" y="0" width="160" height="240" fill="#4a4a52"/>
-      <line x1="200" y1="0" x2="200" y2="240" stroke="#888" stroke-dasharray="10,8" stroke-width="2"/>
-      <g fill="#9a9aa4"><rect x="128" y="56" width="144" height="7"/><rect x="128" y="70" width="144" height="7"/><rect x="128" y="84" width="144" height="7"/></g>
-      <use href="#hz-car" x="160" y="30"/>
-      <polygon points="160,46 130,110 190,110" fill="#f5e9b8" opacity=".5"/>
-      <text x="96" y="34" font-size="11" fill="#f5e9b8" font-weight="bold">glare</text>
-      <use href="#hz-ped" x="252" y="62"/>
-      <text x="296" y="60" font-size="11" fill="#ff8888" font-weight="bold">pedestrian</text>
-      <use href="#hz-you" x="240" y="205"/>
-      <polygon points="240,148 218,96 262,96" fill="#f5e9b8" opacity=".35"/>
-      <text x="330" y="225" font-size="11" fill="#aaa" font-weight="bold">night · rain</text>
-    </symbol>
+    <!-- scene-engine actors: drawn heading NORTH (up) at origin; renderScene
+         rotates them by heading. Headlights lead the front, red tail-lights the
+         rear, so a glance shows which way each vehicle points. -->
+    <g id="sc-car"><rect x="-10.5" y="-19" width="21" height="38" rx="5" fill="#8b9099" stroke="#33363b" stroke-width="1"/><rect x="-8" y="-13" width="16" height="12" rx="2.5" fill="#cfe1f5"/><rect x="-8" y="3" width="16" height="9" rx="2.5" fill="#7d828a"/><rect x="-9.5" y="-19.5" width="4.5" height="3" rx="1.2" fill="#ffe27a"/><rect x="5" y="-19.5" width="4.5" height="3" rx="1.2" fill="#ffe27a"/><rect x="-9.5" y="16.5" width="4.5" height="3" rx="1.2" fill="#d6342c"/><rect x="5" y="16.5" width="4.5" height="3" rx="1.2" fill="#d6342c"/></g>
+    <g id="sc-you"><rect x="-10.5" y="-19" width="21" height="38" rx="5" fill="#1A50A2" stroke="#0e2f63" stroke-width="1"/><rect x="-8" y="-13" width="16" height="12" rx="2.5" fill="#bcd6f7"/><rect x="-8" y="3" width="16" height="9" rx="2.5" fill="#3a6ab5"/><rect x="-9.5" y="-19.5" width="4.5" height="3" rx="1.2" fill="#ffe27a"/><rect x="5" y="-19.5" width="4.5" height="3" rx="1.2" fill="#ffe27a"/><rect x="-9.5" y="16.5" width="4.5" height="3" rx="1.2" fill="#d6342c"/><rect x="5" y="16.5" width="4.5" height="3" rx="1.2" fill="#d6342c"/></g>
+    <g id="sc-truck"><rect x="-12" y="-26" width="24" height="52" rx="4" fill="#55584f" stroke="#2c2e29" stroke-width="1"/><rect x="-9" y="-22" width="18" height="12" rx="2.5" fill="#cfe1f5"/><rect x="-9" y="6" width="18" height="14" rx="2" fill="#43463f"/><rect x="-11" y="-26.5" width="4.5" height="3" rx="1.2" fill="#ffe27a"/><rect x="6.5" y="-26.5" width="4.5" height="3" rx="1.2" fill="#ffe27a"/><rect x="-11" y="23.5" width="4.5" height="3" rx="1.2" fill="#d6342c"/><rect x="6.5" y="23.5" width="4.5" height="3" rx="1.2" fill="#d6342c"/></g>
+    <g id="sc-moto"><rect x="-3.5" y="-12" width="7" height="24" rx="3" fill="#2a2a2e"/><circle cx="0" cy="0" r="5.2" fill="#3c3c42"/><circle cx="0" cy="-12.5" r="3.2" fill="#ffe27a"/><circle cx="0" cy="12.5" r="2.8" fill="#d6342c"/></g>
+    <g id="sc-bike"><circle cx="0" cy="-8.5" r="5" fill="none" stroke="#C0272D" stroke-width="2"/><circle cx="0" cy="8.5" r="5" fill="none" stroke="#C0272D" stroke-width="2"/><line x1="0" y1="-8.5" x2="0" y2="8.5" stroke="#C0272D" stroke-width="2"/><circle cx="0" cy="0" r="2.6" fill="#C0272D"/></g>
+    <g id="sc-ped"><circle cx="0" cy="-9" r="4.4" fill="#C0272D"/><path d="M0 -5 L0 6" stroke="#C0272D" stroke-width="3.2"/><path d="M-5 -1 L5 -1" stroke="#C0272D" stroke-width="2.8"/><path d="M0 6 L-4 15 M0 6 L4 15" stroke="#C0272D" stroke-width="2.8"/></g>
   </defs>
 </svg>
 
@@ -927,8 +853,20 @@ var QUESTIONS = [
 
 /* ===== 03 DATA: HAZARD_QUESTIONS ===== */
 var HAZARD_QUESTIONS = [
-{id:'haz-001', topic:'rightOfWay', stage:2, sceneSvg:'haz-scene-1',
- sceneText:'You are driving at 30 km/h toward an uncontrolled intersection of equal-width roads. A truck is parked on the crossing road to your left, just before the intersection, blocking your view. A bicycle\'s front wheel is visible ahead of the truck, moving toward the intersection.',
+{id:'haz-001', topic:'rightOfWay', stage:2,
+ scene:{bg:{type:'cross',cx:200,cy:98,half:34},
+  actors:[
+   {g:'you',  on:'main', dir:'N', at:0.94},
+   {g:'truck',on:'main', dir:'N', at:0.69, park:true},
+   {g:'bike', on:'cross',dir:'E', at:0.38}
+  ],
+  arrows:[ {from:0, dy:-22, color:'#1A50A2'}, {from:2, dx:18, color:'#C0272D'} ],
+  labels:[
+   {x:196,y:218,t:'you',color:'#1A50A2'},
+   {x:150,y:162,t:'parked truck',color:'#4a4a42',anchor:'end'},
+   {x:182,y:58,t:'bicycle (from your left)',color:'#C0272D',anchor:'middle'}
+  ]},
+ sceneText:'You are driving at 30 km/h toward an uncontrolled intersection of equal-width roads. A truck is parked on the left side of your road, just before the intersection, blocking your view of the crossing road to the left. A bicycle\'s front wheel is visible ahead of the truck, moving toward the intersection.',
  parts:[
   {statement:'The bicycle may enter the intersection hidden by the truck, so I will slow to a speed at which I can stop immediately (徐行) before entering.', answer:true,
    explanation:'Poor-visibility uncontrolled intersections are statutory 徐行 places — and the visible wheel is a direct warning.'},
@@ -937,7 +875,19 @@ var HAZARD_QUESTIONS = [
   {statement:'I will watch only the bicycle on the left, since no hazard can come from the right at an equal-width intersection.', answer:false,
    explanation:'Fixating on one hazard creates the next. Traffic from the right can still conflict; scanning both sides is required.'}
  ]},
-{id:'haz-002', topic:'rightOfWay', stage:2, sceneSvg:'haz-scene-2',
+{id:'haz-002', topic:'rightOfWay', stage:2,
+ scene:{bg:{type:'cross'},
+  actors:[
+   {g:'you', on:'main', dir:'N', at:0.86},
+   {g:'car', on:'main', dir:'S', at:0.20},
+   {g:'moto',on:'main', dir:'S', at:0.05}
+  ],
+  arrows:[ {path:'M182 176 L182 138 Q182 122 206 130 L248 134', head:[248,134,230,132], color:'#1A50A2', dash:true} ],
+  labels:[
+   {x:158,y:206,t:'you (turning right)',color:'#1A50A2',anchor:'end'},
+   {x:230,y:60,t:'oncoming car',color:'#555'},
+   {x:230,y:30,t:'motorcycle (hidden)',color:'#C0272D'}
+  ]},
  sceneText:'You are waiting to turn right at a signalized intersection. An oncoming car approaches, signaling nothing, and behind it you glimpse a motorcycle. The oncoming car appears to be slowing as the light turns yellow.',
  parts:[
   {statement:'The oncoming car seems to be stopping for the yellow light, so I can complete my turn quickly before the light changes.', answer:false,
@@ -947,7 +897,21 @@ var HAZARD_QUESTIONS = [
   {statement:'Even while turning, pedestrians may be on the crossing to my right, so I must check it before completing the turn.', answer:true,
    explanation:'The crossing at the exit of your turn is part of the same maneuver — turning drivers owe pedestrians a stop.'}
  ]},
-{id:'haz-003', topic:'pedestrians', stage:2, sceneSvg:'haz-scene-3',
+{id:'haz-003', topic:'pedestrians', stage:2,
+ scene:{bg:{type:'vMulti',half:38},
+  crosswalks:[{road:'main',at:0.24}],
+  actors:[
+   {g:'car', on:'main', lane:'L', dir:'N', at:0.42},
+   {g:'you', on:'main', lane:'R', dir:'N', at:0.86},
+   {g:'ped', on:'main', lane:'L', dir:'N', at:0.31}
+  ],
+  arrows:[ {from:1, dy:-30, color:'#1A50A2'} ],
+  labels:[
+   {x:227,y:206,t:'you',color:'#1A50A2'},
+   {x:140,y:108,t:'stopped',color:'#555',anchor:'end'},
+   {x:236,y:60,t:'crosswalk',color:'#555'},
+   {x:120,y:74,t:'pedestrian?',color:'#C0272D',anchor:'end'}
+  ]},
  sceneText:'You are driving at 40 km/h in the right lane of a two-lane road. In the left lane ahead, a car has stopped just before a pedestrian crossing. You cannot see the crossing area in front of the stopped car.',
  parts:[
   {statement:'The car ahead may have stopped to let a pedestrian cross, so I must stop before the crossing rather than pass at my current speed.', answer:true,
@@ -957,7 +921,24 @@ var HAZARD_QUESTIONS = [
   {statement:'A pedestrian may emerge suddenly from in front of the stopped car at a pace I cannot predict.', answer:true,
    explanation:'That is precisely the hazard: an unseen pedestrian mid-crossing, screened by the stopped vehicle.'}
  ]},
-{id:'haz-004', topic:'pedestrians', stage:2, sceneSvg:'haz-scene-4',
+{id:'haz-004', topic:'pedestrians', stage:2,
+ scene:{bg:{type:'hNarrow',half:34},
+  actors:[
+   {g:'you', on:'main', dir:'E', off:14,    at:0.16},
+   {g:'car', on:'main', dir:'E', park:true, at:0.46},
+   {g:'car', on:'main', dir:'E', park:true, at:0.63},
+   {g:'ped', on:'main', off:-24, at:0.555},
+   {g:'ped', on:'main', off:40,  at:0.80}
+  ],
+  props:[{kind:'ball', x:214, y:128}],
+  arrows:[ {from:0, dx:30, color:'#1A50A2'}, {x1:216,y1:108,x2:210,y2:130, color:'#C0272D'} ],
+  labels:[
+   {x:210,y:70,t:'parked cars (your left)',color:'#555',anchor:'middle'},
+   {x:252,y:100,t:'child? hidden',color:'#C0272D',anchor:'start'},
+   {x:198,y:136,t:'ball',color:'#C0272D',anchor:'end'},
+   {x:300,y:188,t:'child (decoy)',color:'#C0272D',anchor:'middle'},
+   {x:54,y:130,t:'you',color:'#1A50A2'}
+  ]},
  sceneText:'You are driving at 25 km/h on a narrow residential street with cars parked on the left. A ball rolls into the road from between the parked cars, and a child is visible on the sidewalk to your right.',
  parts:[
   {statement:'A child may chase the ball into the road from between the parked cars, so I should brake at once and be ready to stop.', answer:true,
@@ -967,7 +948,25 @@ var HAZARD_QUESTIONS = [
   {statement:'Sounding the horn continuously while maintaining my speed is the appropriate way to warn the children.', answer:false,
    explanation:'Slowing/stopping is the duty; the horn is for danger avoidance, not a substitute for braking — and children may not react to it as adults would.'}
  ]},
-{id:'haz-005', topic:'railWeather', stage:2, sceneSvg:'haz-scene-5',
+{id:'haz-005', topic:'railWeather', stage:2,
+ scene:{bg:{type:'v'}, night:true,
+  crosswalks:[{road:'main',at:0.42}],
+  props:[
+   {kind:'cone', x:182, y:176, dir:'N', len:80, spread:30, opacity:0.30},
+   {kind:'cone', x:218, y:72,  dir:'S', len:80, spread:30, opacity:0.32}
+  ],
+  actors:[
+   {g:'you', on:'main', dir:'N', at:0.86},
+   {g:'car', on:'main', dir:'S', at:0.18},
+   {g:'ped', on:'main', dir:'W', at:0.46}
+  ],
+  arrows:[ {from:0, dy:-28, color:'#9db9e8'}, {from:2, dx:-20, color:'#ff8888'} ],
+  labels:[
+   {x:158,y:206,t:'you',color:'#9db9e8',anchor:'end'},
+   {x:232,y:56,t:'oncoming glare',color:'#f5e9b8'},
+   {x:210,y:134,t:'pedestrian (dark)',color:'#ff8888',anchor:'end'},
+   {x:8,y:232,t:'night · rain',color:'#aaa'}
+  ]},
  sceneText:'You are driving at night in the rain at 50 km/h. An oncoming car approaches with bright headlights. There is a pedestrian crossing ahead, and a pedestrian in dark clothing is starting to cross from the right.',
  parts:[
   {statement:'The pedestrian may disappear from my view where my headlights and the oncoming car\'s lights cross, so I should slow down before the crossing.', answer:true,
@@ -1855,6 +1854,146 @@ function topCar(color, win){
     '<polygon points="12,-9 12,9 16,6.5 16,-6.5" fill="'+win+'"/>' +                                            // rear window
     '<rect x="-23" y="-10" width="4" height="4" rx="1" fill="#ffe27a"/><rect x="-23" y="6" width="4" height="4" rx="1" fill="#ffe27a"/>' +  // headlights
     '<rect x="19.5" y="-10" width="3.5" height="4" rx="1" fill="#c0272d"/><rect x="19.5" y="6" width="3.5" height="4" rx="1" fill="#c0272d"/>'; // tail-lights
+}
+
+/* ===== SCENE ENGINE — declarative overhead figures for drills & quizzes =====
+   Why: hand-placed scenes let a car sit on the wrong side of the road. Here a
+   moving vehicle's lane is DERIVED from its heading, so the drive-on-the-left
+   rule is structural (not eyeballed) and the boot validator can assert it.
+   Canvas 400x240; headings N/E/S/W = up/right/down/left. Crosswalk stripes run
+   PARALLEL to travel (Japanese 横断歩道); both are handled here so every scene
+   inherits the convention. Actors are the #sc-* glyphs, drawn heading north. */
+var SCENE_W = 400, SCENE_H = 240;
+var DIR_ROT = {N:0, E:90, S:180, W:270};
+var DIR_AXIS = {N:'V', S:'V', E:'H', W:'H'};
+var SC_VEHICLES = {you:1, car:1, truck:1, moto:1, bike:1};
+
+/* lane centre for a moving vehicle — keep to the LEFT of the heading.
+   V road: N keeps west (c-off), S keeps east. H road: E keeps north (c-off), W keeps south. */
+function laneCross(dir, road){
+  var off = road.half * 0.5;
+  if (road.axis === 'V') return dir === 'N' ? road.c - off : road.c + off;
+  return dir === 'E' ? road.c - off : road.c + off;
+}
+/* same-direction multilane: lane is chosen explicitly (vehicles share a heading) */
+function multiCross(lane, road){
+  var off = road.half * 0.5;
+  return lane === 'R' ? road.c + off : road.c - off;
+}
+/* parked vehicle hugs the left curb of its heading — inset by ~one vehicle
+   half-width so it sits fully on the carriageway against the edge, not floating
+   mid-lane and not overhanging the shoulder */
+function parkCross(dir, road){
+  var edge = road.half - 11;
+  if (road.axis === 'V') return dir === 'N' ? road.c - edge : road.c + edge;
+  return dir === 'E' ? road.c - edge : road.c + edge;
+}
+function alongV(at){ return 16 + at * 208; }   // y for vertical roads
+function alongH(at){ return 16 + at * 368; }   // x for horizontal roads
+
+/* layout presets -> {svg, roads:{main, cross?}} */
+function sceneLayout(bg, night){
+  var asph = night ? '#44454d' : '#aeaaa0';
+  var line = night ? '#8a8a92' : '#ffffff';
+  var t = bg.type, cx, cy, half, svg;
+  if (t === 'v' || t === 'vMulti'){
+    cx = bg.cx || 200; half = bg.half || 36;
+    svg = '<rect x="'+(cx-half)+'" y="0" width="'+(2*half)+'" height="'+SCENE_H+'" fill="'+asph+'"/>' +
+      '<line x1="'+cx+'" y1="0" x2="'+cx+'" y2="'+SCENE_H+'" stroke="'+line+'" stroke-dasharray="'+(t==='vMulti'?'9,9':'11,9')+'" stroke-width="2"/>';
+    return {svg:svg, roads:{main:{axis:'V', c:cx, half:half, multi:t==='vMulti'}}};
+  }
+  if (t === 'h' || t === 'hNarrow'){
+    cy = bg.cy || 120; half = bg.half || (t==='hNarrow' ? 28 : 36);
+    svg = '<rect x="0" y="'+(cy-half)+'" width="'+SCENE_W+'" height="'+(2*half)+'" fill="'+asph+'"/>';
+    if (t === 'hNarrow') svg += '<rect x="0" y="'+(cy-half-5)+'" width="'+SCENE_W+'" height="5" fill="#d8d2c4"/><rect x="0" y="'+(cy+half)+'" width="'+SCENE_W+'" height="5" fill="#d8d2c4"/>';
+    else svg += '<line x1="0" y1="'+cy+'" x2="'+SCENE_W+'" y2="'+cy+'" stroke="'+line+'" stroke-dasharray="11,9" stroke-width="2"/>';
+    return {svg:svg, roads:{main:{axis:'H', c:cy, half:half}}};
+  }
+  // crossroads: vertical main + horizontal cross, centre lines broken at the box
+  cx = bg.cx || 200; cy = bg.cy || 120; half = bg.half || 36;
+  svg = '<rect x="'+(cx-half)+'" y="0" width="'+(2*half)+'" height="'+SCENE_H+'" fill="'+asph+'"/>' +
+    '<rect x="0" y="'+(cy-half)+'" width="'+SCENE_W+'" height="'+(2*half)+'" fill="'+asph+'"/>' +
+    '<line x1="'+cx+'" y1="0" x2="'+cx+'" y2="'+(cy-half)+'" stroke="'+line+'" stroke-dasharray="11,9" stroke-width="2"/>' +
+    '<line x1="'+cx+'" y1="'+(cy+half)+'" x2="'+cx+'" y2="'+SCENE_H+'" stroke="'+line+'" stroke-dasharray="11,9" stroke-width="2"/>' +
+    '<line x1="0" y1="'+cy+'" x2="'+(cx-half)+'" y2="'+cy+'" stroke="'+line+'" stroke-dasharray="11,9" stroke-width="2"/>' +
+    '<line x1="'+(cx+half)+'" y1="'+cy+'" x2="'+SCENE_W+'" y2="'+cy+'" stroke="'+line+'" stroke-dasharray="11,9" stroke-width="2"/>';
+  return {svg:svg, roads:{main:{axis:'V', c:cx, half:half}, cross:{axis:'H', c:cy, half:half}}};
+}
+
+/* compute an actor's pixel position from its lane/heading on its road.
+   off = explicit signed offset from road centre (+ = south/east), an escape
+   hatch for freeform layouts (narrow streets, props) where lane rules don't apply. */
+function actorPos(a, road){
+  var cross;
+  if (typeof a.off === 'number') cross = road.c + a.off;
+  else if (a.park) cross = parkCross(a.dir, road);
+  else if (road.multi) cross = multiCross(a.lane, road);
+  else cross = laneCross(a.dir, road);
+  var along = road.axis === 'V' ? alongV(a.at) : alongH(a.at);
+  return road.axis === 'V' ? {x:cross, y:along} : {x:along, y:cross};
+}
+
+/* zebra: stripes run PARALLEL to travel — vertical bars on a V road, horizontal on an H road */
+function crosswalkSvg(road, at, night){
+  var col = night ? '#9a9aa4' : '#ffffff', depth = 26, step = 9, w = 5, out = '', i;
+  if (road.axis === 'V'){
+    var y0 = alongV(at) - depth/2;
+    for (i = road.c - road.half + 4; i <= road.c + road.half - w - 2; i += step)
+      out += '<rect x="'+i.toFixed(1)+'" y="'+y0.toFixed(1)+'" width="'+w+'" height="'+depth+'" fill="'+col+'"/>';
+  } else {
+    var x0 = alongH(at) - depth/2;
+    for (i = road.c - road.half + 4; i <= road.c + road.half - w - 2; i += step)
+      out += '<rect x="'+x0.toFixed(1)+'" y="'+i.toFixed(1)+'" width="'+depth+'" height="'+w+'" fill="'+col+'"/>';
+  }
+  return out;
+}
+
+/* translucent headlight beam from an apex along a heading */
+function coneSvg(p){
+  var len = p.len||60, sp = p.spread||26, c = p.color||'#f5e9b8', o = (p.opacity==null?0.4:p.opacity), x=p.x, y=p.y, pts;
+  if (p.dir==='N') pts = x+','+y+' '+(x-sp)+','+(y-len)+' '+(x+sp)+','+(y-len);
+  else if (p.dir==='S') pts = x+','+y+' '+(x-sp)+','+(y+len)+' '+(x+sp)+','+(y+len);
+  else if (p.dir==='E') pts = x+','+y+' '+(x+len)+','+(y-sp)+' '+(x+len)+','+(y+sp);
+  else pts = x+','+y+' '+(x-len)+','+(y-sp)+' '+(x-len)+','+(y+sp);
+  return '<polygon points="'+pts+'" fill="'+c+'" opacity="'+o+'"/>';
+}
+
+function arrowHead(x2,y2,x1,y1,col){
+  var ang = Math.atan2(y2-y1, x2-x1), L = 8.5;
+  return '<polygon points="'+x2.toFixed(1)+','+y2.toFixed(1)+' '+(x2-L*Math.cos(ang-0.5)).toFixed(1)+','+(y2-L*Math.sin(ang-0.5)).toFixed(1)+' '+(x2-L*Math.cos(ang+0.5)).toFixed(1)+','+(y2-L*Math.sin(ang+0.5)).toFixed(1)+'" fill="'+col+'"/>';
+}
+function arrowSvg(x1,y1,x2,y2,col,dash){
+  return '<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+col+'" stroke-width="3"'+(dash?' stroke-dasharray="6,5"':'')+'/>' + arrowHead(x2,y2,x1,y1,col);
+}
+
+/* render a declarative scene to inner-SVG markup (the caller wraps it in <svg>) */
+function renderScene(s){
+  var night = !!s.night;
+  var lay = sceneLayout(s.bg, night);
+  var out = '<rect width="'+SCENE_W+'" height="'+SCENE_H+'" fill="'+(night?'#23232b':'#e9e4d8')+'"/>' + lay.svg;
+  (s.crosswalks||[]).forEach(function(cw){ out += crosswalkSvg(lay.roads[cw.road||'main'], cw.at, night); });
+  (s.props||[]).forEach(function(p){ if (p.kind==='cone') out += coneSvg(p); });
+  var pos = [];
+  (s.actors||[]).forEach(function(a){
+    var pt = actorPos(a, lay.roads[a.on||'main']);
+    pos.push(pt);
+    var rot = a.g === 'ped' ? 0 : (DIR_ROT[a.dir] || 0);   // pedestrians stay upright
+    var sc = a.scale ? ' scale('+a.scale+')' : '';
+    out += '<use href="#sc-'+a.g+'" transform="translate('+pt.x.toFixed(1)+','+pt.y.toFixed(1)+') rotate('+rot+')'+sc+'"/>';
+  });
+  (s.props||[]).forEach(function(p){ if (p.kind==='ball') out += '<circle cx="'+p.x+'" cy="'+p.y+'" r="'+(p.r||6)+'" fill="'+(p.color||'#C0272D')+'"/>'; });
+  (s.arrows||[]).forEach(function(ar){
+    var col = ar.color || '#1A50A2';
+    if (ar.path){ out += '<path d="'+ar.path+'" fill="none" stroke="'+col+'" stroke-width="3"'+(ar.dash?' stroke-dasharray="6,5"':'')+'/>' + arrowHead(ar.head[0],ar.head[1],ar.head[2],ar.head[3],col); return; }
+    var x1, y1, x2, y2;
+    if (typeof ar.from === 'number'){ x1=pos[ar.from].x; y1=pos[ar.from].y; x2=x1+(ar.dx||0); y2=y1+(ar.dy||0); }
+    else { x1=ar.x1; y1=ar.y1; x2=ar.x2; y2=ar.y2; }
+    out += arrowSvg(x1,y1,x2,y2,col,ar.dash);
+  });
+  (s.labels||[]).forEach(function(l){
+    out += '<text x="'+l.x+'" y="'+l.y+'" font-size="'+(l.size||11)+'" font-weight="bold" fill="'+(l.color||'#1d1d1f')+'"'+(l.anchor?' text-anchor="'+l.anchor+'"':'')+'>'+l.t+'</text>';
+  });
+  return out;
 }
 
 /* --- chapter digests --- */
@@ -2847,7 +2986,7 @@ function renderHazardScreen(run, hi){
     });
     renderQuizNavButtons();
   }, 0);
-  var svg = h.sceneSvg ? '<svg viewBox="0 0 400 240" style="width:100%;max-width:440px;border:1px solid var(--line-strong);background:#fff;display:block"><use href="#' + h.sceneSvg + '"></use></svg>' : '';
+  var svg = h.scene ? '<svg viewBox="0 0 400 240" style="width:100%;max-width:440px;border:1px solid var(--line-strong);background:#fff;display:block">' + renderScene(h.scene) + '</svg>' : '';
   return '<div class="callout"><span class="lbl">Hazard prediction · 2 pts, all 3 parts must be correct</span>' + esc(h.sceneText) + '</div>' +
     svg + partsHtml +
     '<div class="btn-row" id="quizNav"></div>';
@@ -2970,6 +3109,33 @@ function renderQuizPicker(){
 }
 
 /* ===== 08 BOOT ===== */
+/* scene lint: the left-hand rule is structural (lane derived from heading), so
+   here we catch authoring slips — a vehicle headed across its own road, an actor
+   off-canvas, a multilane vehicle with no lane — and scene/prose drift (a noun in
+   sceneText with no matching glyph). Runs every boot via validateData(). */
+function validateScene(h, errs){
+  var s = h.scene, bg = s.bg || {};
+  var mainAxis = (bg.type === 'h' || bg.type === 'hNarrow') ? 'H' : 'V';
+  var glyphs = {};
+  (s.actors || []).forEach(function(a, i){
+    glyphs[a.g] = 1;
+    var axis = (a.on === 'cross') ? 'H' : mainAxis;
+    if (typeof a.at !== 'number' || a.at < 0 || a.at > 1) errs.push(h.id + ': actor ' + i + ' (' + a.g + ') at out of range');
+    if (SC_VEHICLES[a.g]){
+      if (!DIR_AXIS[a.dir]) errs.push(h.id + ': actor ' + i + ' (' + a.g + ') bad dir ' + a.dir);
+      else if (DIR_AXIS[a.dir] !== axis) errs.push(h.id + ': actor ' + i + ' (' + a.g + ') heads ' + a.dir + ' but its road axis is ' + axis + ' — left-hand placement would be wrong');
+      if (bg.type === 'vMulti' && typeof a.off !== 'number' && !a.park && a.lane !== 'L' && a.lane !== 'R')
+        errs.push(h.id + ': actor ' + i + ' (' + a.g + ') on multilane needs lane L or R');
+    }
+  });
+  var txt = (h.sceneText || '').toLowerCase();
+  if (/parked/.test(txt) && !(s.actors || []).some(function(a){ return a.park; })) errs.push(h.id + ': sceneText says "parked" but no parked actor');
+  if (/bicycle/.test(txt) && !glyphs.bike) errs.push(h.id + ': sceneText mentions a bicycle, none in scene');
+  if (/motorcycle/.test(txt) && !glyphs.moto) errs.push(h.id + ': sceneText mentions a motorcycle, none in scene');
+  if (/(pedestrian|child)/.test(txt) && !glyphs.ped) errs.push(h.id + ': sceneText mentions a person, no ped in scene');
+  if (/(pedestrian crossing|crosswalk|zebra)/.test(txt) && !(s.crosswalks && s.crosswalks.length)) errs.push(h.id + ': sceneText mentions a pedestrian crossing, none drawn');
+}
+
 function validateData(){
   var errs = [], counts = {};
   var ids = {};
@@ -2991,6 +3157,7 @@ function validateData(){
     if (ids[h.id]) errs.push('duplicate id ' + h.id);
     ids[h.id] = 1;
     if (!h.parts || h.parts.length !== 3) errs.push(h.id + ': hazard needs exactly 3 parts');
+    if (h.scene) validateScene(h, errs);
   });
   var s1 = QUESTIONS.filter(function(q){ return q.stage === 1; }).length;
   console.log('[JDL] questions:', QUESTIONS.length, '(stage1:', s1 + ')', 'hazard:', HAZARD_QUESTIONS.length);
